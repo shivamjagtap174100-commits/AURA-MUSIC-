@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Search as SearchIcon, X, Music, User, Disc, Radio, Sparkles } from 'lucide-react';
-import { Song, Album, Artist, Playlist } from '../types';
+import { Search as SearchIcon, X, Music, User, Disc, Radio, Clock } from 'lucide-react';
+import type { Song, Album, Artist, Playlist } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
 import { SongRow } from '../components/SongRow';
 import { AlbumCard } from '../components/AlbumCard';
 import { ArtistCard } from '../components/ArtistCard';
 import { PlaylistCard } from '../components/PlaylistCard';
-import { GENRES } from '../data/initialCatalog';
 
 interface SearchScreenProps {
   initialQuery?: string;
   onNavigate: (tab: string, meta?: any) => void;
   onOpenPlaylistModal: (song: Song) => void;
 }
+
+const RECENT_SEARCHES = ['Synthwave', 'Luna Chill', 'Neon Odyssey', 'Electronic', 'Deep House'];
+
+const DISCOVER_GENRES = [
+  { id: 'synthwave', name: 'Synthwave & Retro', desc: 'Analog synthesizers and nostalgic rhythms' },
+  { id: 'lo-fi', name: 'Lo-Fi & Study', desc: 'Chill vinyl textures and low tempo beats' },
+  { id: 'electronic', name: 'Electronic & Ambient', desc: 'Expansive soundscapes and deep bass' },
+  { id: 'deep-house', name: 'Deep House', desc: 'Warm 4/4 grooves and rolling sub-lines' },
+  { id: 'acoustic', name: 'Acoustic & Folk', desc: 'Fingerstyle guitars and organic instruments' },
+  { id: 'chillstep', name: 'Chillstep & Future', desc: 'Ethereal melodies and modern sub-drops' },
+];
 
 export const SearchScreen: React.FC<SearchScreenProps> = ({
   initialQuery = '',
@@ -50,39 +60,39 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
     results.playlists.length > 0;
 
   return (
-    <div className="space-y-6 pb-32 animate-in fade-in duration-200">
+    <div className="space-y-6 pb-32 select-none animate-in fade-in duration-150">
       {/* Search Input Bar */}
-      <div className="relative max-w-2xl">
-        <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-violet-400" />
+      <div className="relative max-w-xl">
+        <SearchIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" />
         <input
           type="text"
           autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search songs, artists, albums, playlists, genres..."
-          className="w-full pl-12 pr-10 py-3.5 bg-white/[0.05] hover:bg-white/[0.08] focus:bg-white/[0.09] border border-white/10 focus:border-cyan-400 rounded-2xl text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none transition-all shadow-lg"
+          placeholder="Search songs, artists, albums, playlists..."
+          className="w-full pl-10 pr-9 py-2.5 bg-[#181818] border border-[#262626] focus:border-[#B7A0FF] rounded-lg text-sm text-[#F5F5F5] placeholder-[#525252] focus:outline-none transition-colors"
         />
         {query && (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white rounded-full hover:bg-white/10"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#737373] hover:text-white rounded"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5" />
           </button>
         )}
       </div>
 
-      {/* Filter Chips */}
+      {/* Filter Category Chips */}
       {query && (
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
           {(['all', 'songs', 'artists', 'albums', 'playlists'] as const).map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${
+              className={`px-3 py-1 rounded-md text-xs font-medium capitalize transition-colors ${
                 activeFilter === filter
-                  ? 'bg-gradient-to-r from-violet-600 to-cyan-500 text-white shadow-md shadow-violet-600/30'
-                  : 'bg-white/[0.05] text-slate-400 hover:text-white hover:bg-white/[0.08]'
+                  ? 'bg-[#282828] text-[#F5F5F5] border border-[#383838]'
+                  : 'bg-[#181818] text-[#737373] hover:text-white border border-[#242424]'
               }`}
             >
               {filter}
@@ -91,18 +101,18 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
         </div>
       )}
 
-      {/* Results Display */}
+      {/* Results View */}
       {query ? (
         hasResults ? (
           <div className="space-y-8">
-            {/* Top Song Result */}
+            {/* Top Songs */}
             {(activeFilter === 'all' || activeFilter === 'songs') && results.songs.length > 0 && (
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                  <Music className="w-4 h-4 text-cyan-400" />
+                <h3 className="section-title mb-3 flex items-center gap-2">
+                  <Music className="w-4 h-4 text-[#B7A0FF]" />
                   <span>Songs ({results.songs.length})</span>
                 </h3>
-                <div className="glass-panel p-2 rounded-2xl space-y-1">
+                <div className="rounded-xl bg-[#181818] border border-[#242424] p-2 space-y-0.5">
                   {results.songs.map((song, idx) => (
                     <SongRow
                       key={song.id}
@@ -117,14 +127,14 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
               </div>
             )}
 
-            {/* Artists Result */}
+            {/* Artists */}
             {(activeFilter === 'all' || activeFilter === 'artists') && results.artists.length > 0 && (
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                  <User className="w-4 h-4 text-violet-400" />
+                <h3 className="section-title mb-3 flex items-center gap-2">
+                  <User className="w-4 h-4 text-[#B7A0FF]" />
                   <span>Artists ({results.artists.length})</span>
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
                   {results.artists.map((artist) => (
                     <ArtistCard
                       key={artist.id}
@@ -136,14 +146,14 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
               </div>
             )}
 
-            {/* Albums Result */}
+            {/* Albums */}
             {(activeFilter === 'all' || activeFilter === 'albums') && results.albums.length > 0 && (
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                  <Disc className="w-4 h-4 text-cyan-400" />
+                <h3 className="section-title mb-3 flex items-center gap-2">
+                  <Disc className="w-4 h-4 text-[#B7A0FF]" />
                   <span>Albums ({results.albums.length})</span>
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
                   {results.albums.map((album) => (
                     <AlbumCard
                       key={album.id}
@@ -155,14 +165,14 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
               </div>
             )}
 
-            {/* Playlists Result */}
+            {/* Playlists */}
             {(activeFilter === 'all' || activeFilter === 'playlists') && results.playlists.length > 0 && (
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-violet-400" />
+                <h3 className="section-title mb-3 flex items-center gap-2">
+                  <Radio className="w-4 h-4 text-[#B7A0FF]" />
                   <span>Playlists ({results.playlists.length})</span>
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                   {results.playlists.map((pl) => (
                     <PlaylistCard
                       key={pl.id}
@@ -175,32 +185,48 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({
             )}
           </div>
         ) : (
-          <div className="text-center py-16 text-slate-500">
-            <SearchIcon className="w-12 h-12 mx-auto mb-3 text-slate-600 opacity-40" />
-            <p className="text-base font-semibold text-slate-400">No results found for "{query}"</p>
-            <p className="text-xs text-slate-500 mt-1">
-              Try searching with different keywords, artist name, or genre.
-            </p>
+          <div className="text-center py-20 text-[#737373]">
+            <p className="text-sm font-medium text-[#A1A1A1]">No matches found for "{query}"</p>
+            <p className="text-xs text-[#737373] mt-1">Please check your spelling or search by another artist or genre.</p>
           </div>
         )
       ) : (
-        /* Empty State: Explore Genres */
-        <div>
-          <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>Browse All Genres</span>
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {GENRES.map((genre) => (
-              <div
-                key={genre.id}
-                onClick={() => setQuery(genre.name)}
-                className={`p-5 rounded-2xl bg-gradient-to-br ${genre.color} border border-white/10 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg`}
-              >
-                <h4 className="text-lg font-bold text-white">{genre.name}</h4>
-                <p className="text-xs text-white/70 mt-1">Listen to {genre.name}</p>
-              </div>
-            ))}
+        /* Empty / Idle State: Recent searches & Discover Genres */
+        <div className="space-y-8">
+          {/* Recent Searches */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#737373] mb-3 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
+              <span>Recent Searches</span>
+            </h3>
+            <div className="flex items-center gap-2 flex-wrap">
+              {RECENT_SEARCHES.map((term) => (
+                <button
+                  key={term}
+                  onClick={() => setQuery(term)}
+                  className="px-3 py-1.5 rounded-md bg-[#181818] hover:bg-[#202020] border border-[#242424] text-xs text-[#A1A1A1] hover:text-[#F5F5F5] transition-colors"
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Discover by Genre (Refined Editorial Surfaces) */}
+          <div>
+            <h3 className="section-title mb-3">Browse Genres & Moods</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {DISCOVER_GENRES.map((g) => (
+                <div
+                  key={g.id}
+                  onClick={() => setQuery(g.name.split(' ')[0])}
+                  className="p-4 rounded-lg bg-[#181818] hover:bg-[#202020] border border-[#242424] hover:border-[#333333] cursor-pointer transition-colors"
+                >
+                  <h4 className="text-sm font-medium text-[#F5F5F5]">{g.name}</h4>
+                  <p className="text-xs text-[#737373] mt-1">{g.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

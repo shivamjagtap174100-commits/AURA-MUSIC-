@@ -1,7 +1,7 @@
 {
-  "short_name": "Aura Music",
-  "name": "AURA MUSIC — Premium Cross-Platform Music Streaming",
-  "description": "Your Music. Your Mood. Your World. High fidelity royalty-free music streaming with offline listening.",
+  "short_name": "Aura",
+  "name": "AURA MUSIC",
+  "description": "Your Music. Your Mood. Your World. Minimal luxury commercial music streaming platform.",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -11,8 +11,8 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#08090e",
-  "theme_color": "#08090e",
+  "background_color": "#101010",
+  "theme_color": "#101010",
   "display": "standalone",
   "orientation": "portrait-primary",
   "categories": ["music", "entertainment", "audio"]

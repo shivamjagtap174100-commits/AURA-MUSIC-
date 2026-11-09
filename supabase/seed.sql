@@ -32,3 +32,4 @@ VALUES
 ('00000000-0000-0000-0000-000000000105', 'Raindrop Memories', '00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80', 'https://cdn.pixabay.com/download/audio/2022/02/07/audio_d1719ab488.mp3?filename=acoustic-guitar-ambient-14251.mp3', 153, 'Acoustic', 2024, 'High (320 kbps)', '320 kbps', 5.9, 112000, true, 'Pixabay License / Free Commercial Use'),
 ('00000000-0000-0000-0000-000000000106', 'Solar Flare', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&auto=format&fit=crop&q=80', 'https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3?filename=uplifting-synthwave-124792.mp3', 178, 'Synthwave', 2024, 'Ultra HD / FLAC', 'Lossless 96kHz', 7.9, 204350, true, 'Pixabay License / Free Commercial Use')
 ON CONFLICT (id) DO NOTHING;
+

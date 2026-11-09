@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ShieldAlert,
+  Shield,
   Plus,
   Trash2,
   Edit2,
@@ -10,22 +10,19 @@ import {
   HardDrive,
   CheckCircle,
   AlertCircle,
-  Upload,
 } from 'lucide-react';
-import { Song, AudioQuality } from '../types';
+import type { Song, AudioQuality } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
-import { useAuth } from '../context/AuthContext';
 import { useDownloads } from '../context/DownloadContext';
 import { AudioQualityBadge } from '../components/AudioQualityBadge';
 
 export const AdminScreen: React.FC = () => {
-  const { user } = useAuth();
   const { storageUsed } = useDownloads();
 
   const [songs, setSongs] = useState<Song[]>(() => catalogService.getSongs());
   const [activeTab, setActiveTab] = useState<'tracks' | 'add' | 'analytics'>('tracks');
 
-  // Form State for Adding/Editing Track
+  // Form State
   const [editingSongId, setEditingSongId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [artistName, setArtistName] = useState('');
@@ -69,17 +66,17 @@ export const AdminScreen: React.FC = () => {
   };
 
   const handleDeleteSong = (songId: string, songTitle: string) => {
-    if (window.confirm(`Are you sure you want to delete "${songTitle}"?`)) {
+    if (window.confirm(`Delete "${songTitle}" from catalog?`)) {
       catalogService.deleteSong(songId);
       setSongs([...catalogService.getSongs()]);
-      setFeedback({ type: 'success', message: `Deleted "${songTitle}" successfully.` });
+      setFeedback({ type: 'success', message: `Deleted "${songTitle}".` });
     }
   };
 
   const handleSubmitTrack = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !artistName || !audioUrl) {
-      setFeedback({ type: 'error', message: 'Please fill in Title, Artist, and Audio Stream URL.' });
+      setFeedback({ type: 'error', message: 'Please provide Title, Artist, and Audio URL.' });
       return;
     }
 
@@ -100,7 +97,7 @@ export const AdminScreen: React.FC = () => {
         lyrics,
         licenseInfo,
       });
-      setFeedback({ type: 'success', message: `Updated "${title}" successfully!` });
+      setFeedback({ type: 'success', message: `Updated "${title}".` });
     } else {
       const newSong: Song = {
         id: `song-custom-${Date.now()}`,
@@ -123,7 +120,7 @@ export const AdminScreen: React.FC = () => {
       };
 
       catalogService.addSong(newSong);
-      setFeedback({ type: 'success', message: `Added new track "${title}" to Aura Catalog!` });
+      setFeedback({ type: 'success', message: `Published "${title}".` });
     }
 
     setSongs([...catalogService.getSongs()]);
@@ -131,84 +128,75 @@ export const AdminScreen: React.FC = () => {
     setActiveTab('tracks');
   };
 
-  // Stats calculation
   const totalPlays = songs.reduce((sum, s) => sum + (s.playCount || 0), 0);
-  const totalAlbums = catalogService.getAlbums().length;
   const totalArtists = catalogService.getArtists().length;
 
   return (
-    <div className="space-y-6 pb-32 animate-in fade-in duration-200">
-      {/* Admin Header */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-violet-950/80 to-purple-950/60 border border-violet-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
-        <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-400 flex items-center justify-center text-white shadow-lg">
-            <ShieldAlert className="w-6 h-6" />
+    <div className="space-y-6 pb-32 select-none animate-in fade-in duration-150">
+      {/* Header */}
+      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 text-[#B7A0FF] text-xs font-mono uppercase tracking-wider mb-1">
+            <Shield className="w-3.5 h-3.5" />
+            <span>Administrator Portal</span>
           </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Aura Music Admin Portal</h1>
-            <p className="text-xs text-slate-300">
-              Manage songs, catalog metadata, audio streaming URLs, and platform statistics.
-            </p>
-          </div>
+          <h1 className="editorial-title">Catalog & Management</h1>
+          <p className="text-xs text-[#737373] mt-1">Manage music metadata, audio files, and platform telemetry</p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              resetForm();
-              setActiveTab('add');
-            }}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-violet-600/30 active:scale-95 transition-all"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Add New Music</span>
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            resetForm();
+            setActiveTab('add');
+          }}
+          className="px-4 py-2 rounded-lg bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs flex items-center gap-1.5 transition-colors self-start sm:self-auto"
+        >
+          <Plus className="w-4 h-4" />
+          <span>Add Music</span>
+        </button>
       </div>
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-2xl glass-panel">
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Total Songs</span>
-            <Music className="w-4 h-4 text-violet-400" />
+        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
+          <div className="flex items-center justify-between text-[#737373] mb-1">
+            <span className="text-xs">Songs</span>
+            <Music className="w-4 h-4" />
           </div>
-          <p className="text-2xl font-bold text-white">{songs.length}</p>
+          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{songs.length}</p>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel">
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Total Streams</span>
-            <BarChart2 className="w-4 h-4 text-cyan-400" />
+        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
+          <div className="flex items-center justify-between text-[#737373] mb-1">
+            <span className="text-xs">Streams</span>
+            <BarChart2 className="w-4 h-4" />
           </div>
-          <p className="text-2xl font-bold text-white">{totalPlays.toLocaleString()}</p>
+          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{totalPlays.toLocaleString()}</p>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel">
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Verified Artists</span>
-            <Users className="w-4 h-4 text-purple-400" />
+        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
+          <div className="flex items-center justify-between text-[#737373] mb-1">
+            <span className="text-xs">Artists</span>
+            <Users className="w-4 h-4" />
           </div>
-          <p className="text-2xl font-bold text-white">{totalArtists}</p>
+          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{totalArtists}</p>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel">
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Offline Cache</span>
-            <HardDrive className="w-4 h-4 text-teal-400" />
+        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
+          <div className="flex items-center justify-between text-[#737373] mb-1">
+            <span className="text-xs">Offline Cache</span>
+            <HardDrive className="w-4 h-4" />
           </div>
-          <p className="text-2xl font-bold text-white">{storageUsed}</p>
+          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{storageUsed}</p>
         </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-white/[0.08] pb-3">
+      {/* Tabs */}
+      <div className="flex items-center gap-2 border-b border-[#242424] pb-2">
         <button
           onClick={() => setActiveTab('tracks')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-            activeTab === 'tracks'
-              ? 'bg-violet-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+            activeTab === 'tracks' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
           }`}
         >
           Manage Music ({songs.length})
@@ -216,34 +204,30 @@ export const AdminScreen: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('add')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-            activeTab === 'add'
-              ? 'bg-violet-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+            activeTab === 'add' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
           }`}
         >
-          {editingSongId ? 'Edit Track' : 'Upload / Add Music'}
+          {editingSongId ? 'Edit Track' : 'Add New Track'}
         </button>
 
         <button
           onClick={() => setActiveTab('analytics')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-            activeTab === 'analytics'
-              ? 'bg-violet-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+            activeTab === 'analytics' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
           }`}
         >
-          Analytics & Insights
+          Telemetry
         </button>
       </div>
 
       {/* Feedback Toast */}
       {feedback && (
         <div
-          className={`p-3.5 rounded-2xl flex items-center justify-between text-xs font-medium border ${
+          className={`p-3 rounded-lg flex items-center justify-between text-xs border ${
             feedback.type === 'success'
-              ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
-              : 'bg-rose-950/60 border-rose-500/40 text-rose-300'
+              ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-300'
+              : 'bg-rose-950/40 border-rose-500/30 text-rose-300'
           }`}
         >
           <div className="flex items-center gap-2">
@@ -254,66 +238,63 @@ export const AdminScreen: React.FC = () => {
             )}
             <span>{feedback.message}</span>
           </div>
-          <button onClick={() => setFeedback(null)} className="hover:text-white">
+          <button onClick={() => setFeedback(null)} className="text-[#A1A1A1] hover:text-white">
             Dismiss
           </button>
         </div>
       )}
 
-      {/* TAB 1: Song Management Table */}
+      {/* TAB 1: Song Table */}
       {activeTab === 'tracks' && (
-        <div className="glass-panel rounded-3xl overflow-hidden border border-white/[0.08]">
+        <div className="rounded-xl bg-[#181818] border border-[#242424] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-white/[0.08] text-slate-400 font-semibold bg-white/[0.02]">
-                  <th className="p-3.5">#</th>
-                  <th className="p-3.5">Track Title</th>
-                  <th className="p-3.5">Artist & Album</th>
-                  <th className="p-3.5">Genre</th>
-                  <th className="p-3.5">Quality</th>
-                  <th className="p-3.5">Plays</th>
-                  <th className="p-3.5 text-right">Actions</th>
+                <tr className="border-b border-[#262626] text-[#737373] font-medium bg-[#141414]">
+                  <th className="p-3">#</th>
+                  <th className="p-3">Title</th>
+                  <th className="p-3">Artist</th>
+                  <th className="p-3">Genre</th>
+                  <th className="p-3">Quality</th>
+                  <th className="p-3">Plays</th>
+                  <th className="p-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.04]">
+              <tbody className="divide-y divide-[#242424]">
                 {songs.map((song, idx) => (
-                  <tr key={song.id} className="hover:bg-white/[0.02] transition-colors">
-                    <td className="p-3.5 font-mono text-slate-500">{idx + 1}</td>
-                    <td className="p-3.5">
+                  <tr key={song.id} className="hover:bg-[#1f1f1f] transition-colors">
+                    <td className="p-3 font-mono text-[#737373]">{idx + 1}</td>
+                    <td className="p-3">
                       <div className="flex items-center gap-2.5">
                         <img
                           src={song.coverUrl}
                           alt=""
-                          className="w-9 h-9 rounded-lg object-cover"
+                          className="w-8 h-8 rounded object-cover bg-[#242424]"
                         />
-                        <span className="font-bold text-white">{song.title}</span>
+                        <span className="font-medium text-[#F5F5F5]">{song.title}</span>
                       </div>
                     </td>
-                    <td className="p-3.5">
-                      <p className="text-slate-200 font-medium">{song.artistName}</p>
-                      <p className="text-slate-500 text-[11px]">{song.albumTitle || 'Single'}</p>
-                    </td>
-                    <td className="p-3.5 text-slate-300">{song.genre}</td>
-                    <td className="p-3.5">
+                    <td className="p-3 text-[#A1A1A1]">{song.artistName}</td>
+                    <td className="p-3 text-[#737373]">{song.genre}</td>
+                    <td className="p-3">
                       <AudioQualityBadge quality={song.audioQuality} />
                     </td>
-                    <td className="p-3.5 font-mono text-cyan-400">{song.playCount.toLocaleString()}</td>
-                    <td className="p-3.5 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
+                    <td className="p-3 font-mono text-[#A1A1A1]">{song.playCount.toLocaleString()}</td>
+                    <td className="p-3 text-right">
+                      <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => handleEditClick(song)}
-                          className="p-1.5 text-slate-400 hover:text-cyan-400 rounded-lg hover:bg-white/[0.08]"
-                          title="Edit Metadata"
+                          className="p-1.5 text-[#737373] hover:text-white rounded hover:bg-[#262626]"
+                          title="Edit"
                         >
-                          <Edit2 className="w-4 h-4" />
+                          <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDeleteSong(song.id, song.title)}
-                          className="p-1.5 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-white/[0.08]"
-                          title="Delete Music"
+                          className="p-1.5 text-[#737373] hover:text-rose-400 rounded hover:bg-[#262626]"
+                          title="Delete"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </td>
@@ -325,63 +306,63 @@ export const AdminScreen: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 2: Upload / Add Music Form */}
+      {/* TAB 2: Form */}
       {activeTab === 'add' && (
-        <form onSubmit={handleSubmitTrack} className="glass-panel p-6 sm:p-8 rounded-3xl space-y-5 max-w-3xl">
-          <h3 className="text-lg font-bold text-white mb-2">
-            {editingSongId ? 'Edit Music Metadata' : 'Add Authorized Music Track'}
+        <form onSubmit={handleSubmitTrack} className="p-6 rounded-xl bg-[#181818] border border-[#242424] space-y-4 max-w-2xl">
+          <h3 className="text-sm font-semibold text-[#F5F5F5]">
+            {editingSongId ? 'Edit Music Metadata' : 'Add New Authorized Track'}
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-                Track Title *
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+                Title *
               </label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Neon Horizons"
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500"
+                placeholder="Track title"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-                Artist Name *
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+                Artist *
               </label>
               <input
                 type="text"
                 required
                 value={artistName}
                 onChange={(e) => setArtistName(e.target.value)}
-                placeholder="e.g. Solstice Echo"
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500"
+                placeholder="Artist name"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-                Album Title (Optional)
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+                Album (Optional)
               </label>
               <input
                 type="text"
                 value={albumTitle}
                 onChange={(e) => setAlbumTitle(e.target.value)}
-                placeholder="e.g. Cyber Soundscapes"
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500"
+                placeholder="Album name"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
                 Genre
               </label>
               <select
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
               >
                 <option value="Synthwave">Synthwave</option>
                 <option value="Lo-Fi">Lo-Fi & Chill</option>
@@ -389,31 +370,29 @@ export const AdminScreen: React.FC = () => {
                 <option value="Deep House">Deep House</option>
                 <option value="Acoustic">Acoustic</option>
                 <option value="Chillstep">Chillstep</option>
-                <option value="Ambient">Ambient</option>
-                <option value="Cyberpunk">Cyberpunk</option>
               </select>
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-                Duration (seconds)
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+                Duration (sec)
               </label>
               <input
                 type="number"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500 font-mono"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-                Audio Quality Tier
+              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+                Quality Tier
               </label>
               <select
                 value={audioQuality}
                 onChange={(e) => setAudioQuality(e.target.value as AudioQuality)}
-                className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500"
+                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
               >
                 <option value="High (320 kbps)">High (320 kbps)</option>
                 <option value="Ultra HD / FLAC">Ultra HD / FLAC</option>
@@ -423,71 +402,55 @@ export const AdminScreen: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-              Audio File URL (MP3/WAV/AAC) *
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              Audio File URL (MP3/WAV) *
             </label>
             <input
               type="url"
               required
               value={audioUrl}
               onChange={(e) => setAudioUrl(e.target.value)}
-              placeholder="https://cdn.example.com/audio/track.mp3"
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500 font-mono text-xs"
+              placeholder="https://..."
+              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
             />
-            <p className="text-[10px] text-slate-500 mt-1">
-              Must be authorized, public domain, or royalty-free audio file with CORS enabled.
-            </p>
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-              Cover Artwork URL
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              Artwork Image URL
             </label>
             <input
               type="url"
               value={coverUrl}
               onChange={(e) => setCoverUrl(e.target.value)}
-              placeholder="https://images.unsplash.com/photo-..."
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500 font-mono text-xs"
+              placeholder="https://..."
+              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
               Lyrics (Optional)
             </label>
             <textarea
               rows={3}
               value={lyrics}
               onChange={(e) => setLyrics(e.target.value)}
-              placeholder="[Verse 1]..."
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500 font-mono text-xs resize-none"
+              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF] resize-none"
             />
           </div>
 
-          <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-              Royalty-Free Licensing Information
-            </label>
-            <input
-              type="text"
-              value={licenseInfo}
-              onChange={(e) => setLicenseInfo(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-violet-500 text-xs"
-            />
-          </div>
-
-          <div className="flex items-center justify-end gap-3 pt-3">
+          <div className="flex items-center justify-end gap-2 pt-2">
             <button
               type="button"
               onClick={resetForm}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white"
+              className="px-3 py-1.5 text-xs text-[#737373] hover:text-white"
             >
               Reset
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg shadow-violet-600/30"
+              className="px-4 py-1.5 bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs rounded-md"
             >
               {editingSongId ? 'Save Changes' : 'Publish Track'}
             </button>
@@ -495,75 +458,25 @@ export const AdminScreen: React.FC = () => {
         </form>
       )}
 
-      {/* TAB 3: Analytics & Listening Insights */}
+      {/* TAB 3: Telemetry */}
       {activeTab === 'analytics' && (
-        <div className="space-y-6">
-          <div className="glass-panel p-6 rounded-3xl">
-            <h3 className="text-base font-bold text-white mb-4">Top Streamed Tracks</h3>
-            <div className="space-y-3">
+        <div className="space-y-4">
+          <div className="p-6 rounded-xl bg-[#181818] border border-[#242424]">
+            <h3 className="text-sm font-semibold text-[#F5F5F5] mb-3">Top Streamed Tracks</h3>
+            <div className="space-y-2">
               {songs
                 .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
                 .slice(0, 5)
-                .map((s, idx) => {
-                  const maxPlays = songs[0]?.playCount || 1;
-                  const pct = Math.round(((s.playCount || 0) / maxPlays) * 100);
-                  return (
-                    <div key={s.id} className="space-y-1">
-                      <div className="flex justify-between text-xs">
-                        <span className="font-semibold text-white">
-                          {idx + 1}. {s.title} — {s.artistName}
-                        </span>
-                        <span className="text-cyan-400 font-mono font-bold">
-                          {s.playCount.toLocaleString()} plays
-                        </span>
-                      </div>
-                      <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full"
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="glass-panel p-6 rounded-3xl">
-              <h3 className="text-base font-bold text-white mb-2">Supabase Database Health</h3>
-              <div className="space-y-2 text-xs text-slate-300">
-                <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                  <span>PostgreSQL RLS Status</span>
-                  <span className="text-emerald-400 font-semibold">Active & Enforced</span>
-                </div>
-                <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                  <span>Storage Buckets</span>
-                  <span className="text-cyan-400 font-semibold">music-audio, music-covers</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span>Client-Side Security</span>
-                  <span className="text-emerald-400 font-semibold">Anon Key Restricted</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-panel p-6 rounded-3xl">
-              <h3 className="text-base font-bold text-white mb-2">Offline Storage Telemetry</h3>
-              <div className="space-y-2 text-xs text-slate-300">
-                <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                  <span>IndexedDB Key</span>
-                  <span className="text-cyan-400 font-mono">aura_offline_audio_*</span>
-                </div>
-                <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                  <span>Current App Storage</span>
-                  <span className="text-violet-300 font-mono font-bold">{storageUsed}</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span>Audio Format</span>
-                  <span className="text-slate-400">Audio/MPEG (Blob Cached)</span>
-                </div>
-              </div>
+                .map((s, idx) => (
+                  <div key={s.id} className="flex justify-between items-center text-xs py-1 border-b border-[#242424]">
+                    <span className="text-[#D4D4D4]">
+                      {idx + 1}. {s.title} — <span className="text-[#737373]">{s.artistName}</span>
+                    </span>
+                    <span className="font-mono text-[#A1A1A1]">
+                      {s.playCount.toLocaleString()} plays
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

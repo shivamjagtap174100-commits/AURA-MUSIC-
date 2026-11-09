@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import {
-  User,
-  ShieldCheck,
   Headphones,
   HardDrive,
   LogOut,
   Edit2,
   Check,
   Database,
-  Sparkles,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useDownloads } from '../context/DownloadContext';
-import { AudioQuality } from '../types';
+import type { AudioQuality } from '../types/index.ts';
 import { isSupabaseConfigured } from '../services/supabase';
 
 export const ProfileScreen: React.FC = () => {
@@ -40,19 +37,18 @@ export const ProfileScreen: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6 pb-32 max-w-3xl mx-auto animate-in fade-in duration-200">
+    <div className="space-y-6 pb-32 max-w-2xl mx-auto select-none animate-in fade-in duration-150">
       {/* Profile Card Header */}
-      <div className="p-6 sm:p-8 rounded-3xl glass-panel border border-white/10 flex flex-col sm:flex-row items-center gap-6 shadow-xl">
+      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] flex flex-col sm:flex-row items-center gap-5">
         <div className="relative">
           <img
             src={user?.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
             alt=""
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-violet-500/40 shadow-xl"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2 border-[#303030] bg-[#242424]"
           />
-          <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-slate-900" />
         </div>
 
-        <div className="text-center sm:text-left space-y-2 flex-1">
+        <div className="text-center sm:text-left space-y-1.5 flex-1">
           {isEditing ? (
             <div className="space-y-2 max-w-xs">
               <input
@@ -60,33 +56,33 @@ export const ProfileScreen: React.FC = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Full Name"
-                className="w-full px-3 py-1.5 bg-black/50 border border-violet-500 rounded-lg text-sm text-white focus:outline-none"
+                className="w-full px-3 py-1 bg-[#101010] border border-[#B7A0FF] rounded-md text-xs text-white focus:outline-none"
               />
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
-                className="w-full px-3 py-1.5 bg-black/50 border border-violet-500 rounded-lg text-sm text-white focus:outline-none"
+                className="w-full px-3 py-1 bg-[#101010] border border-[#B7A0FF] rounded-md text-xs text-white focus:outline-none"
               />
               <button
                 onClick={handleSaveProfile}
-                className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1"
+                className="px-3 py-1 bg-[#F5F5F5] hover:bg-white text-black rounded text-xs font-medium flex items-center gap-1"
               >
-                <Check className="w-3.5 h-3.5" /> Save Changes
+                <Check className="w-3 h-3" /> Save
               </button>
             </div>
           ) : (
             <>
               <div className="flex items-center justify-center sm:justify-start gap-2">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
+                <h1 className="text-xl sm:text-2xl font-bold text-[#F5F5F5]">
                   {user?.fullName || user?.username}
                 </h1>
-                <span className="px-2 py-0.5 rounded-full bg-violet-600/30 border border-violet-500/40 text-[10px] font-bold text-violet-300 uppercase">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono text-[#737373] border border-[#303030] uppercase">
                   {user?.role}
                 </span>
               </div>
-              <p className="text-xs text-slate-400">@{user?.username} • {user?.email}</p>
+              <p className="text-xs text-[#737373] font-mono">@{user?.username} • {user?.email}</p>
             </>
           )}
 
@@ -94,9 +90,9 @@ export const ProfileScreen: React.FC = () => {
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="px-3 py-1.5 rounded-xl glass-pill hover:bg-white/10 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1 bg-[#202020] hover:bg-[#282828] text-[#D4D4D4] text-xs font-medium rounded-md border border-[#2b2b2b] flex items-center gap-1.5 transition-colors"
               >
-                <Edit2 className="w-3.5 h-3.5" />
+                <Edit2 className="w-3 h-3" />
                 <span>Edit Profile</span>
               </button>
             )}
@@ -104,56 +100,56 @@ export const ProfileScreen: React.FC = () => {
             {isGuest ? (
               <button
                 onClick={() => openAuthModal('signin')}
-                className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-xs shadow-md"
+                className="px-3 py-1 bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs rounded-md"
               >
-                Sign In / Register
+                Sign In
               </button>
             ) : (
               <button
                 onClick={() => signOut()}
-                className="px-3 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1 bg-[#202020] hover:bg-rose-950/40 text-[#737373] hover:text-rose-400 text-xs font-medium rounded-md border border-[#2b2b2b] flex items-center gap-1.5 transition-colors"
               >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Log Out</span>
+                <LogOut className="w-3 h-3" />
+                <span>Sign Out</span>
               </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* Streaming Audio Quality Preference */}
-      <div className="glass-panel p-6 rounded-3xl space-y-4">
+      {/* Streaming Quality Preference */}
+      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] space-y-4">
         <div className="flex items-center gap-2">
-          <Headphones className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-base font-bold text-white">Audio Streaming Quality</h2>
+          <Headphones className="w-4 h-4 text-[#B7A0FF]" />
+          <h2 className="text-sm font-semibold text-[#F5F5F5]">Audio Streaming Quality</h2>
         </div>
-        <p className="text-xs text-slate-400">
-          Aura Music provides original master audio quality up to 320 kbps AAC and Ultra HD FLAC. Select your preferred tier:
+        <p className="text-xs text-[#737373]">
+          Select your master playback bit-rate. High-resolution FLAC audio preserves original recording details.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           {qualities.map((q) => {
             const isSelected = user?.preferredQuality === q;
             return (
               <div
                 key={q}
                 onClick={() => handleQualitySelect(q)}
-                className={`p-4 rounded-2xl cursor-pointer border transition-all ${
+                className={`p-3.5 rounded-lg cursor-pointer border transition-colors ${
                   isSelected
-                    ? 'bg-violet-950/60 border-cyan-400 shadow-lg shadow-cyan-400/10'
-                    : 'bg-white/[0.03] border-white/10 hover:bg-white/[0.06]'
+                    ? 'bg-[#221f2d] border-[#B7A0FF]'
+                    : 'bg-[#141414] border-[#262626] hover:bg-[#1a1a1a]'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-white">{q}</span>
-                  {isSelected && <Check className="w-4 h-4 text-cyan-400" />}
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`text-xs font-medium ${isSelected ? 'text-[#B7A0FF]' : 'text-[#F5F5F5]'}`}>{q}</span>
+                  {isSelected && <Check className="w-3.5 h-3.5 text-[#B7A0FF]" />}
                 </div>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-[#737373]">
                   {q.includes('FLAC')
-                    ? 'Lossless compression with complete studio fidelity.'
+                    ? 'Studio lossless fidelity.'
                     : q.includes('320')
-                    ? 'High bit-rate stereo with ultra clean highs.'
-                    : 'Standard fidelity optimized for mobile data.'}
+                    ? 'Crystal clear stereo stream.'
+                    : 'Standard mobile data friendly.'}
                 </p>
               </div>
             );
@@ -162,40 +158,34 @@ export const ProfileScreen: React.FC = () => {
       </div>
 
       {/* Offline Storage Status */}
-      <div className="glass-panel p-6 rounded-3xl space-y-3">
+      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <HardDrive className="w-5 h-5 text-teal-400" />
-            <h2 className="text-base font-bold text-white">Offline Storage Status</h2>
+            <HardDrive className="w-4 h-4 text-[#737373]" />
+            <h2 className="text-sm font-semibold text-[#F5F5F5]">Offline Storage</h2>
           </div>
-          <span className="text-xs font-mono text-cyan-400 font-bold">{storageUsed}</span>
+          <span className="text-xs font-mono text-[#A1A1A1]">{storageUsed}</span>
         </div>
-        <p className="text-xs text-slate-400">
-          You have <strong className="text-white">{downloadedSongs.length}</strong> songs saved locally in application storage for offline listening without an internet connection.
+        <p className="text-xs text-[#737373]">
+          <strong className="text-white font-mono">{downloadedSongs.length}</strong> songs saved locally in application storage for offline listening with zero data consumption.
         </p>
       </div>
 
-      {/* Supabase Connection Status Card */}
-      <div className="glass-panel p-6 rounded-3xl space-y-3">
+      {/* Supabase Connection Details */}
+      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-violet-400" />
-            <h2 className="text-base font-bold text-white">Backend & Cloud Database</h2>
+            <Database className="w-4 h-4 text-[#737373]" />
+            <h2 className="text-sm font-semibold text-[#F5F5F5]">Backend & Security</h2>
           </div>
-          <span
-            className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-              isSupabaseConfigured
-                ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40'
-                : 'bg-cyan-950 text-cyan-300 border border-cyan-500/40'
-            }`}
-          >
-            {isSupabaseConfigured ? 'Supabase Live Connected' : 'Local Offline Mode Active'}
+          <span className="text-[11px] font-mono text-[#737373]">
+            {isSupabaseConfigured ? 'Supabase Connected' : 'Local Persistent Mode'}
           </span>
         </div>
-        <p className="text-xs text-slate-400 leading-relaxed">
+        <p className="text-xs text-[#737373] leading-relaxed">
           {isSupabaseConfigured
-            ? 'Aura Music is communicating directly with your PostgreSQL Supabase instance with Row Level Security enabled.'
-            : 'To connect your live Supabase project, populate VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file and run the SQL migration script from supabase/schema.sql.'}
+            ? 'Aura Music is communicating securely with PostgreSQL via Supabase with active Row Level Security.'
+            : 'Running in offline-first mode. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env to sync with cloud.'}
         </p>
       </div>
     </div>

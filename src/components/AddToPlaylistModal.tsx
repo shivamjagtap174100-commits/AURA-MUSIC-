@@ -1,6 +1,6 @@
 import React from 'react';
-import { X, Check, Plus, Music } from 'lucide-react';
-import { Song, Playlist } from '../types';
+import { X, Check, Plus } from 'lucide-react';
+import type { Song, Playlist } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
 
 interface AddToPlaylistModalProps {
@@ -26,23 +26,22 @@ export const AddToPlaylistModal: React.FC<AddToPlaylistModalProps> = ({
     } else {
       catalogService.addSongToPlaylist(playlist.id, song.id);
     }
-    // Re-render
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-sm p-6 rounded-3xl glass-dropdown border border-white/10 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150 select-none">
+      <div className="relative w-full max-w-sm p-5 rounded-xl bg-[#181818] border border-[#2b2b2b] shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full hover:bg-white/[0.08]"
+          className="absolute top-4 right-4 p-1.5 text-[#737373] hover:text-white rounded-md hover:bg-[#242424] transition-colors"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
-        <h3 className="text-base font-bold text-white mb-1">Add to Playlist</h3>
-        <p className="text-xs text-slate-400 truncate mb-4">
-          Choose a playlist for <span className="text-cyan-400 font-semibold">{song.title}</span>
+        <h3 className="text-sm font-semibold text-[#F5F5F5] mb-0.5">Add to Playlist</h3>
+        <p className="text-xs text-[#737373] truncate mb-3">
+          Select playlist for <span className="text-[#D4D4D4] font-medium">{song.title}</span>
         </p>
 
         <button
@@ -50,45 +49,45 @@ export const AddToPlaylistModal: React.FC<AddToPlaylistModalProps> = ({
             onClose();
             onOpenCreatePlaylist();
           }}
-          className="w-full flex items-center justify-center gap-2 py-2.5 mb-3 rounded-xl bg-violet-600/30 hover:bg-violet-600/50 border border-violet-500/40 text-violet-300 font-semibold text-xs transition-colors"
+          className="w-full flex items-center justify-center gap-2 py-2 mb-3 rounded-lg bg-[#202020] hover:bg-[#262626] border border-[#2b2b2b] text-[#F5F5F5] font-medium text-xs transition-colors"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-3.5 h-3.5 text-[#B7A0FF]" />
           <span>New Playlist</span>
         </button>
 
-        <div className="max-h-60 overflow-y-auto space-y-1.5 pr-1">
+        <div className="max-h-56 overflow-y-auto space-y-1 pr-1">
           {playlists.map((pl) => {
             const hasSong = pl.songIds.includes(song.id);
             return (
               <div
                 key={pl.id}
                 onClick={() => handleToggleSongInPlaylist(pl)}
-                className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-colors ${
+                className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors ${
                   hasSong
-                    ? 'bg-cyan-950/40 border border-cyan-500/30'
-                    : 'hover:bg-white/[0.05] border border-transparent'
+                    ? 'bg-[#221f2d] text-[#B7A0FF]'
+                    : 'hover:bg-[#202020] text-[#D4D4D4]'
                 }`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <img
                     src={pl.coverUrl}
-                    alt={pl.title}
-                    className="w-9 h-9 rounded-lg object-cover"
+                    alt=""
+                    className="w-8 h-8 rounded object-cover bg-[#242424]"
                   />
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-slate-200 truncate">{pl.title}</p>
-                    <p className="text-[10px] text-slate-500">{pl.songIds.length} songs</p>
+                    <p className="text-xs font-medium truncate">{pl.title}</p>
+                    <p className="text-[10px] text-[#737373]">{pl.songIds.length} tracks</p>
                   </div>
                 </div>
 
                 <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center border ${
+                  className={`w-4 h-4 rounded-full flex items-center justify-center border ${
                     hasSong
-                      ? 'bg-cyan-400 border-cyan-400 text-black'
-                      : 'border-white/20 text-transparent'
+                      ? 'bg-[#B7A0FF] border-[#B7A0FF] text-black'
+                      : 'border-[#404040] text-transparent'
                   }`}
                 >
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  <Check className="w-3 h-3 stroke-[3]" />
                 </div>
               </div>
             );

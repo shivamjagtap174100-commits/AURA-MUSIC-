@@ -235,3 +235,4 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO storage.buckets (id, name, public) 
 VALUES ('music-covers', 'music-covers', true)
 ON CONFLICT (id) DO NOTHING;
+

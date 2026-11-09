@@ -371,3 +371,4 @@ class CatalogService {
 }
 
 export const catalogService = new CatalogService();
+

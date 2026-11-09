@@ -1,6 +1,6 @@
 import React from 'react';
-import { Play, CheckCircle2, User, ArrowLeft, Disc } from 'lucide-react';
-import { Song, Artist } from '../types';
+import { Play, Check, ArrowLeft, Disc } from 'lucide-react';
+import type { Song } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
 import { useAudio } from '../context/AudioContext';
 import { SongRow } from '../components/SongRow';
@@ -26,12 +26,11 @@ export const ArtistDetailScreen: React.FC<ArtistDetailScreenProps> = ({
 
   if (!artist) {
     return (
-      <div className="text-center py-24 text-slate-500">
-        <User className="w-16 h-16 mx-auto mb-3 opacity-30 text-violet-400" />
-        <h3 className="text-lg font-bold text-slate-300">Artist not found</h3>
+      <div className="text-center py-20 text-[#737373]">
+        <p className="text-sm font-medium text-[#A1A1A1]">Artist not found</p>
         <button
           onClick={() => onNavigate('home')}
-          className="mt-4 px-4 py-2 bg-violet-600 text-white text-xs font-semibold rounded-xl"
+          className="mt-3 px-3 py-1.5 bg-[#202020] text-xs font-medium text-white rounded-md"
         >
           Return Home
         </button>
@@ -46,76 +45,70 @@ export const ArtistDetailScreen: React.FC<ArtistDetailScreenProps> = ({
   };
 
   return (
-    <div className="space-y-8 pb-32 animate-in fade-in duration-200">
+    <div className="space-y-8 pb-32 select-none animate-in fade-in duration-150">
       <button
         onClick={() => onNavigate('home')}
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#F5F5F5] transition-colors"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back</span>
       </button>
 
       {/* Artist Hero Banner */}
-      <div className="relative rounded-3xl overflow-hidden glass-panel border border-white/10 min-h-[260px] sm:min-h-[320px] flex flex-col justify-end p-6 sm:p-8 shadow-2xl">
-        {/* Banner image or gradient background */}
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={artist.bannerUrl || artist.avatarUrl}
-            alt={artist.name}
-            className="w-full h-full object-cover filter brightness-[0.4] blur-sm scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08090e] via-[#08090e]/70 to-transparent" />
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center sm:items-end gap-5">
+      <div className="relative rounded-xl overflow-hidden bg-[#181818] border border-[#242424] p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-end gap-6">
+        <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-[#242424] border-2 border-[#303030] shadow-xl shrink-0">
           <img
             src={artist.avatarUrl}
             alt={artist.name}
-            className="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-violet-500/40 shadow-2xl shrink-0"
+            className="w-full h-full object-cover"
           />
+        </div>
 
-          <div className="text-center sm:text-left space-y-2 flex-1">
-            <div className="flex items-center justify-center sm:justify-start gap-1.5 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-              {artist.verified && <CheckCircle2 className="w-4 h-4 fill-cyan-400/20" />}
-              <span>Verified Artist</span>
-            </div>
+        <div className="text-center sm:text-left space-y-2 flex-1">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5 text-[#B7A0FF] text-[11px] font-mono uppercase tracking-wider">
+            {artist.verified && (
+              <span className="w-3.5 h-3.5 rounded-full bg-[#B7A0FF]/20 flex items-center justify-center">
+                <Check className="w-2.5 h-2.5 text-[#B7A0FF] stroke-[2.5]" />
+              </span>
+            )}
+            <span>Verified Artist</span>
+          </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-              {artist.name}
-            </h1>
+          <h1 className="text-3xl sm:text-5xl font-bold text-[#F5F5F5] tracking-tight">
+            {artist.name}
+          </h1>
 
-            <p className="text-xs sm:text-sm text-slate-300">
-              {artist.monthlyListeners?.toLocaleString() || '500,000'} monthly listeners
-            </p>
+          <p className="text-xs text-[#A1A1A1] font-mono">
+            {artist.monthlyListeners?.toLocaleString() || '500,000'} monthly listeners
+          </p>
 
-            <div className="pt-2 flex items-center justify-center sm:justify-start gap-3">
-              <button
-                onClick={handlePlayTop}
-                disabled={artistSongs.length === 0}
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg shadow-violet-600/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
-              >
-                <Play className="w-4 h-4 fill-white" />
-                <span>Play Top Tracks</span>
-              </button>
-            </div>
+          <div className="pt-2 flex items-center justify-center sm:justify-start gap-3">
+            <button
+              onClick={handlePlayTop}
+              disabled={artistSongs.length === 0}
+              className="px-5 py-2 rounded-full bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs flex items-center gap-1.5 shadow-md disabled:opacity-40"
+            >
+              <Play className="w-3.5 h-3.5 fill-black" />
+              <span>Play Top Tracks</span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Artist Bio */}
       {artist.bio && (
-        <div className="glass-panel p-5 rounded-2xl">
-          <h3 className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-2">
+        <div className="p-4 rounded-xl bg-[#181818] border border-[#242424]">
+          <h3 className="text-xs uppercase tracking-wider text-[#737373] font-mono mb-1.5">
             About the Artist
           </h3>
-          <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">{artist.bio}</p>
+          <p className="text-xs sm:text-sm text-[#D4D4D4] leading-relaxed max-w-xl">{artist.bio}</p>
         </div>
       )}
 
       {/* Popular Tracks */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-4">Popular Releases</h2>
-        <div className="glass-panel p-2 sm:p-3 rounded-3xl space-y-1">
+        <h2 className="section-title mb-3">Popular Releases</h2>
+        <div className="rounded-xl bg-[#181818] border border-[#242424] p-2 space-y-0.5">
           {artistSongs.map((song, idx) => (
             <SongRow
               key={song.id}
@@ -131,11 +124,11 @@ export const ArtistDetailScreen: React.FC<ArtistDetailScreenProps> = ({
       {/* Artist Albums */}
       {artistAlbums.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <Disc className="w-5 h-5 text-cyan-400" />
+          <h2 className="section-title mb-3 flex items-center gap-2">
+            <Disc className="w-4 h-4 text-[#B7A0FF]" />
             <span>Discography</span>
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
             {artistAlbums.map((album) => (
               <AlbumCard
                 key={album.id}

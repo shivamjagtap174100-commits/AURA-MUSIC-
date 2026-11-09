@@ -214,3 +214,4 @@ export const downloadManager = {
     return { totalBytes, formatted };
   },
 };
+

@@ -1,9 +1,8 @@
 import React from 'react';
-import { AudioQuality } from '../types';
+import type { AudioQuality } from '../types/index.ts';
 
 interface AudioQualityBadgeProps {
   quality: AudioQuality;
-  showIcon?: boolean;
 }
 
 export const AudioQualityBadge: React.FC<AudioQualityBadgeProps> = ({ quality }) => {
@@ -12,16 +11,16 @@ export const AudioQualityBadge: React.FC<AudioQualityBadgeProps> = ({ quality })
 
   return (
     <span
-      className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase border transition-colors ${
+      className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-medium tracking-wider uppercase border select-none ${
         isLossless
-          ? 'bg-cyan-950/60 text-cyan-300 border-cyan-500/40 shadow-sm shadow-cyan-500/20'
+          ? 'bg-[#181818] text-[#B7A0FF] border-[#B7A0FF]/30'
           : isHigh
-          ? 'bg-violet-950/60 text-violet-300 border-violet-500/40 shadow-sm shadow-violet-500/20'
-          : 'bg-slate-800/60 text-slate-400 border-slate-700/50'
+          ? 'bg-[#181818] text-[#D4D4D4] border-[#303030]'
+          : 'bg-[#181818] text-[#737373] border-[#262626]'
       }`}
       title={`Audio Quality: ${quality}`}
     >
-      {isLossless ? 'FLAC HD' : isHigh ? '320 KBPS' : '128 KBPS'}
+      {isLossless ? 'LOSSLESS' : isHigh ? '320K' : '128K'}
     </span>
   );
 };

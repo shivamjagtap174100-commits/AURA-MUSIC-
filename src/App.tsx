@@ -23,7 +23,7 @@ import { AlbumDetailScreen } from './screens/AlbumDetailScreen';
 import { ArtistDetailScreen } from './screens/ArtistDetailScreen';
 import { AdminScreen } from './screens/AdminScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
-import { Song } from './types';
+import type { Song } from './types/index.ts';
 import { catalogService } from './services/catalogService';
 
 interface NavigationState {
@@ -146,7 +146,7 @@ const MainApp: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#08090e] text-slate-100 overflow-hidden">
+    <div className="flex h-screen w-full bg-[#101010] text-[#F5F5F5] overflow-hidden">
       {/* Desktop Sidebar */}
       <Sidebar
         currentTab={currentNav.tab}

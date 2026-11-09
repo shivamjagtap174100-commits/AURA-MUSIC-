@@ -38,3 +38,4 @@ export async function safeDbQuery<T>(
     return { data: null, error: (err as Error).message };
   }
 }
+

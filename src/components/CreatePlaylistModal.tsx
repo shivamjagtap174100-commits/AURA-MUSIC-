@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Music, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { X } from 'lucide-react';
 import { catalogService } from '../services/catalogService';
 
 interface CreatePlaylistModalProps {
@@ -41,36 +41,29 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md p-6 rounded-3xl glass-dropdown border border-white/10 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150 select-none">
+      <div className="relative w-full max-w-sm p-6 rounded-xl bg-[#181818] border border-[#2b2b2b] shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-full hover:bg-white/[0.08]"
+          className="absolute top-4 right-4 p-1.5 text-[#737373] hover:text-white rounded-md hover:bg-[#242424] transition-colors"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
-        <div className="flex items-center gap-2 mb-4">
-          <div className="p-2 rounded-xl bg-violet-600/30 text-violet-400">
-            <Sparkles className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-white">Create New Playlist</h3>
-            <p className="text-xs text-slate-400">Curate your mood and sonic identity</p>
-          </div>
-        </div>
+        <h3 className="text-base font-semibold text-[#F5F5F5] mb-1">Create Playlist</h3>
+        <p className="text-xs text-[#A1A1A1] mb-4">Curate your own mood and collection</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Cover Art Preview & Presets */}
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-2">
-              Playlist Artwork
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-2">
+              Artwork Cover
             </label>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <img
                 src={coverUrl}
-                alt="Selected Cover"
-                className="w-16 h-16 rounded-xl object-cover border border-white/20 shadow-md shrink-0"
+                alt=""
+                className="w-14 h-14 rounded-md object-cover border border-[#303030] bg-[#242424] shrink-0"
               />
               <div className="flex items-center gap-1.5 flex-wrap">
                 {PRESET_COVERS.map((preset, idx) => (
@@ -78,8 +71,8 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
                     key={idx}
                     type="button"
                     onClick={() => setCoverUrl(preset)}
-                    className={`w-9 h-9 rounded-lg overflow-hidden border transition-all ${
-                      coverUrl === preset ? 'border-cyan-400 ring-2 ring-cyan-400/30 scale-105' : 'border-white/10 opacity-70 hover:opacity-100'
+                    className={`w-8 h-8 rounded overflow-hidden border transition-all ${
+                      coverUrl === preset ? 'border-[#B7A0FF] ring-1 ring-[#B7A0FF]' : 'border-[#2b2b2b] opacity-60 hover:opacity-100'
                     }`}
                   >
                     <img src={preset} alt="" className="w-full h-full object-cover" />
@@ -90,29 +83,29 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
-              Title *
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              Title
             </label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Midnight Cyber Drive"
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400"
+              placeholder="e.g. Midnight Ambient"
+              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-lg text-xs text-white placeholder-[#525252] focus:outline-none focus:border-[#B7A0FF] transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-1">
+            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
               Description (Optional)
             </label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Give your playlist a mood description..."
-              className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 resize-none"
+              placeholder="Optional notes or mood description..."
+              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-lg text-xs text-white placeholder-[#525252] focus:outline-none focus:border-[#B7A0FF] transition-colors resize-none"
             />
           </div>
 
@@ -120,15 +113,15 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white"
+              className="px-3 py-1.5 rounded-md text-xs font-medium text-[#737373] hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-xs shadow-md shadow-violet-600/30"
+              className="px-4 py-1.5 rounded-md bg-[#F5F5F5] hover:bg-white text-black font-medium text-xs transition-colors"
             >
-              Create Playlist
+              Create
             </button>
           </div>
         </form>

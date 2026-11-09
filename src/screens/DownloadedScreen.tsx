@@ -1,6 +1,6 @@
 import React from 'react';
-import { Download, Play, Shuffle, HardDrive, CheckCircle2, Trash2 } from 'lucide-react';
-import { Song } from '../types';
+import { Download, Play, Shuffle, HardDrive, ArrowLeft } from 'lucide-react';
+import type { Song } from '../types/index.ts';
 import { useDownloads } from '../context/DownloadContext';
 import { useAudio } from '../context/AudioContext';
 import { SongRow } from '../components/SongRow';
@@ -15,7 +15,7 @@ export const DownloadedScreen: React.FC<DownloadedScreenProps> = ({
   onOpenPlaylistModal,
 }) => {
   const { playSong } = useAudio();
-  const { downloadedSongs, storageUsed, removeDownload } = useDownloads();
+  const { downloadedSongs, storageUsed } = useDownloads();
 
   const songs = downloadedSongs.map((d) => d.song);
 
@@ -33,46 +33,53 @@ export const DownloadedScreen: React.FC<DownloadedScreenProps> = ({
   };
 
   return (
-    <div className="space-y-6 pb-32 animate-in fade-in duration-200">
+    <div className="space-y-6 pb-32 select-none animate-in fade-in duration-150">
+      <button
+        onClick={() => onNavigate('library')}
+        className="inline-flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#F5F5F5] transition-colors"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        <span>Back to library</span>
+      </button>
+
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-tr from-teal-950/80 via-cyan-950/40 to-slate-900 border border-teal-500/20 shadow-2xl">
-        <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-600 to-cyan-600 flex items-center justify-center shadow-2xl shrink-0">
-          <Download className="w-20 h-20 text-white" />
+      <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 p-6 rounded-xl bg-[#181818] border border-[#242424]">
+        <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-lg bg-[#202020] border border-[#2b2b2b] flex items-center justify-center shrink-0">
+          <Download className="w-12 h-12 text-[#B7A0FF]" />
         </div>
 
         <div className="text-center sm:text-left space-y-2 flex-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-semibold">
-            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-            <span>OFFLINE LOCAL STORAGE READY</span>
-          </div>
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#737373]">
+            Offline Storage
+          </span>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#F5F5F5] tracking-tight">
             Downloaded Music
           </h1>
 
-          <div className="flex items-center justify-center sm:justify-start gap-3 text-xs sm:text-sm text-slate-300">
-            <span>{songs.length} Authorized tracks</span>
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-[#A1A1A1] font-mono">
+            <span>{songs.length} tracks offline</span>
             <span>•</span>
-            <span className="flex items-center gap-1 text-cyan-400 font-mono">
+            <span className="flex items-center gap-1 text-[#B7A0FF]">
               <HardDrive className="w-3.5 h-3.5" />
-              {storageUsed} local storage
+              {storageUsed}
             </span>
           </div>
 
-          <div className="flex items-center justify-center sm:justify-start gap-3 pt-3">
+          <div className="flex items-center justify-center sm:justify-start gap-2.5 pt-2">
             <button
               onClick={handlePlayAll}
               disabled={songs.length === 0}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-black font-bold text-sm shadow-xl shadow-cyan-600/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
+              className="px-5 py-2 rounded-full bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs flex items-center gap-1.5 shadow-md disabled:opacity-40"
             >
-              <Play className="w-4 h-4 fill-black" />
+              <Play className="w-3.5 h-3.5 fill-black" />
               <span>Play Offline</span>
             </button>
 
             <button
               onClick={handleShuffle}
               disabled={songs.length === 0}
-              className="p-3 rounded-full glass-pill hover:bg-white/10 text-white transition-colors disabled:opacity-40"
+              className="p-2 rounded-full bg-[#242424] hover:bg-[#2c2c2c] text-[#D4D4D4] hover:text-white transition-colors border border-[#303030] disabled:opacity-40"
               title="Shuffle Offline Tracks"
             >
               <Shuffle className="w-4 h-4" />
@@ -81,17 +88,14 @@ export const DownloadedScreen: React.FC<DownloadedScreenProps> = ({
         </div>
       </div>
 
-      {/* Song List */}
+      {/* Track List */}
       {songs.length === 0 ? (
-        <div className="text-center py-20 text-slate-500">
-          <Download className="w-16 h-16 mx-auto mb-3 opacity-20 text-cyan-400" />
-          <h3 className="text-lg font-bold text-slate-300">No offline downloads yet</h3>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-            Click the download button next to any song to store it locally for high quality offline listening with zero internet usage.
-          </p>
+        <div className="text-center py-16 text-[#737373]">
+          <p className="text-sm font-medium text-[#A1A1A1]">No offline tracks</p>
+          <p className="text-xs text-[#737373] mt-1">Tap the download icon on any song to save it for offline listening.</p>
         </div>
       ) : (
-        <div className="glass-panel p-2 sm:p-3 rounded-3xl space-y-1">
+        <div className="rounded-xl bg-[#181818] border border-[#242424] p-2 space-y-0.5">
           {songs.map((song, idx) => (
             <SongRow
               key={song.id}

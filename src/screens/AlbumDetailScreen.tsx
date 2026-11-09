@@ -1,6 +1,6 @@
 import React from 'react';
-import { Play, Shuffle, Disc, ArrowLeft } from 'lucide-react';
-import { Song, Album } from '../types';
+import { Play, Shuffle, ArrowLeft } from 'lucide-react';
+import type { Song } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
 import { useAudio } from '../context/AudioContext';
 import { SongRow } from '../components/SongRow';
@@ -22,12 +22,11 @@ export const AlbumDetailScreen: React.FC<AlbumDetailScreenProps> = ({
 
   if (!album) {
     return (
-      <div className="text-center py-24 text-slate-500">
-        <Disc className="w-16 h-16 mx-auto mb-3 opacity-30 text-cyan-400" />
-        <h3 className="text-lg font-bold text-slate-300">Album not found</h3>
+      <div className="text-center py-20 text-[#737373]">
+        <p className="text-sm font-medium text-[#A1A1A1]">Album not found</p>
         <button
           onClick={() => onNavigate('home')}
-          className="mt-4 px-4 py-2 bg-violet-600 text-white text-xs font-semibold rounded-xl"
+          className="mt-3 px-3 py-1.5 bg-[#202020] text-xs font-medium text-white rounded-md"
         >
           Return Home
         </button>
@@ -49,18 +48,18 @@ export const AlbumDetailScreen: React.FC<AlbumDetailScreenProps> = ({
   };
 
   return (
-    <div className="space-y-6 pb-32 animate-in fade-in duration-200">
+    <div className="space-y-6 pb-32 select-none animate-in fade-in duration-150">
       <button
         onClick={() => onNavigate('home')}
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#F5F5F5] transition-colors"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back to browse</span>
       </button>
 
-      {/* Album Banner */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 p-6 sm:p-8 rounded-3xl bg-gradient-to-tr from-cyan-950/60 via-slate-900 to-violet-950/40 border border-white/10 shadow-2xl">
-        <div className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-2xl shrink-0 border border-white/10">
+      {/* Album Header Banner */}
+      <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 p-6 rounded-xl bg-[#181818] border border-[#242424]">
+        <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-lg overflow-hidden shrink-0 bg-[#242424] border border-[#303030] shadow-xl">
           <img
             src={album.coverUrl}
             alt={album.title}
@@ -69,38 +68,39 @@ export const AlbumDetailScreen: React.FC<AlbumDetailScreenProps> = ({
         </div>
 
         <div className="text-center sm:text-left space-y-2 flex-1">
-          <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#737373]">
             Album • {album.genre}
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+
+          <h1 className="text-2xl sm:text-4xl font-bold text-[#F5F5F5] tracking-tight">
             {album.title}
           </h1>
 
-          <p className="text-sm text-slate-300">
+          <p className="text-xs sm:text-sm text-[#A1A1A1]">
             By{' '}
             <span
               onClick={() => onNavigate('artist-detail', { artistId: album.artistId })}
-              className="text-violet-300 font-semibold hover:underline cursor-pointer"
+              className="text-[#F5F5F5] font-medium hover:underline cursor-pointer"
             >
               {album.artistName}
             </span>{' '}
             • {album.releaseYear} • {songs.length} tracks
           </p>
 
-          <div className="flex items-center justify-center sm:justify-start gap-3 pt-3">
+          <div className="flex items-center justify-center sm:justify-start gap-2.5 pt-2">
             <button
               onClick={handlePlayAll}
               disabled={songs.length === 0}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-sm shadow-xl shadow-cyan-600/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all disabled:opacity-40"
+              className="px-5 py-2 rounded-full bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs flex items-center gap-1.5 shadow-md disabled:opacity-40"
             >
-              <Play className="w-4 h-4 fill-white" />
-              <span>Play Album</span>
+              <Play className="w-3.5 h-3.5 fill-black" />
+              <span>Play</span>
             </button>
 
             <button
               onClick={handleShuffle}
               disabled={songs.length === 0}
-              className="p-3 rounded-full glass-pill hover:bg-white/10 text-white transition-colors disabled:opacity-40"
+              className="p-2 rounded-full bg-[#242424] hover:bg-[#2c2c2c] text-[#D4D4D4] hover:text-white transition-colors border border-[#303030] disabled:opacity-40"
               title="Shuffle Album"
             >
               <Shuffle className="w-4 h-4" />
@@ -110,7 +110,7 @@ export const AlbumDetailScreen: React.FC<AlbumDetailScreenProps> = ({
       </div>
 
       {/* Album Tracks */}
-      <div className="glass-panel p-2 sm:p-3 rounded-3xl space-y-1">
+      <div className="rounded-xl bg-[#181818] border border-[#242424] p-2 space-y-0.5">
         {songs.map((song, idx) => (
           <SongRow
             key={song.id}

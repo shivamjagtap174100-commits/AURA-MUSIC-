@@ -77,3 +77,4 @@ export const useDownloads = () => {
   if (!ctx) throw new Error('useDownloads must be used within a DownloadProvider');
   return ctx;
 };
+

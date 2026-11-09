@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ChevronLeft, ChevronRight, User, ShieldCheck, Database, Bell } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { isSupabaseConfigured } from '../services/supabase';
 import { Logo } from './Logo';
@@ -28,84 +28,76 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-20 bg-[#08090e]/80 backdrop-blur-xl border-b border-white/[0.06] px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-20 bg-[#101010]/90 backdrop-blur-md border-b border-[#202020] px-4 sm:px-8 py-3 flex items-center justify-between gap-4 select-none">
       {/* Left: Mobile Logo & Navigation History */}
       <div className="flex items-center gap-3">
         <div className="md:hidden">
           <Logo size="sm" />
         </div>
 
-        <div className="hidden sm:flex items-center gap-1.5">
+        <div className="hidden sm:flex items-center gap-1">
           <button
             onClick={onGoBack}
             disabled={!canGoBack}
-            className={`p-1.5 rounded-full bg-black/40 border border-white/10 transition-colors ${
-              canGoBack ? 'text-white hover:bg-white/10' : 'text-slate-600 cursor-not-allowed'
+            className={`p-1.5 rounded-full transition-colors ${
+              canGoBack ? 'text-[#F5F5F5] hover:bg-[#202020]' : 'text-[#404040] cursor-not-allowed'
             }`}
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             disabled
-            className="p-1.5 rounded-full bg-black/40 border border-white/10 text-slate-600 cursor-not-allowed"
+            className="p-1.5 rounded-full text-[#404040] cursor-not-allowed"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
-        <span className="hidden lg:inline text-xs font-semibold text-slate-400">
-          {getGreeting()}, <span className="text-white">{user?.fullName || user?.username || 'Guest'}</span>
+        <span className="hidden lg:inline text-xs text-[#737373] ml-2">
+          {getGreeting()}, <span className="text-[#F5F5F5] font-medium">{user?.fullName || user?.username || 'Listener'}</span>
         </span>
       </div>
 
-      {/* Center: Search pill */}
+      {/* Center: Minimal Search Field */}
       <div
         onClick={onSearchClick}
-        className="flex-1 max-w-md mx-2 sm:mx-4 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.08] cursor-pointer text-slate-400 hover:text-slate-200 transition-all shadow-inner"
+        className="flex-1 max-w-sm mx-2 sm:mx-4 flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-[#181818] hover:bg-[#202020] border border-[#262626] cursor-pointer text-[#737373] hover:text-[#A1A1A1] transition-colors"
       >
-        <Search className="w-4 h-4 text-violet-400" />
-        <span className="text-xs truncate">What do you want to listen to?</span>
-        <kbd className="hidden sm:inline-block ml-auto text-[10px] font-mono bg-white/[0.08] px-1.5 py-0.5 rounded text-slate-400">
-          Search
-        </kbd>
+        <Search className="w-3.5 h-3.5 text-[#737373]" />
+        <span className="text-xs truncate">Search songs, artists, albums...</span>
       </div>
 
       {/* Right: Cloud Sync Status & User Profile */}
-      <div className="flex items-center gap-2 sm:gap-3">
-        {/* Supabase status badge */}
+      <div className="flex items-center gap-3">
+        {/* Connection status pill */}
         <div
-          title={isSupabaseConfigured ? 'Supabase Database Connected' : 'Running in Offline / Local Store Mode'}
-          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium border border-white/10 bg-white/[0.03]"
+          title={isSupabaseConfigured ? 'Connected to Supabase' : 'Offline local database'}
+          className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-[#737373] border border-[#242424]"
         >
           <span
-            className={`w-2 h-2 rounded-full ${
-              isSupabaseConfigured ? 'bg-emerald-400' : 'bg-cyan-400 animate-pulse'
+            className={`w-1.5 h-1.5 rounded-full ${
+              isSupabaseConfigured ? 'bg-emerald-500' : 'bg-[#B7A0FF]'
             }`}
           />
-          <span className="text-slate-300">
-            {isSupabaseConfigured ? 'Cloud Sync' : 'Offline Ready'}
-          </span>
+          <span>{isSupabaseConfigured ? 'Online' : 'Local'}</span>
         </div>
 
         {isGuest ? (
           <button
             onClick={() => openAuthModal('signin')}
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white shadow-md shadow-violet-500/20 active:scale-95 transition-all"
+            className="px-3 py-1 rounded-md text-xs font-medium bg-[#F5F5F5] hover:bg-white text-black transition-colors"
           >
             Sign In
           </button>
         ) : (
           <div
             onClick={onProfileClick}
-            className="flex items-center gap-2 p-1 pl-2 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] cursor-pointer transition-colors"
+            className="flex items-center gap-2 p-1 rounded-full hover:bg-[#181818] cursor-pointer transition-colors"
           >
-            <span className="text-xs font-semibold text-slate-200 hidden sm:inline max-w-[100px] truncate">
-              {user?.username}
-            </span>
             <img
               src={user?.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
-              alt={user?.username || 'User'}
-              className="w-7 h-7 rounded-full object-cover border border-violet-500"
+              alt=""
+              className="w-7 h-7 rounded-full object-cover border border-[#303030]"
             />
           </div>
         )}
