@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="auraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#141726"/>
+      <stop offset="100%" stop-color="#08090e"/>
+    </radialGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="url(#bgGlow)"/>
+  <rect width="98" height="98" x="1" y="1" rx="23" fill="none" stroke="url(#auraGrad)" stroke-width="2" opacity="0.6"/>
+  <!-- Musical note wave -->
+  <path d="M40 70V28l32-6v42" fill="none" stroke="url(#auraGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="28" cy="70" r="12" fill="#8b5cf6"/>
+  <circle cx="60" cy="64" r="12" fill="#06b6d4"/>
+</svg>
