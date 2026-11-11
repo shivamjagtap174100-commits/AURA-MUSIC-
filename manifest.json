@@ -1,0 +1,19 @@
+{
+  "short_name": "Aura",
+  "name": "AURA MUSIC",
+  "description": "Your Music. Your Mood. Your World. Minimal luxury commercial music streaming platform.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["music", "entertainment", "audio"]
+}
