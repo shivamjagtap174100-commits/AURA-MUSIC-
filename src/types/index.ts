@@ -86,6 +86,8 @@ export interface Song {
   lyrics?: string;
   isRoyaltyFree: boolean;
   licenseInfo?: string;
+  playbackMode?: 'full-length' | 'preview'; // Truthful playback distinction: full licensed track vs 30s preview
+  previewDuration?: number; // Actual preview length in seconds (default 30)
   playbackRights?: 'public-domain' | 'licensed-preview' | 'creative-commons' | 'user-authorized' | 'licensed-full';
   availabilityStatus?: 'available' | 'offline-cached' | 'streaming';
   playbackAvailability: PlaybackAvailability; // 'available' | 'unavailable'

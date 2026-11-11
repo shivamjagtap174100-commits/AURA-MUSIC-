@@ -29,7 +29,11 @@ class PlaylistService {
     try {
       const stored = localStorage.getItem(STORAGE_KEY_PLAYLISTS);
       if (stored) {
-        this.playlists = JSON.parse(stored);
+        const parsed: Playlist[] = JSON.parse(stored);
+        // Guarantee canonical editorial playlists are always present
+        const existingIds = new Set(parsed.map((p) => p.id));
+        const missingInitial = INITIAL_PLAYLISTS.filter((p) => !existingIds.has(p.id));
+        this.playlists = [...parsed, ...missingInitial];
       } else {
         this.playlists = [...INITIAL_PLAYLISTS];
         this.saveLocal();

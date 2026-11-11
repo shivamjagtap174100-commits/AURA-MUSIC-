@@ -11,6 +11,7 @@ import type { Song, Album, Artist, Playlist, MusicLanguage, SpotifyDiscoveryTrac
 import { trackRepository } from './trackRepository.ts';
 import { playlistService } from './playlistService.ts';
 import { spotifyDiscoveryService } from './spotifyDiscoveryService.ts';
+import { providerRegistry } from './providerRegistry.ts';
 
 // Transliteration dictionary for Indian scripts and regional musical queries
 const TRANSLITERATION_MAP: Record<string, string[]> = {
@@ -36,6 +37,28 @@ const TRANSLITERATION_MAP: Record<string, string[]> = {
   'diljit': ['दिलजीत', 'ਦਿਲਜੀਤ', 'diljit dosanjh', 'ਦਿਲਜੀਤ ਦੋਸਾਂਝ'],
   'diljit dosanjh': ['ਦਿਲਜੀਤ ਦੋਸਾਂਝ', 'दिलजीत दोसांझ', 'diljit'],
   'ਦਿਲਜੀਤ ਦੋਸਾਂਝ': ['diljit dosanjh', 'diljit'],
+
+  // Karan Aujla
+  'karan': ['ਕਰਨ', 'करण', 'karan aujla', 'ਕਰਨ ਔਜਲਾ'],
+  'karan aujla': ['ਕਰਨ ਔਜਲਾ', 'करण औजला', 'karan aujla', 'karan', 'aujla'],
+  'ਕਰਨ ਔਜਲਾ': ['karan aujla', 'karan', 'aujla'],
+  'करण औजला': ['karan aujla', 'karan'],
+  'aujla': ['ਔਜਲਾ', 'karan aujla', 'ਕਰਨ ਔਜਲਾ'],
+  'tauba tauba': ['ਤੌਬਾ ਤੌਬਾ', 'तौबा तौबा', 'tauba tauba'],
+  'softly': ['ਸਾਫਟਲੀ', 'softly', 'ikky'],
+  'winning speech': ['ਵਿਨਿੰਗ ਸਪੀਚ', 'winning speech'],
+  '52 bars': ['52 bars', 'ਬਵੰਜਾ ਬਾਰਜ਼'],
+
+  // A.R. Rahman
+  'rahman': ['ए आर रहमान', 'ரஹ்மான்', 'ar rahman', 'a.r. rahman'],
+  'ar rahman': ['ए आर रहमान', 'ரஹ்மான்', 'rahman', 'a.r. rahman'],
+  'a.r. rahman': ['ए आर रहमान', 'ரஹ்மான்', 'rahman', 'ar rahman'],
+  'ஏ.ஆர்.ரஹ்மான்': ['ar rahman', 'a.r. rahman', 'rahman'],
+
+  // Sonu Nigam
+  'sonu': ['सोनू', 'सोनू निगम', 'sonu nigam'],
+  'sonu nigam': ['सोनू निगम', 'सोनू', 'sonu'],
+  'सोनू निगम': ['sonu nigam', 'sonu'],
 
   // Marathi queries
   'marathi': ['मराठी', 'marathi songs', 'मराठी गाणी'],
@@ -236,7 +259,7 @@ class SearchService {
   }
 
   /**
-   * Asynchronous deep search integrating live Spotify Discovery Web API
+   * Asynchronous deep search integrating live Spotify Discovery Web API & Multi-Provider Registry
    */
   public async search(query: string, languageFilter?: MusicLanguage | string): Promise<UnifiedSearchResult> {
     const syncResults = this.searchSync(query, languageFilter);
@@ -248,10 +271,29 @@ class SearchService {
         ? syncResults.detectedLanguage
         : languageFilter;
 
+      // 1. Query Spotify discovery
       const spotifyRes = await spotifyDiscoveryService.search(query, activeLanguage || undefined);
+
+      // 2. Query dynamic multi-provider registry for additional licensed tracks if local results are few
+      let additionalLicensed: Song[] = [];
+      try {
+        const jamendo = providerRegistry.getProvider('jamendo');
+        if (jamendo) {
+          additionalLicensed = await jamendo.searchTracks(query, 5);
+        }
+      } catch {
+        // Safe fallback
+      }
+
+      const existingIds = new Set(syncResults.licensedSongs.map((s) => s.id));
+      const newLicensed = additionalLicensed.filter((s) => !existingIds.has(s.id));
+      const combinedLicensed = [...syncResults.licensedSongs, ...newLicensed];
+      const combinedPlayable = combinedLicensed.filter((s) => s.playbackAvailability === 'available');
 
       return {
         ...syncResults,
+        licensedSongs: combinedLicensed,
+        playableSongs: combinedPlayable,
         spotifyTracks: spotifyRes.tracks.length > 0 ? spotifyRes.tracks : syncResults.spotifyTracks,
       };
     } catch (err) {

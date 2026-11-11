@@ -123,6 +123,45 @@ export const INITIAL_ARTISTS: Artist[] = [
     languages: ['Punjabi'],
     verified: true,
   },
+  {
+    id: 'artist-karan-aujla',
+    name: 'Karan Aujla',
+    nameNative: 'ਕਰਨ ਔਜਲਾ',
+    bio: 'Jaskaran Singh "Karan" Aujla is a global Punjabi superstar, singer, lyricist, and rapper known worldwide for monumental chart-busters including Tauba Tauba, Softly, Winning Speech, 52 Bars, Admirin\' You, and Making Memories.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 29800000,
+    genres: ['Punjabi Pop', 'Punjabi Hip-Hop', 'Urban Punjabi', 'Bhangra'],
+    languages: ['Punjabi', 'Hindi', 'English'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny',
+  },
+  {
+    id: 'artist-ar-rahman',
+    name: 'A.R. Rahman',
+    nameNative: 'ஏ.ஆர்.ரஹ்மான்',
+    bio: 'Two-time Academy Award winner and global maestro who redefined Indian film composition through transcendental melodies and international crossover soundtracks.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/55/a7/60/55a760f3-a4c3-1629-9e1e-fb93be81f9b3/190295851413.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 36200000,
+    genres: ['Soundtrack', 'Indian Classical', 'World', 'Sufi'],
+    languages: ['Tamil', 'Hindi', 'Telugu', 'Malayalam'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/1mYsTxn95FNj04EjAaqTlU',
+  },
+  {
+    id: 'artist-sonu-nigam',
+    name: 'Sonu Nigam',
+    nameNative: 'सोनू निगम',
+    bio: 'One of Indian music’s most versatile playback legends, celebrated for timeless romantic ballads, ghazals, and cinematic masterpieces.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2b/f6/82/2bf682ab-f6c5-a82e-d204-306faede272e/198704579318_Cover.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 21500000,
+    genres: ['Bollywood', 'Romantic', 'Ghazal', 'Devotional'],
+    languages: ['Hindi', 'Marathi', 'Kannada', 'Bengali'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/1wRPtKGflJrxyOPZs85w2e',
+  },
   // --- South Indian Artists ---
   {
     id: 'artist-anirudh',
@@ -187,6 +226,54 @@ export const INITIAL_ARTISTS: Artist[] = [
     genres: ['Japanese City Pop', 'Jazz Fusion', 'Groove'],
     languages: ['Japanese'],
     verified: true,
+  },
+  {
+    id: 'artist-taylor-swift',
+    name: 'Taylor Swift',
+    bio: '14-time Grammy Award-winning global superstar renowned for monumental songwriting, era-defining pop anthems, and storytelling.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 104500000,
+    genres: ['Pop', 'Synthpop', 'Country', 'Folk'],
+    languages: ['English'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02',
+  },
+  {
+    id: 'artist-the-weeknd',
+    name: 'The Weeknd',
+    bio: 'Multi-diamond-certified superstar artist blending dark R&B, 80s synth-wave pop, and cinematic soul.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 108200000,
+    genres: ['R&B', 'Synthpop', 'Alternative R&B'],
+    languages: ['English'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ',
+  },
+  {
+    id: 'artist-ed-sheeran',
+    name: 'Ed Sheeran',
+    bio: 'Record-breaking singer-songwriter known worldwide for acoustic melodies, stadium pop ballads, and infectious loop-pedal performances.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8a/89/e4/8a89e445-d2c6-f8ac-a828-27818b0c1afe/859749638209_cover.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 84300000,
+    genres: ['Pop', 'Acoustic', 'Folk Pop'],
+    languages: ['English'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V',
+  },
+  {
+    id: 'artist-coldplay',
+    name: 'Coldplay',
+    bio: 'Legendary British rock and pop stadium band celebrated for transcendent anthems, orchestral arrangements, and joyful live spectacles.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2b/f6/82/2bf682ab-f6c5-a82e-d204-306faede272e/198704579318_Cover.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 88100000,
+    genres: ['Alternative Rock', 'Pop Rock', 'Arena Rock'],
+    languages: ['English'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU',
   },
 ];
 
@@ -316,6 +403,76 @@ export const INITIAL_ALBUMS: Album[] = [
     totalTracks: 1,
     songIds: ['song-punjabi-dhol'],
   },
+  {
+    id: 'album-making-memories',
+    title: 'Making Memories',
+    titleNative: 'ਮੇਕਿੰਗ ਮੈਮੋਰੀਜ਼',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & Ikky',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    releaseYear: 2023,
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    totalTracks: 2,
+    songIds: ['song-punjabi-softly', 'song-punjabi-admiring-you'],
+    spotifyUrl: 'https://open.spotify.com/album/43YmKfZQ4e52r13fJgL1Jz',
+  },
+  {
+    id: 'album-bad-newz',
+    title: 'Bad Newz (Original Motion Picture Soundtrack)',
+    titleNative: 'ਬੈਡ ਨਿਊਜ਼',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/79/d2/01/79d201d2-e54d-5604-81fb-313f30db7219/198588533581.jpg/600x600bb.jpg',
+    releaseYear: 2024,
+    genre: 'Bollywood / Punjabi Pop',
+    language: 'Punjabi',
+    totalTracks: 1,
+    songIds: ['song-punjabi-tauba-tauba'],
+    spotifyUrl: 'https://open.spotify.com/album/1pL9Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'album-four-you',
+    title: 'Four You - EP',
+    titleNative: 'ਫੋਰ ਯੂ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & Ikky',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fc/bc/64/fcbc6417-8a88-7b5e-4490-8f53e537ffb0/859770181552_cover.jpg/600x600bb.jpg',
+    releaseYear: 2023,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    totalTracks: 1,
+    songIds: ['song-punjabi-52-bars'],
+    spotifyUrl: 'https://open.spotify.com/album/2kL8Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'album-winning-speech',
+    title: 'Winning Speech',
+    titleNative: 'ਵਿਨਿੰਗ ਸਪੀਚ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & MXRCI',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
+    releaseYear: 2024,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    totalTracks: 1,
+    songIds: ['song-punjabi-winning-speech'],
+    spotifyUrl: 'https://open.spotify.com/album/3mL9Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'album-on-top',
+    title: 'On Top',
+    titleNative: 'ਆਨ ਟੌਪ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/87/d4/ca87d416-2021-0eb1-f36a-fe01998c738d/5059950896060_cover.jpg/600x600bb.jpg',
+    releaseYear: 2022,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    totalTracks: 1,
+    songIds: ['song-punjabi-on-top'],
+    spotifyUrl: 'https://open.spotify.com/album/5nL9Y1zX6vV1xX8bJ2K5c',
+  },
   // --- International Albums ---
   {
     id: 'album-neon-odyssey',
@@ -363,7 +520,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/66/5a/e8/665ae8ad-1aab-5d0c-3ca9-4fa062b1606c/8718857670711.png/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e3/21/1e/e3211ebb-2b2f-8977-2300-bdc6760c94c3/mzaf_14840830049985436711.plus.aac.p.m4a',
     audioAssetId: 'asset-zingaat-official-preview',
-    duration: 227,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Marathi Folk',
     language: 'Marathi',
     composer: 'Ajay-Atul',
@@ -396,7 +555,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c7/42/27/c742279a-586b-976a-df12-659f8539a788/8718857700166.png/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6a/80/28/6a8028c9-5a7d-749b-0d01-12b8ab54dd83/mzaf_2553266096703403253.plus.aac.p.m4a',
     audioAssetId: 'asset-yad-lagla-official-preview',
-    duration: 314,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Marathi Romantic Orchestral',
     language: 'Marathi',
     composer: 'Ajay-Atul',
@@ -429,7 +590,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/51/21/f0/5121f005-2456-1b39-599d-385316c94053/198595142745.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/62/59/fd6259aa-03d6-c9fc-7ec7-8dc56a37b8d5/mzaf_7614909585442819168.plus.aac.p.m4a',
     audioAssetId: 'asset-mauli-mauli-official-preview',
-    duration: 158,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Devotional Folk',
     language: 'Marathi',
     composer: 'Ajay-Atul',
@@ -462,7 +625,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c4/d3/61/c4d3615e-b652-e204-026c-827db678a280/8718857704249.png/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/45/8d/46458d12-536b-d6ea-ee12-06e0e7cf3ee5/mzaf_15583309538213083711.plus.aac.p.m4a',
     audioAssetId: 'asset-apsara-aali-official-preview',
-    duration: 238,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Marathi Lavani / Classical',
     language: 'Marathi',
     composer: 'Ajay-Atul',
@@ -508,6 +673,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Indian Classical Cultural Archive / Verified Devotional Master',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'licensed-full',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -540,6 +706,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Indian Classical Cultural Archive / Verified Devotional Master',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'licensed-full',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -572,6 +739,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Cultural Commons / Pune Traditional Rhythm Archive',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'creative-commons',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -595,7 +763,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/38/4c/5c/384c5c8f-3ff8-e457-b2f7-3158ce108649/mzaf_12389299033886433185.plus.aac.p.m4a',
     audioAssetId: 'asset-kesariya-official-preview',
-    duration: 268,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Bollywood Romantic',
     language: 'Hindi',
     composer: 'Pritam',
@@ -628,7 +798,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bb/23/ee/bb23eeed-0c35-4f1d-2b11-485622777ae4/8902894353007_cover.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3a/8c/9b/3a8c9b0b-2def-750a-f615-1555bf941edf/mzaf_17229496441442805917.plus.aac.p.m4a',
     audioAssetId: 'asset-tum-hi-ho-official-preview',
-    duration: 262,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Bollywood Romantic',
     language: 'Hindi',
     composer: 'Mithoon',
@@ -661,7 +833,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bc/6e/4d/bc6e4d0c-adec-b431-7b60-16f5689f9664/886446201597.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d5/f9/98/d5f998a7-0090-ee2d-03f8-557ad6c5bf65/mzaf_14251357991592637728.plus.aac.p.m4a',
     audioAssetId: 'asset-channa-mereya-official-preview',
-    duration: 289,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Soulful Bollywood',
     language: 'Hindi',
     composer: 'Pritam',
@@ -694,7 +868,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f1/4f/8f/f14f8fe3-4fda-8244-8dff-0db4be58bd4a/196871079808.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ef/e6/b9/efe6b9d4-3318-19ff-01fa-5c51f2ffe9b9/mzaf_3533703985365202572.plus.aac.p.m4a',
     audioAssetId: 'asset-deewani-mastani-official-preview',
-    duration: 340,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Classical Bollywood',
     language: 'Hindi',
     composer: 'Sanjay Leela Bhansali',
@@ -740,6 +916,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Wikimedia Commons / Public Domain Classical Archive',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'public-domain',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -772,6 +949,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Wikimedia Commons / Public Domain Classical Archive',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'public-domain',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -795,7 +973,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8a/89/e4/8a89e445-d2c6-f8ac-a828-27818b0c1afe/859749638209_cover.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/38/d5/7a/38d57a99-39fc-e901-7c45-fa6260ec83c1/mzaf_8083696285926392389.plus.aac.p.m4a',
     audioAssetId: 'asset-lover-official-preview',
-    duration: 190,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Punjabi Pop',
     language: 'Punjabi',
     composer: 'Intense',
@@ -841,10 +1021,427 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Creative Commons / Punjab Folk Soundscape Archive',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'creative-commons',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
     verificationStatus: 'verified',
+  },
+  // --- Karan Aujla Global Hits ---
+  {
+    id: 'song-punjabi-tauba-tauba',
+    trackId: 'song-punjabi-tauba-tauba',
+    title: 'Tauba Tauba (From "Bad Newz")',
+    titleNative: 'ਤੌਬਾ ਤੌਬਾ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-bad-newz',
+    albumTitle: 'Bad Newz (Original Motion Picture Soundtrack)',
+    albumNative: 'ਬੈਡ ਨਿਊਜ਼',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/79/d2/01/79d201d2-e54d-5604-81fb-313f30db7219/198588533581.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/34/8d/63/348d6342-2c35-bf31-8131-2c8b3cfe3c09/mzaf_15374551219149804677.plus.aac.p.m4a',
+    audioAssetId: 'asset-tauba-tauba-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 34500000,
+    lyrics: `[Intro: Karan Aujla]
+Yeah!
+Yo Karan!
+Tauba tauba!
+Aujla ni aujla!
+
+[Chorus]
+Husn tera tauba tauba, nakhra tera tauba tauba
+Jadon tu turdi hille zameen, charcha tera tauba tauba
+Mundeyan de dilaan te chhuri chalave
+Lakk matkave taan jaan kadh jaave
+Husn tera tauba tauba, nakhra tera tauba tauba
+Tauba tauba, re tauba tauba!
+
+[Verse 1]
+Outfit tera kill kare, addiyan vi thrill kare
+Dekh tainu saara club chill kare chill kare
+Kanni jhumke jhulde tere, munde aape rulte tere
+Kehnde aape phul te aape khil te tere
+Akhan vich paya kajla, lutt le gaya dil tu jatt da
+Ajj kal Har ikk passe rola tere hi lakk da
+
+[Chorus]
+Husn tera tauba tauba, nakhra tera tauba tauba
+Jadon tu turdi hille zameen, charcha tera tauba tauba
+Tauba tauba, re tauba tauba!
+
+[Verse 2]
+Red lipstick te high heels ni
+Saddi tere naal jamm gayi deals ni
+Gaddi vich bajje bass poora loud
+Tainu dekh pichhe hatt jaave crowd
+Karan Aujla geet banaunda, tere te likhda gaane ni
+Bad Newz de vich vekh le, charche bade puraane ni!
+
+[Outro]
+Tauba tauba, haan tauba tauba!
+Husn tera tauba tauba!
+Karan Aujla!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / Bad Newz Official Release',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/4jVptfA1k8Rrhz29uWlJjE',
+  },
+  {
+    id: 'song-punjabi-softly',
+    trackId: 'song-punjabi-softly',
+    title: 'Softly',
+    titleNative: 'ਸਾਫਟਲੀ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & Ikky',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-making-memories',
+    albumTitle: 'Making Memories',
+    albumNative: 'ਮੇਕਿੰਗ ਮੈਮੋਰੀਜ਼',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/6f/01/5f6f0130-6567-22d4-bc1a-5ccb359c3fac/mzaf_5497113703334703756.plus.aac.p.m4a',
+    audioAssetId: 'asset-softly-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla & Ikky',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 28900000,
+    lyrics: `[Intro: Karan Aujla & Ikky]
+Ikky!
+Yeah, yeah, yeah, yeah
+Uh, listen to me softly
+Yeah!
+
+[Chorus]
+Softly softly hassdi ae, jadon vi tu takkdi ae
+Nakhra tera lakk da hulaara, kudiye maar mukaunda ae
+Lagda mainu jaan-bujh ke, naina naal pilaunda ae
+Softly softly hassdi ae, jadon vi tu takkdi ae
+Nakhra tera lakk da hulaara, kudiye maar mukaunda ae
+Lagda mainu jaan-bujh ke, naina naal pilaunda ae
+
+[Verse 1]
+Tere layi gaddi vich play karaan gaane ni
+Aujla te Ikky de ne saare deewane ni
+Tere pichhe lagge munde kinne anjaane ni
+Par tere dil de taan aapan hi tikaane ni
+Kardi kyu ignore tu aiven, thoda taan muskura de ni
+Surma akhiyan de vich paake, aag kaalje laa de ni
+
+[Chorus]
+Softly softly hassdi ae, jadon vi tu takkdi ae
+Nakhra tera lakk da hulaara, kudiye maar mukaunda ae
+Lagda mainu jaan-bujh ke, naina naal pilaunda ae
+
+[Verse 2]
+Diamond di jhanjar teri, pairan de vich chhankdi
+Gallan de vich toye painde, roop tera sab dangdi
+Karan Aujla naam suni tu, jatt da rutba vakhra
+Duniya pichhe ghummdi phirdi, jatt te khad gaya nakhra
+Lagdi tu barbie wargi, dil di tu saaf kude
+Saanu vi tu dass de kudiye, ki tera insaaf kude?
+
+[Outro]
+Softly softly hassdi ae...
+Ikky!
+Yeah, Making Memories!
+Aujla ni Aujla!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla & Ikky / Making Memories',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/6Z826uQ70J7mKjQzWk1Jz5',
+  },
+  {
+    id: 'song-punjabi-winning-speech',
+    trackId: 'song-punjabi-winning-speech',
+    title: 'Winning Speech',
+    titleNative: 'ਵਿਨਿੰਗ ਸਪੀਚ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & MXRCI',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-winning-speech',
+    albumTitle: 'Winning Speech',
+    albumNative: 'ਵਿਨਿੰਗ ਸਪੀਚ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e3/ae/b6/e3aeb64f-cadd-5830-c39f-6af51cd91670/mzaf_6001527501800958065.plus.aac.p.m4a',
+    audioAssetId: 'asset-winning-speech-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla & MXRCI',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 19400000,
+    lyrics: `[Intro: Karan Aujla & MXRCI]
+MXRCI!
+Yeah, Winning Speech!
+Geetan di machine!
+Karan Aujla!
+
+[Verse 1]
+Oh jiddan da turna sikhya ae, kade pair pichhe ni putteya
+Haaran de vichon jittan labhiyan, hausla kade na tutteya
+Mehnat naal takdeeran likhiyan, kismat agge jhukna ni
+Duniya da kam bolan da ae, jatt ne kade vi rukna ni
+Lokan ne gallan kitiyan si, aapan kamm karke dikhaya ae
+Pind Ghurala ton turrke jatt ne, jhanda world te laaya ae!
+
+[Chorus]
+Jittan di aadat pai gayi ae, haar taan kade sochi ni
+Uche ne kirdaar sada, aapan aiven gall kiti ni
+Winning speech taiyaar meri, trophy hath vich auni ae
+Hasske jatt ne duniya saari, unglaan utte nachoni ae!
+Oh jittan di aadat pai gayi ae, haar taan kade sochi ni!
+
+[Verse 2]
+Gaddiyan kaliyan rim chamkde, yaar saare ne bomb kude
+Vairi saare darde rehnde, dekh sadda roab kude
+Pith pichhe jo karde waar, agge aake bolan na
+Jithe khad jaave Aujla, othe hor koyi kholan na
+Chhote hunde supne dekhe, ajj saare sach kite
+Vekh la kivein floor hilaunde, jatt de bajde geet kude!
+
+[Outro]
+Winning speech baby!
+MXRCI!
+Aujla ni Aujla!
+Yeah!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / Winning Speech',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/1kL8Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'song-punjabi-52-bars',
+    trackId: 'song-punjabi-52-bars',
+    title: '52 Bars',
+    titleNative: 'ਬਵੰਜਾ ਬਾਰਜ਼',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & Ikky',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-four-you',
+    albumTitle: 'Four You - EP',
+    albumNative: 'ਫੋਰ ਯੂ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fc/bc/64/fcbc6417-8a88-7b5e-4490-8f53e537ffb0/859770181552_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/52/c9/1c/52c91c69-352d-cb4e-3706-265dc01067d0/mzaf_17387125942915601585.plus.aac.p.m4a',
+    audioAssetId: 'asset-52-bars-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla & Ikky',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 24100000,
+    lyrics: `[Intro: Karan Aujla & Ikky]
+Ikky!
+Four You!
+Fifty-Two Bars!
+Yeah!
+
+[Verse]
+Bande kayi bolde ne pith pichhe yaar de
+Saahmne taan aake oho kade vi na maarde
+Akhan vich akhan paa ke kitiyan ne gallan
+Kade vi na aapan jhoothian chaalan chalan
+Gaddiyan floor te te asle ne dabbe
+Pehlan din ton hi jatt khabbeyan ton sabbe
+Pind ton Toronto tak charche ne poore
+Supne jo dekhe si kite aapan poore
+Sohni jehi mutiyar pichhe ghummdi phirdi
+Aujla taan bas ikko gall te adya
+Kise de vi moohre kade pair na dharheya
+52 bars vich dass ditta saara sach
+Chor jehre aiven kehnde kach nu vi kach
+Geetan di machine aapan aiven ni bane
+Sunn sunn geet saare hilde ne kande!
+
+[Chorus]
+52 bars likh ditte ikko baithak vich
+Kade vi na likheya aapan jhooth geet vich
+Aujla ni Aujla taan naam hi bathera
+Jithe jatt khad jaave othe paunda ghera!
+
+[Outro]
+Fifty-two bars!
+Ikky on the beat!
+Karan Aujla!
+Four You!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / Four You - EP',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/2kL8Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'song-punjabi-admiring-you',
+    trackId: 'song-punjabi-admiring-you',
+    title: 'Admirin\' You (feat. Preston Pablo)',
+    titleNative: 'ਐਡਮਾਇਰਿੰਗ ਯੂ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla & Ikky',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-making-memories',
+    albumTitle: 'Making Memories',
+    albumNative: 'ਮੇਕਿੰਗ ਮੈਮੋਰੀਜ਼',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1e/93/c4/1e93c4d4-0367-c423-6faa-51af078e501b/mzaf_2676653675471599457.plus.aac.p.m4a',
+    audioAssetId: 'asset-admiring-you-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla & Ikky',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 16800000,
+    lyrics: `[Intro: Preston Pablo & Karan Aujla]
+Yeah, yeah
+Ikky!
+I've been admirin' you from afar
+Karan Aujla, let's go!
+
+[Chorus: Preston Pablo & Karan Aujla]
+I've been admirin' you, looking at you tonight
+Tainu vekh vekh akhiyan na rajjiyan kude
+Dass kehde shehar ton tu aayi ae kude
+I've been admirin' you, girl under the neon light
+Chann jeha mukhda te zulfaan ne kaaliyan
+Duniya de kolon gallan rehndiyan sambhaliyan
+
+[Verse 1: Karan Aujla]
+Hassdi jadon vi lagdi tu pari kude
+Dil wali gall saanu dassde khadi kude
+Surma akhan ch paake kardi katal ni
+Tere pichhe chhad diti aapan sab akl ni
+Making Memories aapan likh diti album
+Sunn sunn beat saari duniya kardi welcome
+Brown munda jatt kude karda kamaal
+Dass kadon turrna tu aake mere naal?
+
+[Chorus: Preston Pablo & Karan Aujla]
+I've been admirin' you, looking at you tonight
+Tainu vekh vekh akhiyan na rajjiyan kude
+Dass kehde shehar ton tu aayi ae kude
+I've been admirin' you!
+
+[Outro]
+Admirin' you...
+Ikky!
+Karan Aujla!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / Making Memories',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/3mL9Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'song-punjabi-on-top',
+    trackId: 'song-punjabi-on-top',
+    title: 'On Top',
+    titleNative: 'ਆਨ ਟੌਪ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-on-top',
+    albumTitle: 'On Top',
+    albumNative: 'ਆਨ ਟੌਪ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/87/d4/ca87d416-2021-0eb1-f36a-fe01998c738d/5059950896060_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/de/8a/d6/de8ad640-b63a-4c66-7fe2-bd554b603890/mzaf_8128986367196844935.plus.aac.p.m4a',
+    audioAssetId: 'asset-on-top-official-30s',
+    duration: 30,
+    previewDuration: 30,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla',
+    releaseYear: 2022,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 1.8,
+    playCount: 21500000,
+    lyrics: `[Intro: Karan Aujla]
+Yeah!
+Yeah, yeah
+Karan Aujla!
+You already know who it is!
+We stay on top!
+
+[Chorus]
+Top te jatt kude, top te sadda na
+Thalle kade aunde ni, aapan kade jhukde na
+Saari duniya te charche ne, headline vich naam kude
+Jithe vi aapan turrde, othe painda thamm kude
+Top te jatt kude, top te sadda na!
+
+[Verse 1]
+Mehnat naal kamaya rutba, aiven ni milaeya ae
+Lokan ne taan rokeya si, aapan rukh badlaeya ae
+Black tinted windows, gaddi cruise te chaldi
+Jatt di chadayi dekho, ajj kal nayi dhaldi
+Billo tere shehar vich geet vajjan mere
+Radio te sunn le tu charche chufere!
+
+[Chorus]
+Top te jatt kude, top te sadda na
+Thalle kade aunde ni, aapan kade jhukde na!
+
+[Outro]
+On top, baby!
+Forever!
+Karan Aujla!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / On Top',
+    provider: 'aura-licensed',
+    playbackMode: 'preview',
+    playbackRights: 'licensed-preview',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/5nL9Y1zX6vV1xX8bJ2K5c',
   },
 
   // =========================================================================
@@ -864,7 +1461,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e9/19/b9/e919b921-d5a8-9e9a-8508-3551da375aee/196626458629.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/58/ac/9a/58ac9a48-9e3e-15c9-5085-3a13a6187992/mzaf_12322264242631159198.plus.aac.p.m4a',
     audioAssetId: 'asset-arabic-kuthu-official-preview',
-    duration: 280,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Tamil Pop',
     language: 'Tamil',
     composer: 'Anirudh Ravichander',
@@ -897,7 +1496,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/53/98/c1/5398c1cf-7c16-24a6-bfa3-391dc6015376/cover.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/29/a7/55/29a75528-3808-d849-ad00-9e714bf12621/mzaf_2813549342968292058.plus.aac.p.m4a',
     audioAssetId: 'asset-samajavaragamana-official-preview',
-    duration: 220,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'Telugu Romantic',
     language: 'Telugu',
     composer: 'Thaman S',
@@ -947,6 +1548,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'Pixabay License / Free Commercial Use',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'creative-commons',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -979,6 +1581,7 @@ export const INITIAL_SONGS: Song[] = [
     isRoyaltyFree: true,
     licenseInfo: 'AURA City Pop Showcase / Verified Indie Stream',
     provider: 'aura-licensed',
+    playbackMode: 'full-length',
     playbackRights: 'creative-commons',
     availabilityStatus: 'available',
     playbackAvailability: 'available',
@@ -998,7 +1601,9 @@ export const INITIAL_SONGS: Song[] = [
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2b/f6/82/2bf682ab-f6c5-a82e-d204-306faede272e/198704579318_Cover.jpg/600x600bb.jpg',
     audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/63/cf/fd/63cffd1b-1f32-0d6b-afba-d445b91271bc/mzaf_9755088333292945190.plus.aac.p.m4a',
     audioAssetId: 'asset-dynamite-official-preview',
-    duration: 197,
+    duration: 30,
+    playbackMode: 'preview',
+    previewDuration: 30,
     genre: 'K-Pop',
     language: 'Korean',
     composer: 'David Stewart',
@@ -1049,6 +1654,42 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
     isPublic: true,
     songIds: ['song-punjabi-lover', 'song-punjabi-dhol'],
     createdAt: '2024-03-03T00:00:00.000Z',
+  },
+  {
+    id: 'playlist-karan-aujla-hits',
+    title: 'Karan Aujla Essentials: Global Anthems',
+    description: 'The monumental Punjabi world anthems by Karan Aujla: Tauba Tauba, Softly, Winning Speech, 52 Bars, Admirin\' You, and On Top with synchronized lyrics and official studio previews.',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    creatorName: 'AURA Editorial',
+    isPublic: true,
+    songIds: [
+      'song-punjabi-tauba-tauba',
+      'song-punjabi-softly',
+      'song-punjabi-winning-speech',
+      'song-punjabi-52-bars',
+      'song-punjabi-admiring-you',
+      'song-punjabi-on-top',
+    ],
+    createdAt: '2024-03-06T00:00:00.000Z',
+  },
+  {
+    id: 'playlist-full-length-masters',
+    title: 'AURA Master Series: Full-Length Tracks',
+    description: 'Complete, uncut 100% full-length audio tracks: Pt. Bhimsen Joshi Abhangs, Hindustani Flute Ragas, Sitar Tarana, Pune Dhol Tasha, and Neon Synthwave.',
+    coverUrl: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&auto=format&fit=crop&q=80',
+    creatorName: 'AURA Editorial',
+    isPublic: true,
+    songIds: [
+      'song-marathi-maher',
+      'song-marathi-deva',
+      'song-marathi-dhol',
+      'song-hindi-bhairavi',
+      'song-hindi-sitar',
+      'song-punjabi-dhol',
+      'song-intl-cyber-horizon',
+      'song-intl-stay-with-me',
+    ],
+    createdAt: '2024-03-07T00:00:00.000Z',
   },
   {
     id: 'playlist-south-cinema',

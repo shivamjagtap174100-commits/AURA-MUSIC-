@@ -235,10 +235,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               songs: ['song-marathi-zingaat', 'song-marathi-yad-lagla', 'song-marathi-mauli'],
             },
             {
-              title: 'Daily Mix 3 • Punjabi Swagger',
-              desc: 'Diljit Dosanjh, Sidhu Moose Wala & Urban Bhangra',
-              cover: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-              songs: ['song-punjabi-lover', 'song-punjabi-so-high'],
+              title: 'Daily Mix 3 • Punjabi Anthems',
+              desc: 'Karan Aujla, Diljit Dosanjh, Ikky & Urban Bhangra',
+              cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+              songs: ['song-punjabi-tauba-tauba', 'song-punjabi-softly', 'song-punjabi-lover'],
             },
             {
               title: 'Daily Mix 4 • Nocturnal Chill',

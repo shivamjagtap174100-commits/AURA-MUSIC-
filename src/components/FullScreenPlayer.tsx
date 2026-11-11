@@ -288,7 +288,7 @@ export const FullScreenPlayer: React.FC = () => {
         {/* Track Title & Artist */}
         <div className="flex items-center justify-between mb-4">
           <div className="min-w-0 flex-1 pr-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h2 className="text-xl sm:text-2xl font-bold text-[#F3F0E9] truncate tracking-tight font-['Manrope']">
                 {currentSong.title}
               </h2>
@@ -297,10 +297,29 @@ export const FullScreenPlayer: React.FC = () => {
                   {currentSong.titleNative}
                 </span>
               )}
+              {currentSong.playbackMode === 'preview' ? (
+                <span className="text-[10px] px-2 py-0.5 rounded bg-[#C5A66B]/20 text-[#D8BF91] border border-[#C5A66B]/30 font-mono">
+                  Official Preview (30s)
+                </span>
+              ) : (
+                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+                  Full-Length Master
+                </span>
+              )}
               <AudioQualityBadge quality={currentSong.audioQuality} />
             </div>
             <p className="text-sm text-[#929292] truncate mt-0.5">
               {currentSong.artistName} {currentSong.artistNative && `(${currentSong.artistNative})`}
+              {currentSong.playbackMode === 'preview' && currentSong.spotifyUrl && (
+                <a
+                  href={currentSong.spotifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-3 text-[#1DB954] hover:underline font-normal inline-flex items-center gap-1"
+                >
+                  Full track on Spotify ↗
+                </a>
+              )}
             </p>
           </div>
 

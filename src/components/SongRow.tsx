@@ -116,6 +116,16 @@ export const SongRow: React.FC<SongRowProps> = ({
               Spotify Master
             </span>
           )}
+          {song.playbackMode === 'preview' && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#C5A66B]/15 text-[#D8BF91] border border-[#C5A66B]/30 font-mono">
+              Preview 30s
+            </span>
+          )}
+          {song.playbackMode === 'full-length' && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono hidden sm:inline">
+              Full Track
+            </span>
+          )}
           <AudioQualityBadge quality={song.audioQuality} />
           {song.language && (
             <span className="text-[10px] text-[#666666] font-mono hidden lg:inline">

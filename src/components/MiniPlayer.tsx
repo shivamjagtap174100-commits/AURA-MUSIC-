@@ -161,6 +161,15 @@ export const MiniPlayer: React.FC = () => {
               <h4 className="text-sm font-medium text-[#F3F0E9] truncate hover:text-[#C5A66B] transition-colors">
                 {currentSong.title}
               </h4>
+              {currentSong.playbackMode === 'preview' ? (
+                <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#C5A66B]/20 text-[#D8BF91] border border-[#C5A66B]/30 font-mono shrink-0">
+                  Preview 30s
+                </span>
+              ) : (
+                <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono hidden md:inline shrink-0">
+                  Full Track
+                </span>
+              )}
               <AudioQualityBadge quality={currentSong.audioQuality} />
             </div>
             <p className="text-xs text-[#929292] truncate hover:text-[#F3F0E9] transition-colors">
