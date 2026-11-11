@@ -37,6 +37,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = ({
     ...catalogService.getSongsByLanguage('Japanese'),
     ...catalogService.getSongsByLanguage('English'),
   ];
+  const fullLengthSongs = catalogService.getPlayableSongs().filter((s) => s.playbackMode === 'full-length');
 
   return (
     <div className="space-y-10 pb-36 select-none animate-in fade-in duration-200">
@@ -175,7 +176,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = ({
                   ਪੰਜਾਬੀ
                 </span>
               </h2>
-              <p className="text-xs text-[#666666] mt-0.5">Heavy basslines and chart-toppers from Diljit Dosanjh and Sidhu Moose Wala</p>
+              <p className="text-xs text-[#666666] mt-0.5">Heavy basslines and chart-toppers from Karan Aujla, Diljit Dosanjh, and Punjab Folk Masters</p>
             </div>
           </div>
 
@@ -246,6 +247,36 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = ({
                 song={song}
                 index={idx}
                 queueContext={intlSongs}
+                onOpenPlaylistModal={onOpenPlaylistModal}
+                onSelectArtist={(artistId) => onNavigate('artist-detail', { artistId })}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 6. AURA Master Series: 100% Full-Length Uncut Tracks */}
+      {fullLengthSongs.length > 0 && (
+        <section>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="section-title flex items-center gap-2">
+                <span>AURA Master Series: 100% Full-Length Tracks</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-mono">
+                  Full Length Masters
+                </span>
+              </h2>
+              <p className="text-xs text-[#666666] mt-0.5">Uncut, full-duration classical, devotional, rhythm, and synthwave recordings</p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-[#171819] border border-[#292929] p-3 space-y-1 shadow-sm">
+            {fullLengthSongs.map((song, idx) => (
+              <SongRow
+                key={song.id}
+                song={song}
+                index={idx}
+                queueContext={fullLengthSongs}
                 onOpenPlaylistModal={onOpenPlaylistModal}
                 onSelectArtist={(artistId) => onNavigate('artist-detail', { artistId })}
               />
