@@ -23,31 +23,38 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="group p-3 rounded-lg bg-[#181818] hover:bg-[#202020] border border-[#242424] hover:border-[#333333] transition-all duration-200 cursor-pointer flex flex-col select-none"
+      className="group p-3 rounded-xl bg-[#171819] hover:bg-[#202123] border border-[#292929] hover:border-[#383838] transition-all duration-200 cursor-pointer flex flex-col select-none shadow-sm"
     >
-      <div className="relative aspect-square w-full rounded-md overflow-hidden mb-3 bg-[#242424]">
+      <div className="relative aspect-square w-full rounded-lg overflow-hidden mb-3 bg-[#101112]">
         <img
           src={album.coverUrl}
           alt={album.title}
-          className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
           loading="lazy"
         />
 
-        {/* Minimal White Circular Play Button on Hover */}
+        {/* Champagne Gold Circular Play Button on Hover */}
         <button
           onClick={handlePlayDirect}
           title="Play Album"
-          className="absolute bottom-2.5 right-2.5 w-9 h-9 rounded-full bg-[#F5F5F5] hover:bg-white text-black flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 shadow-md hover:scale-105 active:scale-95"
+          className="absolute bottom-2.5 right-2.5 w-10 h-10 rounded-full bg-[#C5A66B] hover:bg-[#D8BF91] text-[#08090A] flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 shadow-lg hover:scale-105 active:scale-95"
         >
-          <Play className="w-4 h-4 fill-black ml-0.5" />
+          <Play className="w-4 h-4 fill-[#08090A] ml-0.5" />
         </button>
       </div>
 
-      <h4 className="font-medium text-[#F5F5F5] text-sm truncate group-hover:text-white transition-colors">
-        {album.title}
-      </h4>
-      <p className="text-xs text-[#A1A1A1] truncate mt-1">
-        {album.artistName}
+      <div className="flex items-center justify-between gap-1">
+        <h4 className="font-semibold text-[#F3F0E9] text-sm truncate group-hover:text-[#D8BF91] transition-colors font-['Manrope']">
+          {album.title}
+        </h4>
+        {album.language && (
+          <span className="text-[10px] text-[#666666] font-mono shrink-0">
+            {album.language}
+          </span>
+        )}
+      </div>
+      <p className="text-xs text-[#929292] truncate mt-1">
+        {album.artistName} {album.releaseYear ? `• ${album.releaseYear}` : ''}
       </p>
     </div>
   );

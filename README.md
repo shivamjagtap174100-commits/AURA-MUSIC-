@@ -1,285 +1,198 @@
-# AURA MUSIC
+# AURA MUSIC — Master Architecture & Production Documentation
 
-> **Tagline:** *Your Music. Your Mood. Your World.*
-
-A premium, production-quality cross-platform music streaming platform built for **Web** and **Android**. Designed with an original sonic identity, deep charcoal aesthetics, electric violet and teal accents, glassmorphic surfaces, and studio-grade audio capabilities.
-
----
-
-## 🎧 Key Capabilities & Architectural Highlights
-
-- **Original Brand & Design Identity:**
-  - Charcoal & deep space dark theme (`#08090e`, `#0f111a`, `#171926`).
-  - Electric violet (`#8b5cf6`) and neon teal (`#06b6d4`) accents with glowing aura backdrops.
-  - Custom SVG logo featuring an iridescent soundwave aura with gradient particles.
-  - Smooth glassmorphism, responsive navigation drawer, and rounded card hierarchy.
-- **Cross-Platform Support:**
-  - **Web Application:** Fully responsive desktop, tablet, and mobile interface; installable Progressive Web App (PWA); persistent mini-player; global keyboard shortcuts.
-  - **Android Application:** Capacitor Android native shell with Gradle build configuration (`android/`), background audio playback permissions (`FOREGROUND_SERVICE`, `WAKE_LOCK`, `FOREGROUND_SERVICE_MEDIA_PLAYBACK`), and lock screen notification media controls via the MediaSession API.
-- **Persistent High-Fidelity Audio Player:**
-  - Plays actual audio files (MP3, WAV, AAC, FLAC).
-  - Play, Pause, Next, Previous, Seek slider, Volume slider, and Mute.
-  - Shuffle mode and Repeat modes (`off`, `all`, `one`).
-  - Queue drawer with track reordering (move up/down), remove item, and clear queue.
-  - Mini-player (docked above bottom navigation on mobile, full-width at bottom on desktop).
-  - Full-screen player modal with breathing/rotating vinyl album artwork, ambient backlights, lyrics reader, and queue view.
-- **True Offline Download Engine:**
-  - Authorized royalty-free music downloads using chunked streaming with accurate progress percentages.
-  - Platform-specific local storage: IndexedDB (`idb-keyval`) audio Blob caching (`aura_offline_audio_{id}`).
-  - Offline playback interception: automatically serves local `blob:` URLs when offline or playing downloaded tracks with zero internet connectivity.
-  - Storage telemetry: view total local disk space consumed and remove downloads individually.
-- **Playlist System & Library:**
-  - Create playlists with custom titles, descriptions, and cover artwork presets.
-  - Add and remove songs, reorder tracks within playlists, rename, or delete playlists.
-  - Dedicated "Liked Songs" library with instant heart toggling and shuffle playback.
-  - Dedicated "Offline Tracks" library for zero-latency airplane/offline listening.
-- **Search Engine:**
-  - Real-time search across songs, artists, albums, genres, and playlists.
-  - Instant filter chips (`All`, `Songs`, `Artists`, `Albums`, `Playlists`).
-  - Empty state with interactive genre discovery cards.
-- **Supabase Authentication & Backend:**
-  - Email/password authentication, Google OAuth integration, password reset, and guest browsing mode.
-  - User profiles with avatars and audio streaming quality preferences (128 kbps, 320 kbps, Ultra HD / FLAC).
-  - Production PostgreSQL schema (`supabase/schema.sql`) with Row Level Security (RLS) policies, indexes, auto-profile trigger on signup, and storage buckets (`music-audio`, `music-covers`).
-  - Graceful offline fallback: fully functional local store and guest mode if Supabase credentials are not yet configured.
-- **Admin Dashboard:**
-  - Role-protected admin portal (`role: 'admin'`).
-  - Upload/publish authorized royalty-free tracks with metadata (Title, Artist, Album, Genre, Duration, Audio Quality, Bitrate, Audio Stream URL, Cover URL, Lyrics, License info).
-  - Edit song metadata and delete songs from catalog.
-  - Real-time listening statistics and top-streamed track visualizations.
+> **Tagline:** *SOUND BEYOND ORDINARY.*  
+> **Aesthetic Identity:** Obsidian Gold (Minimal Luxury • Editorial Music Experience)  
+> **Platforms:** Modern Web (PWA) & Native Android (Capacitor)
 
 ---
 
-## 📂 Project Structure
+## 1. System Overview
+
+**AURA MUSIC** is a commercial-grade, cross-platform music streaming platform engineered with a strict two-pillar architecture:
+
+1. **System A — Spotify Discovery Integration**: Uses the official Spotify Web API for permitted catalog discovery, artist biographies, album discographies, and verified Spotify links (`spotifyUrl`). In accordance with Spotify Developer Policy, Spotify metadata is never grafted onto unrelated third-party audio streams.
+2. **System B — Independent Licensed Playback**: An independent, legal audio engine playing 100% matched, verified recordings with genuine audio assets (Marathi Abhangs & Dhol Tasha, Hindustani Classical Ragas & Sitar, Punjabi Folk Dhol, Synthwave, and Japanese City Pop).
+3. **The Core Architectural Mandate**:
+   > **THE SONG DISPLAYED MUST ALWAYS BE THE EXACT SONG BEING PLAYED.**  
+   > If an authorized audio asset is not legally licensed for independent streaming (such as proprietary film masters owned by T-Series or Zee Music), the platform marks the track as unavailable and presents an official link to Spotify. Unrelated fallback audio is strictly prohibited throughout the entire application.
+
+---
+
+## 2. Song Mismatch Root Cause Analysis & Permanent Resolution
+
+### The Issue
+Previous prototypes displayed commercial Indian titles (e.g. *Zingaat*, *Kesariya*, *Tum Hi Ho*, *Mauli Mauli*), but mapped them to generic royalty-free electronic synthwave audio files (e.g. `uplifting-synthwave-124792.mp3`, `electronic-future-beats-117997.mp3`). This produced a critical user mismatch where selecting a Marathi song played an English electronic instrumental.
+
+### The Resolution
+1. **Unique Track Identification**: Every song possesses a canonical `track_id` (`id`), `provider`, `audio_asset_id`, `playback_availability`, and `verification_status`.
+2. **Track Validation Gate (`TrackValidationService`)**: Before any audio stream reaches the HTML5 `audio.src`, it undergoes validation:
+   - Verifies that `verification_status === 'verified'` and `playback_availability === 'available'`.
+   - Strictly rejects any Marathi or Hindi track paired with synthetic placeholder audio.
+   - For commercial tracks where independent full streaming rights are reserved, the engine halts playback, clears the audio buffer, and sets an informative notice with an actionable "Listen on Spotify ↗" button.
+3. **Authentic Verified Audio Assets**:
+   - **Marathi**: Authentic Marathi Abhangs (*Majhe Maher Pandhari*, *Deva Tujhya Dari* by Pt. Bhimsen Joshi tradition) and traditional Pune Dhol Tasha festive rhythms.
+   - **Hindi / Classical**: Authentic Bansuri Flute (*Raga Bhairavi Morning Raga*) and Classical Sitar (*Sitar Tarana in Yaman*).
+   - **Punjabi**: Authentic Folk Dhol & Tumbi (*Bhangra Dhol Punjab*).
+   - **English / International**: Authentic Synthwave (*Cyber Horizon* by Neon Mirage) and Japanese City Pop (*Stay With Me* by Miki Matsubara).
+
+---
+
+## 3. Modular Backend & Services Architecture
 
 ```
-aura-music/
-├── android/                   # Native Android Studio Gradle Project (Capacitor)
-│   ├── app/
-│   │   ├── build.gradle       # App-level build configuration (permissions, targetSdk)
-│   │   └── src/main/
-│   │       ├── AndroidManifest.xml # Media playback, foreground service & internet permissions
-│   │       └── assets/public/ # Synced production web build assets
-│   ├── build.gradle           # Root Gradle configuration
-│   └── gradlew.bat            # Windows Gradle wrapper
-├── public/
-│   ├── favicon.svg            # Custom Aura Music SVG vector icon
-│   └── manifest.json          # PWA Manifest (standalone display, theme-color)
-├── scripts/
-│   ├── build-android.ps1      # PowerShell Android APK & AAB automated builder
-│   ├── build-android.sh       # Bash Android APK & AAB automated builder
-│   └── verify-suite.js        # Automated catalog and business logic test suite
-├── src/
-│   ├── components/
-│   │   ├── AddToPlaylistModal.tsx
-│   │   ├── AlbumCard.tsx
-│   │   ├── ArtistCard.tsx
-│   │   ├── AudioQualityBadge.tsx
-│   │   ├── AuthModal.tsx
-│   │   ├── CreatePlaylistModal.tsx
-│   │   ├── EqualizerBars.tsx
-│   │   ├── FullScreenPlayer.tsx
-│   │   ├── Logo.tsx
-│   │   ├── MiniPlayer.tsx
-│   │   ├── MobileBottomNav.tsx
-│   │   ├── PlaylistCard.tsx
-│   │   ├── QueueDrawer.tsx
-│   │   ├── Sidebar.tsx
-│   │   ├── SongRow.tsx
-│   │   └── TopHeader.tsx
-│   ├── context/
-│   │   ├── AudioContext.tsx
-│   │   ├── AuthContext.tsx
-│   │   └── DownloadContext.tsx
-│   ├── data/
-│   │   └── initialCatalog.ts  # Verified royalty-free audio catalog (MP3 streams, artwork, lyrics)
-│   ├── screens/
-│   │   ├── AdminScreen.tsx
-│   │   ├── AlbumDetailScreen.tsx
-│   │   ├── ArtistDetailScreen.tsx
-│   │   ├── DownloadedScreen.tsx
-│   │   ├── HomeScreen.tsx
-│   │   ├── LibraryScreen.tsx
-│   │   ├── LikedSongsScreen.tsx
-│   │   ├── PlaylistDetailScreen.tsx
-│   │   ├── ProfileScreen.tsx
-│   │   └── SearchScreen.tsx
-│   ├── services/
-│   │   ├── audioService.ts    # Audio playback engine + MediaSession API
-│   │   ├── authService.ts     # Supabase auth + guest mode + profiles
-│   │   ├── catalogService.ts  # Songs, albums, artists, playlists data layer
-│   │   ├── downloadManager.ts # IndexedDB audio Blob offline cache
-│   │   └── supabase.ts        # Supabase client & connection validator
-│   ├── types/
-│   │   └── index.ts           # TypeScript interfaces & types
-│   ├── App.tsx                # Master container & view router
-│   ├── index.css              # Tailwind CSS v4 styling & glassmorphic themes
-│   └── main.tsx
-├── supabase/
-│   ├── schema.sql             # Full PostgreSQL schema with RLS policies, tables, triggers
-│   └── seed.sql               # Initial seed data for artists, albums, songs
-├── .env.example               # Environment variables example
-├── capacitor.config.ts        # Capacitor configuration
-├── package.json
-└── vite.config.ts
+src/services/
+├── spotifyDiscoveryService.ts     # Official Spotify Web API integration (OAuth Client Credentials & discovery)
+├── licensedMusicCatalogService.ts  # Independent licensed music catalog & query layer
+├── trackRepository.ts              # Single source of truth for tracks, artists, and albums
+├── trackValidationService.ts       # Enforces exact audio-to-metadata matching & rejects fallbacks
+├── playbackService.ts              # High-fidelity audio playback engine (HTML5 Audio & MediaSession)
+├── queueService.ts                 # Queue management, traversal, shuffling, and repeating
+├── searchService.ts                # Multilingual search with script transliteration (Devanagari, Gurmukhi, Latin)
+├── playlistService.ts              # Playlist CRUD with explicit track_id foreign keys
+├── userLibraryService.ts           # Liked songs, saved albums, and cross-device sync
+├── recentlyPlayedService.ts        # Listening history with deduplication and timestamps
+├── downloadManager.ts              # IndexedDB binary Blob storage for offline listening
+├── audioService.ts                 # Unified backwards-compatibility façade
+├── catalogService.ts               # Unified façade linking all modular services
+└── supabase.ts                     # Production PostgreSQL connection & RLS client
 ```
 
 ---
 
-## ⚡ Quick Start & Development
+## 4. Database Design (PostgreSQL Schema)
+
+The database schema (`supabase/schema.sql`) implements fully normalized tables with foreign keys and Row Level Security:
+
+- **`tracks`**:
+  `track_id` (PK), `provider`, `provider_track_id`, `title`, `title_native`, `artist_id` (FK), `artist_name`, `artist_native`, `album_id` (FK), `album_title`, `cover_url`, `audio_url`, `audio_asset_id`, `duration`, `genre`, `language`, `composer`, `audio_quality`, `bitrate`, `file_size_mb`, `play_count`, `playback_availability`, `verification_status`, `spotify_url`.
+- **`artists`**:
+  `id` (PK), `name`, `name_native`, `bio`, `avatar_url`, `banner_url`, `monthly_listeners`, `genres`, `languages`, `verified`, `spotify_url`.
+- **`albums`**:
+  `id` (PK), `title`, `title_native`, `artist_id` (FK), `artist_name`, `cover_url`, `release_year`, `genre`, `language`, `total_tracks`, `spotify_url`.
+- **`playlists`**:
+  `id` (PK), `user_id` (FK), `title`, `description`, `cover_url`, `creator_name`, `is_public`.
+- **`playlist_tracks`**:
+  `id` (PK), `playlist_id` (FK), `track_id` (FK), `position`, `added_at`.
+- **`user_library`**:
+  `id` (PK), `user_id` (FK), `track_id` (FK), `saved_at`.
+- **`recently_played`**:
+  `id` (PK), `user_id` (FK), `track_id` (FK), `duration_played`, `played_at`.
+- **`playback_history`**:
+  `id` (PK), `user_id` (FK), `track_id` (FK), `session_playback_id`, `device_info`, `completed`, `played_at`.
+- **`downloads`**:
+  `id` (PK), `user_id` (FK), `track_id` (FK), `file_size_bytes`, `format`, `downloaded_at`.
+
+---
+
+## 5. Obsidian Gold Design System
+
+The visual identity is built on dark AMOLED luxury with warm champagne gold accents:
+
+| Token | Hex | Role |
+|---|---|---|
+| `--background` | `#08090A` | Deep Obsidian AMOLED shell |
+| `--background-secondary` | `#101112` | Sidebar, navigation, modal surfaces |
+| `--surface` | `#171819` | Cards, song rows, bottom player bar |
+| `--surface-elevated` | `#202123` | Active track highlights, hover cards |
+| `--accent-gold` | `#C5A66B` | Champagne gold: play controls, scrubbers, active states |
+| `--accent-gold-light` | `#D8BF91` | Metallic highlights, secondary accents |
+| `--text-primary` | `#F3F0E9` | Crisp off-white typography |
+| `--text-secondary` | `#929292` | Artist metadata, subheadings |
+| `--text-muted` | `#666666` | Durations, track numbers |
+| `--border` | `#292929` | Hairline dividers and subtle borders |
+
+---
+
+## 6. Smart Multilingual Search Engine
+
+The search engine (`SearchService`) features:
+1. **Bidirectional Transliteration**:
+   - Queries like `अरिजीत सिंह` match `Arijit Singh`.
+   - Queries like `अजय अतुल` or `मराठी गाणी` match `Ajay Atul` and `Marathi songs`.
+   - Supports Gurmukhi (`ਦਿਲਜੀਤ ਦੋਸਾਂਝ`), Tamil (`அனிருத்`), and Telugu (`సిద్ శ్రీరామ్`).
+2. **Categorical Separation**:
+   - **Licensed Playable Tracks**: Shows verified songs that play real matched audio.
+   - **Spotify Discovery**: Shows Spotify catalog results with official artwork, popularity, and direct Spotify links.
+   - Never returns an unrelated English song when searching for Marathi music.
+
+---
+
+## 7. Automated Test Suites
+
+Run the automated test suites using the bundled CLI scripts:
+
+```bash
+# 1. Master Architecture Suite (Verifies all 13 core requirements)
+npm run test:architecture
+
+# 2. Multilingual Verification Suite (16/16 query tests across scripts)
+npm run test:verify
+
+# 3. Cross-Platform Responsiveness & Audio Suite (Desktop, Tablet, Mobile)
+npm run test:cross-platform
+```
+
+### Verified Test Coverage:
+- [x] Marathi search and authentic playback
+- [x] Hindi search and authentic playback
+- [x] English search and authentic playback
+- [x] 100% correct title and audio matching
+- [x] Strict incorrect audio rejection
+- [x] Duplicate track handling and queue deduping
+- [x] Missing audio rejection
+- [x] Invalid metadata rejection
+- [x] Spotify discovery and commercial licensing separation
+- [x] Playlist synchronization by track ID
+- [x] Queue management and state transitions
+- [x] Player state synchronization (MiniPlayer & FullScreenPlayer)
+- [x] API failure resilience and empty-state handling
+
+---
+
+## 8. Development & Build Instructions
 
 ### Prerequisites
+- Node.js 20+ (Node 24 recommended)
+- Android Studio & JDK 21 (for native Android builds)
 
-- **Node.js** v18+ (tested on Node 24)
-- **npm** v10+
-
-### 1. Install Dependencies
-
+### Installation & Local Run
 ```bash
+# Install dependencies
 npm install
+
+# Start Vite development server with local network access
+npm run dev -- --host
 ```
+- Local URL: `http://localhost:5173/`
+- Wi-Fi Testing: `http://<your-local-ip>:5173/`
 
-### 2. Configure Environment (Optional)
-
-Copy `.env.example` to `.env`:
-
-```bash
-cp .env.example .env
-```
-
-Set your Supabase credentials:
-```env
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOi...
-```
-*(If omitted, Aura Music operates in full-featured offline local store mode automatically).*
-
-### 3. Run Development Server
-
-```bash
-npm run dev
-```
-
-Open your browser at `http://localhost:5173`.
-
----
-
-## 🧪 Automated Testing & Verification
-
-Run the verification suite to test catalog data integrity, licensing, search algorithms, playlist reordering, and audio quality calculation:
-
-```bash
-npm run test:verify
-```
-
----
-
-## 📱 Android Application Setup & Builds
-
-### Prerequisites for Android Native Builds
-
-- **Java Development Kit (JDK 17 or JDK 21)**
-- **Android Studio** with Android SDK Platform 34+ and Android Build Tools.
-
-### Syncing Web Assets to Android
-
-Whenever you update the web application, sync assets with:
-
-```bash
-npm run android:sync
-```
-
-### Open in Android Studio
-
-```bash
-npm run android:open
-```
-
-### Build Debug APK
-
-```bash
-npm run android:build:debug
-```
-*Output artifact:* `android/app/build/outputs/apk/debug/app-debug.apk`
-
-### Build Release APK
-
-```bash
-npm run android:build:release
-```
-*Output artifact:* `android/app/build/outputs/apk/release/app-release-unsigned.apk`
-
-### Build Google Play AAB Bundle
-
-```bash
-npm run android:bundle
-```
-*Output artifact:* `android/app/build/outputs/bundle/release/app-release.aab`
-
-Or use the provided PowerShell / Bash build scripts:
-- **Windows:** `.\scripts\build-android.ps1 -Target all`
-- **Linux / macOS:** `./scripts/build-android.sh all`
-
----
-
-## 🗄️ Supabase Database Setup
-
-1. Log into your [Supabase Dashboard](https://supabase.com).
-2. Go to the **SQL Editor** tab.
-3. Open `supabase/schema.sql` and run the script to create:
-   - Tables: `profiles`, `artists`, `albums`, `songs`, `playlists`, `playlist_songs`, `liked_songs`, `listening_history`, `downloads`.
-   - Security: Row Level Security (RLS) policies for user privacy.
-   - Storage Buckets: `music-audio` and `music-covers`.
-   - Triggers: Automatic profile row creation upon signup.
-4. Run `supabase/seed.sql` to populate the initial royalty-free catalog.
-
----
-
-## ⌨️ Desktop Keyboard Shortcuts
-
-| Shortcut | Action |
-| :--- | :--- |
-| `Space` | Play / Pause playback |
-| `→` (Right Arrow) | Seek forward 5 seconds |
-| `←` (Left Arrow) | Seek backward 5 seconds |
-| `Shift` + `→` | Skip to next track |
-| `Shift` + `←` | Skip to previous track |
-| `↑` (Up Arrow) | Volume up (+5%) |
-| `↓` (Down Arrow) | Volume down (-5%) |
-| `M` | Toggle Mute / Unmute |
-| `S` | Toggle Shuffle |
-| `R` | Cycle Repeat (`off` → `all` → `one`) |
-| `Esc` | Minimize full-screen player or close modals |
-
----
-
-## 🚀 Web Production Deployment
-
-### Build Production Bundle
-
+### Production Web Build
 ```bash
 npm run build
 ```
-The optimized production bundle is generated in `dist/`.
+Generates optimized assets in `dist/`.
 
-### Deploy to Vercel
-
+### Android Build (Capacitor)
 ```bash
-npx vercel deploy --prod
-```
+# 1. Build web and synchronize assets to Android
+npm run android:sync
 
-### Deploy to Netlify
-
-```bash
-npx netlify deploy --prod --dir=dist
+# 2. Open project in Android Studio
+npm run android:open
 ```
 
 ---
 
-## ⚖️ Audio Licensing & Public Domain Notice
+## 9. Environment Configuration
 
-All bundled tracks in AURA MUSIC utilize verified Creative Commons Zero (CC0) and royalty-free licenses suitable for commercial and non-commercial streaming. When uploading new music via the Admin Dashboard, only upload authorized audio files you own or have explicit rights to distribute.
+Create a `.env` file in the root directory:
 
----
+```env
+# Supabase Configuration (Optional for cloud sync; local storage works out of the box)
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
 
-**AURA MUSIC** — *Your Music. Your Mood. Your World.*
+# Spotify Web API (Optional for live Spotify search; curated discovery works out of the box)
+VITE_SPOTIFY_CLIENT_ID=your-spotify-client-id
+VITE_SPOTIFY_CLIENT_SECRET=your-spotify-client-secret
+```

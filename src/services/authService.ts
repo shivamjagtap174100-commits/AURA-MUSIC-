@@ -1,7 +1,27 @@
-import { UserProfile, AudioQuality } from '../types';
-import { supabase, isSupabaseConfigured } from './supabase';
+import type { UserProfile, AudioQuality } from '../types/index.ts';
+import { supabase, isSupabaseConfigured } from './supabase.ts';
 
 const STORAGE_KEY_AUTH_USER = 'aura_auth_user';
+
+const safeStorage = {
+  getItem: (key: string): string | null => {
+    try {
+      return typeof localStorage !== 'undefined' ? localStorage.getItem(key) : null;
+    } catch {
+      return null;
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      if (typeof localStorage !== 'undefined') localStorage.setItem(key, value);
+    } catch {}
+  },
+  removeItem: (key: string): void => {
+    try {
+      if (typeof localStorage !== 'undefined') localStorage.removeItem(key);
+    } catch {}
+  },
+};
 
 export interface AuthState {
   user: UserProfile | null;
@@ -24,7 +44,7 @@ class AuthService {
   private async init() {
     // 1. Try checking cached user
     try {
-      const cached = localStorage.getItem(STORAGE_KEY_AUTH_USER);
+      const cached = safeStorage.getItem(STORAGE_KEY_AUTH_USER);
       if (cached) {
         this.user = JSON.parse(cached);
         this.isGuest = false;
@@ -74,7 +94,7 @@ class AuthService {
       createdAt: new Date().toISOString(),
     };
     this.isGuest = true;
-    localStorage.removeItem(STORAGE_KEY_AUTH_USER);
+    safeStorage.removeItem(STORAGE_KEY_AUTH_USER);
   }
 
   private async loadUserProfile(userId: string, email: string) {
@@ -98,7 +118,7 @@ class AuthService {
           createdAt: data.created_at,
         };
         this.isGuest = false;
-        localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+        safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
         this.notify();
       } else {
         // Fallback profile if profile row hasn't generated yet
@@ -113,7 +133,7 @@ class AuthService {
           createdAt: new Date().toISOString(),
         };
         this.isGuest = false;
-        localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+        safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
         this.notify();
       }
     } catch (err) {
@@ -176,7 +196,7 @@ class AuthService {
         createdAt: new Date().toISOString(),
       };
       this.isGuest = false;
-      localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+      safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
       this.notify();
       return { user: this.user };
     }
@@ -203,7 +223,7 @@ class AuthService {
         createdAt: new Date().toISOString(),
       };
       this.isGuest = false;
-      localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+      safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
       this.notify();
       return { user: this.user };
     }
@@ -232,7 +252,7 @@ class AuthService {
         createdAt: new Date().toISOString(),
       };
       this.isGuest = false;
-      localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+      safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
       this.notify();
       return { user: this.user };
     }
@@ -261,7 +281,7 @@ class AuthService {
     this.user = { ...this.user, ...updates };
 
     if (!this.isGuest) {
-      localStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
+      safeStorage.setItem(STORAGE_KEY_AUTH_USER, JSON.stringify(this.user));
     }
 
     if (isSupabaseConfigured && supabase && !this.isGuest) {

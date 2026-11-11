@@ -13,10 +13,10 @@ export const AudioQualityBadge: React.FC<AudioQualityBadgeProps> = ({ quality })
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-medium tracking-wider uppercase border select-none ${
         isLossless
-          ? 'bg-[#181818] text-[#B7A0FF] border-[#B7A0FF]/30'
+          ? 'bg-[#171819] text-[#C5A66B] border-[#C5A66B]/30'
           : isHigh
-          ? 'bg-[#181818] text-[#D4D4D4] border-[#303030]'
-          : 'bg-[#181818] text-[#737373] border-[#262626]'
+          ? 'bg-[#171819] text-[#F3F0E9] border-[#292929]'
+          : 'bg-[#171819] text-[#666666] border-[#292929]'
       }`}
       title={`Audio Quality: ${quality}`}
     >

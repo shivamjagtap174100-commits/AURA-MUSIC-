@@ -15,6 +15,7 @@ import type { Song, AudioQuality } from '../types/index.ts';
 import { catalogService } from '../services/catalogService';
 import { useDownloads } from '../context/DownloadContext';
 import { AudioQualityBadge } from '../components/AudioQualityBadge';
+import { MUSIC_LANGUAGES } from '../data/initialCatalog.ts';
 
 export const AdminScreen: React.FC = () => {
   const { storageUsed } = useDownloads();
@@ -25,9 +26,12 @@ export const AdminScreen: React.FC = () => {
   // Form State
   const [editingSongId, setEditingSongId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
+  const [titleNative, setTitleNative] = useState('');
   const [artistName, setArtistName] = useState('');
+  const [artistNative, setArtistNative] = useState('');
   const [albumTitle, setAlbumTitle] = useState('');
-  const [genre, setGenre] = useState('Synthwave');
+  const [genre, setGenre] = useState('Bollywood');
+  const [language, setLanguage] = useState('Hindi');
   const [duration, setDuration] = useState('180');
   const [audioQuality, setAudioQuality] = useState<AudioQuality>('High (320 kbps)');
   const [audioUrl, setAudioUrl] = useState('');
@@ -39,9 +43,12 @@ export const AdminScreen: React.FC = () => {
   const resetForm = () => {
     setEditingSongId(null);
     setTitle('');
+    setTitleNative('');
     setArtistName('');
+    setArtistNative('');
     setAlbumTitle('');
-    setGenre('Synthwave');
+    setGenre('Bollywood');
+    setLanguage('Hindi');
     setDuration('180');
     setAudioQuality('High (320 kbps)');
     setAudioUrl('');
@@ -53,9 +60,12 @@ export const AdminScreen: React.FC = () => {
   const handleEditClick = (s: Song) => {
     setEditingSongId(s.id);
     setTitle(s.title);
+    setTitleNative(s.titleNative || '');
     setArtistName(s.artistName);
+    setArtistNative(s.artistNative || '');
     setAlbumTitle(s.albumTitle || '');
     setGenre(s.genre);
+    setLanguage(s.language || 'Hindi');
     setDuration(s.duration.toString());
     setAudioQuality(s.audioQuality);
     setAudioUrl(s.audioUrl);
@@ -87,9 +97,12 @@ export const AdminScreen: React.FC = () => {
     if (editingSongId) {
       catalogService.updateSong(editingSongId, {
         title,
+        titleNative,
         artistName,
+        artistNative,
         albumTitle,
         genre,
+        language,
         duration: parseInt(duration, 10) || 180,
         audioQuality,
         audioUrl,
@@ -102,13 +115,16 @@ export const AdminScreen: React.FC = () => {
       const newSong: Song = {
         id: `song-custom-${Date.now()}`,
         title,
+        titleNative,
         artistId: `artist-${Date.now()}`,
         artistName,
+        artistNative,
         albumTitle,
         coverUrl: defaultCover,
         audioUrl,
         duration: parseInt(duration, 10) || 180,
         genre,
+        language,
         releaseYear: new Date().getFullYear(),
         audioQuality,
         bitrate: audioQuality.includes('320') ? '320 kbps' : 'Lossless',
@@ -117,6 +133,11 @@ export const AdminScreen: React.FC = () => {
         lyrics,
         isRoyaltyFree: true,
         licenseInfo,
+        provider: 'local',
+        playbackRights: 'user-authorized',
+        availabilityStatus: 'available',
+        playbackAvailability: 'available',
+        verificationStatus: 'verified',
       };
 
       catalogService.addSong(newSong);
@@ -132,16 +153,16 @@ export const AdminScreen: React.FC = () => {
   const totalArtists = catalogService.getArtists().length;
 
   return (
-    <div className="space-y-6 pb-32 select-none animate-in fade-in duration-150">
+    <div className="space-y-6 pb-36 select-none animate-in fade-in duration-150">
       {/* Header */}
-      <div className="p-6 rounded-xl bg-[#181818] border border-[#242424] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-6 rounded-2xl bg-[#171819] border border-[#292929] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
         <div>
-          <div className="flex items-center gap-2 text-[#B7A0FF] text-xs font-mono uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-[#C5A66B] text-xs font-mono uppercase tracking-[0.2em] mb-1 font-semibold">
             <Shield className="w-3.5 h-3.5" />
             <span>Administrator Portal</span>
           </div>
-          <h1 className="editorial-title">Catalog & Management</h1>
-          <p className="text-xs text-[#737373] mt-1">Manage music metadata, audio files, and platform telemetry</p>
+          <h1 className="editorial-title text-2xl sm:text-3xl font-['Manrope']">Catalog & Management</h1>
+          <p className="text-xs text-[#929292] mt-1">Manage multilingual metadata, audio files, and platform telemetry</p>
         </div>
 
         <button
@@ -149,7 +170,7 @@ export const AdminScreen: React.FC = () => {
             resetForm();
             setActiveTab('add');
           }}
-          className="px-4 py-2 rounded-lg bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs flex items-center gap-1.5 transition-colors self-start sm:self-auto"
+          className="px-4 py-2 rounded-lg bg-[#C5A66B] hover:bg-[#D8BF91] text-[#08090A] font-bold text-xs flex items-center gap-1.5 transition-colors self-start sm:self-auto shadow-sm"
         >
           <Plus className="w-4 h-4" />
           <span>Add Music</span>
@@ -158,45 +179,45 @@ export const AdminScreen: React.FC = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
-          <div className="flex items-center justify-between text-[#737373] mb-1">
+        <div className="p-4 rounded-xl bg-[#171819] border border-[#292929]">
+          <div className="flex items-center justify-between text-[#666666] mb-1">
             <span className="text-xs">Songs</span>
-            <Music className="w-4 h-4" />
+            <Music className="w-4 h-4 text-[#C5A66B]" />
           </div>
-          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{songs.length}</p>
+          <p className="text-xl font-bold font-mono text-[#F3F0E9]">{songs.length}</p>
         </div>
 
-        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
-          <div className="flex items-center justify-between text-[#737373] mb-1">
+        <div className="p-4 rounded-xl bg-[#171819] border border-[#292929]">
+          <div className="flex items-center justify-between text-[#666666] mb-1">
             <span className="text-xs">Streams</span>
-            <BarChart2 className="w-4 h-4" />
+            <BarChart2 className="w-4 h-4 text-[#C5A66B]" />
           </div>
-          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{totalPlays.toLocaleString()}</p>
+          <p className="text-xl font-bold font-mono text-[#F3F0E9]">{totalPlays.toLocaleString()}</p>
         </div>
 
-        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
-          <div className="flex items-center justify-between text-[#737373] mb-1">
+        <div className="p-4 rounded-xl bg-[#171819] border border-[#292929]">
+          <div className="flex items-center justify-between text-[#666666] mb-1">
             <span className="text-xs">Artists</span>
-            <Users className="w-4 h-4" />
+            <Users className="w-4 h-4 text-[#C5A66B]" />
           </div>
-          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{totalArtists}</p>
+          <p className="text-xl font-bold font-mono text-[#F3F0E9]">{totalArtists}</p>
         </div>
 
-        <div className="p-4 rounded-lg bg-[#181818] border border-[#242424]">
-          <div className="flex items-center justify-between text-[#737373] mb-1">
+        <div className="p-4 rounded-xl bg-[#171819] border border-[#292929]">
+          <div className="flex items-center justify-between text-[#666666] mb-1">
             <span className="text-xs">Offline Cache</span>
-            <HardDrive className="w-4 h-4" />
+            <HardDrive className="w-4 h-4 text-[#C5A66B]" />
           </div>
-          <p className="text-xl font-bold font-mono text-[#F5F5F5]">{storageUsed}</p>
+          <p className="text-xl font-bold font-mono text-[#F3F0E9]">{storageUsed}</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#242424] pb-2">
+      <div className="flex items-center gap-2 border-b border-[#292929] pb-2">
         <button
           onClick={() => setActiveTab('tracks')}
-          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-            activeTab === 'tracks' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+            activeTab === 'tracks' ? 'bg-[#202123] text-[#C5A66B] border border-[#C5A66B]/30' : 'text-[#666666] hover:text-[#F3F0E9]'
           }`}
         >
           Manage Music ({songs.length})
@@ -204,8 +225,8 @@ export const AdminScreen: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('add')}
-          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-            activeTab === 'add' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+            activeTab === 'add' ? 'bg-[#202123] text-[#C5A66B] border border-[#C5A66B]/30' : 'text-[#666666] hover:text-[#F3F0E9]'
           }`}
         >
           {editingSongId ? 'Edit Track' : 'Add New Track'}
@@ -213,8 +234,8 @@ export const AdminScreen: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('analytics')}
-          className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-            activeTab === 'analytics' ? 'bg-[#282828] text-white' : 'text-[#737373] hover:text-white'
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+            activeTab === 'analytics' ? 'bg-[#202123] text-[#C5A66B] border border-[#C5A66B]/30' : 'text-[#666666] hover:text-[#F3F0E9]'
           }`}
         >
           Telemetry
@@ -238,7 +259,7 @@ export const AdminScreen: React.FC = () => {
             )}
             <span>{feedback.message}</span>
           </div>
-          <button onClick={() => setFeedback(null)} className="text-[#A1A1A1] hover:text-white">
+          <button onClick={() => setFeedback(null)} className="text-[#929292] hover:text-[#F3F0E9]">
             Dismiss
           </button>
         </div>
@@ -246,52 +267,59 @@ export const AdminScreen: React.FC = () => {
 
       {/* TAB 1: Song Table */}
       {activeTab === 'tracks' && (
-        <div className="rounded-xl bg-[#181818] border border-[#242424] overflow-hidden">
+        <div className="rounded-2xl bg-[#171819] border border-[#292929] overflow-hidden shadow-xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-[#262626] text-[#737373] font-medium bg-[#141414]">
+                <tr className="border-b border-[#292929] text-[#666666] font-medium bg-[#101112]">
                   <th className="p-3">#</th>
                   <th className="p-3">Title</th>
                   <th className="p-3">Artist</th>
+                  <th className="p-3">Language</th>
                   <th className="p-3">Genre</th>
                   <th className="p-3">Quality</th>
                   <th className="p-3">Plays</th>
                   <th className="p-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#242424]">
+              <tbody className="divide-y divide-[#292929]">
                 {songs.map((song, idx) => (
-                  <tr key={song.id} className="hover:bg-[#1f1f1f] transition-colors">
-                    <td className="p-3 font-mono text-[#737373]">{idx + 1}</td>
+                  <tr key={song.id} className="hover:bg-[#202123] transition-colors">
+                    <td className="p-3 font-mono text-[#666666]">{idx + 1}</td>
                     <td className="p-3">
                       <div className="flex items-center gap-2.5">
                         <img
                           src={song.coverUrl}
                           alt=""
-                          className="w-8 h-8 rounded object-cover bg-[#242424]"
+                          className="w-8 h-8 rounded-lg object-cover bg-[#101112]"
                         />
-                        <span className="font-medium text-[#F5F5F5]">{song.title}</span>
+                        <div>
+                          <span className="font-semibold text-[#F3F0E9] block">{song.title}</span>
+                          {song.titleNative && (
+                            <span className="text-[10px] text-[#C5A66B]">{song.titleNative}</span>
+                          )}
+                        </div>
                       </div>
                     </td>
-                    <td className="p-3 text-[#A1A1A1]">{song.artistName}</td>
-                    <td className="p-3 text-[#737373]">{song.genre}</td>
+                    <td className="p-3 text-[#929292]">{song.artistName}</td>
+                    <td className="p-3 text-[#C5A66B] font-mono">{song.language || 'Music'}</td>
+                    <td className="p-3 text-[#666666]">{song.genre}</td>
                     <td className="p-3">
                       <AudioQualityBadge quality={song.audioQuality} />
                     </td>
-                    <td className="p-3 font-mono text-[#A1A1A1]">{song.playCount.toLocaleString()}</td>
+                    <td className="p-3 font-mono text-[#929292]">{song.playCount.toLocaleString()}</td>
                     <td className="p-3 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => handleEditClick(song)}
-                          className="p-1.5 text-[#737373] hover:text-white rounded hover:bg-[#262626]"
+                          className="p-1.5 text-[#666666] hover:text-[#C5A66B] rounded hover:bg-[#202123]"
                           title="Edit"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDeleteSong(song.id, song.title)}
-                          className="p-1.5 text-[#737373] hover:text-rose-400 rounded hover:bg-[#262626]"
+                          className="p-1.5 text-[#666666] hover:text-rose-400 rounded hover:bg-[#202123]"
                           title="Delete"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -308,91 +336,129 @@ export const AdminScreen: React.FC = () => {
 
       {/* TAB 2: Form */}
       {activeTab === 'add' && (
-        <form onSubmit={handleSubmitTrack} className="p-6 rounded-xl bg-[#181818] border border-[#242424] space-y-4 max-w-2xl">
-          <h3 className="text-sm font-semibold text-[#F5F5F5]">
+        <form onSubmit={handleSubmitTrack} className="p-6 rounded-2xl bg-[#171819] border border-[#292929] space-y-4 max-w-2xl shadow-xl">
+          <h3 className="text-sm font-bold text-[#F3F0E9] font-['Manrope']">
             {editingSongId ? 'Edit Music Metadata' : 'Add New Authorized Track'}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
-                Title *
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Title (Latin Script) *
               </label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Track title"
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
+                placeholder="e.g. Kesariya or Zingaat"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
-                Artist *
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Title (Native Script)
+              </label>
+              <input
+                type="text"
+                value={titleNative}
+                onChange={(e) => setTitleNative(e.target.value)}
+                placeholder="e.g. केसरिया or झिंगाट"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
+              />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Artist Name *
               </label>
               <input
                 type="text"
                 required
                 value={artistName}
                 onChange={(e) => setArtistName(e.target.value)}
-                placeholder="Artist name"
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
+                placeholder="e.g. Arijit Singh or Ajay-Atul"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Artist (Native Script)
+              </label>
+              <input
+                type="text"
+                value={artistNative}
+                onChange={(e) => setArtistNative(e.target.value)}
+                placeholder="e.g. अरिजीत सिंह or अजय अतुल"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
+              />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
                 Album (Optional)
               </label>
               <input
                 type="text"
                 value={albumTitle}
                 onChange={(e) => setAlbumTitle(e.target.value)}
-                placeholder="Album name"
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
+                placeholder="e.g. Brahmastra or Sairat"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
-                Genre
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Language
               </label>
               <select
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
               >
-                <option value="Synthwave">Synthwave</option>
-                <option value="Lo-Fi">Lo-Fi & Chill</option>
-                <option value="Electronic">Electronic</option>
-                <option value="Deep House">Deep House</option>
-                <option value="Acoustic">Acoustic</option>
-                <option value="Chillstep">Chillstep</option>
+                {MUSIC_LANGUAGES.filter((l) => l !== 'All Languages').map((l) => (
+                  <option key={l} value={l}>
+                    {l}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
+                Genre
+              </label>
+              <input
+                type="text"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                placeholder="e.g. Bollywood Romantic, Marathi Folk"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
+              />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
                 Duration (sec)
               </label>
               <input
                 type="number"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] font-mono focus:outline-none focus:border-[#C5A66B]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+              <label className="text-[11px] font-medium text-[#929292] block mb-1">
                 Quality Tier
               </label>
               <select
                 value={audioQuality}
                 onChange={(e) => setAudioQuality(e.target.value as AudioQuality)}
-                className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white focus:outline-none focus:border-[#B7A0FF]"
+                className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] focus:outline-none focus:border-[#C5A66B]"
               >
                 <option value="High (320 kbps)">High (320 kbps)</option>
                 <option value="Ultra HD / FLAC">Ultra HD / FLAC</option>
@@ -402,8 +468,8 @@ export const AdminScreen: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
-              Audio File URL (MP3/WAV) *
+            <label className="text-[11px] font-medium text-[#929292] block mb-1">
+              Audio File URL (MP3/WAV/AAC) *
             </label>
             <input
               type="url"
@@ -411,32 +477,32 @@ export const AdminScreen: React.FC = () => {
               value={audioUrl}
               onChange={(e) => setAudioUrl(e.target.value)}
               placeholder="https://..."
-              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
+              className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] font-mono focus:outline-none focus:border-[#C5A66B]"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+            <label className="text-[11px] font-medium text-[#929292] block mb-1">
               Artwork Image URL
             </label>
             <input
               type="url"
               value={coverUrl}
               onChange={(e) => setCoverUrl(e.target.value)}
-              placeholder="https://..."
-              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF]"
+              placeholder="https://images.unsplash.com/..."
+              className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] font-mono focus:outline-none focus:border-[#C5A66B]"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+            <label className="text-[11px] font-medium text-[#929292] block mb-1">
               Lyrics (Optional)
             </label>
             <textarea
               rows={3}
               value={lyrics}
               onChange={(e) => setLyrics(e.target.value)}
-              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-md text-xs text-white font-mono focus:outline-none focus:border-[#B7A0FF] resize-none"
+              className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] font-mono focus:outline-none focus:border-[#C5A66B] resize-none"
             />
           </div>
 
@@ -444,13 +510,13 @@ export const AdminScreen: React.FC = () => {
             <button
               type="button"
               onClick={resetForm}
-              className="px-3 py-1.5 text-xs text-[#737373] hover:text-white"
+              className="px-3 py-1.5 text-xs text-[#929292] hover:text-[#F3F0E9]"
             >
               Reset
             </button>
             <button
               type="submit"
-              className="px-4 py-1.5 bg-[#F5F5F5] hover:bg-white text-black font-semibold text-xs rounded-md"
+              className="px-5 py-2 bg-[#C5A66B] hover:bg-[#D8BF91] text-[#08090A] font-bold text-xs rounded-lg shadow-sm"
             >
               {editingSongId ? 'Save Changes' : 'Publish Track'}
             </button>
@@ -461,18 +527,18 @@ export const AdminScreen: React.FC = () => {
       {/* TAB 3: Telemetry */}
       {activeTab === 'analytics' && (
         <div className="space-y-4">
-          <div className="p-6 rounded-xl bg-[#181818] border border-[#242424]">
-            <h3 className="text-sm font-semibold text-[#F5F5F5] mb-3">Top Streamed Tracks</h3>
+          <div className="p-6 rounded-2xl bg-[#171819] border border-[#292929] shadow-xl">
+            <h3 className="text-sm font-bold text-[#F3F0E9] mb-3 font-['Manrope']">Top Streamed Tracks</h3>
             <div className="space-y-2">
               {songs
                 .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
-                .slice(0, 5)
+                .slice(0, 7)
                 .map((s, idx) => (
-                  <div key={s.id} className="flex justify-between items-center text-xs py-1 border-b border-[#242424]">
-                    <span className="text-[#D4D4D4]">
-                      {idx + 1}. {s.title} — <span className="text-[#737373]">{s.artistName}</span>
+                  <div key={s.id} className="flex justify-between items-center text-xs py-2 border-b border-[#292929]">
+                    <span className="text-[#F3F0E9]">
+                      {idx + 1}. {s.title} — <span className="text-[#929292]">{s.artistName}</span>
                     </span>
-                    <span className="font-mono text-[#A1A1A1]">
+                    <span className="font-mono text-[#C5A66B]">
                       {s.playCount.toLocaleString()} plays
                     </span>
                   </div>

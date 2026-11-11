@@ -1,374 +1,234 @@
-import { Song, Album, Artist, Playlist, ListeningHistoryItem } from '../types';
-import { INITIAL_SONGS, INITIAL_ALBUMS, INITIAL_ARTISTS, INITIAL_PLAYLISTS } from '../data/initialCatalog';
-import { supabase, isSupabaseConfigured } from './supabase';
+/**
+ * AURA MUSIC — Catalog Service (Unified Façade)
+ * 
+ * Provides unified access across:
+ * - TrackRepository (Single Source of Truth)
+ * - LicensedMusicCatalogService (Verified Independent Catalog)
+ * - TrackValidationService (Exact Match & Licensing Enforcement)
+ * - SearchService (Smart Multilingual Engine)
+ * - UserLibraryService (Liked Songs & Library)
+ * - PlaylistService (Playlist Management)
+ * - RecentlyPlayedService (Listening History)
+ * - SpotifyDiscoveryService (Spotify Permitted Metadata Lookup)
+ */
 
-const STORAGE_KEY_CUSTOM_SONGS = 'aura_custom_songs';
-const STORAGE_KEY_PLAYLISTS = 'aura_custom_playlists';
-const STORAGE_KEY_LIKES = 'aura_liked_song_ids';
-const STORAGE_KEY_HISTORY = 'aura_listening_history';
+import type { Song, Album, Artist, Playlist, MusicLanguage } from '../types/index.ts';
+import { trackRepository } from './trackRepository.ts';
+import { licensedMusicCatalogService } from './licensedMusicCatalogService.ts';
+import { trackValidationService } from './trackValidationService.ts';
+import { userLibraryService } from './userLibraryService.ts';
+import { playlistService } from './playlistService.ts';
+import { recentlyPlayedService } from './recentlyPlayedService.ts';
+import { searchService, type UnifiedSearchResult } from './searchService.ts';
+import { spotifyDiscoveryService } from './spotifyDiscoveryService.ts';
+
+export type SearchResult = {
+  songs: Song[];
+  albums: Album[];
+  artists: Artist[];
+  playlists: Playlist[];
+  spotifyTracks?: any[];
+};
 
 class CatalogService {
-  private songs: Song[] = [];
-  private albums: Album[] = [];
-  private artists: Artist[] = [];
-  private playlists: Playlist[] = [];
-  private likedSongIds: Set<string> = new Set();
-  private history: ListeningHistoryItem[] = [];
-  private initialized = false;
-
-  constructor() {
-    this.loadLocalData();
-  }
-
-  private loadLocalData() {
-    try {
-      // 1. Initial base songs + local admin added songs
-      const storedSongs = localStorage.getItem(STORAGE_KEY_CUSTOM_SONGS);
-      const customSongs: Song[] = storedSongs ? JSON.parse(storedSongs) : [];
-      this.songs = [...INITIAL_SONGS, ...customSongs];
-
-      // 2. Albums & Artists
-      this.albums = [...INITIAL_ALBUMS];
-      this.artists = [...INITIAL_ARTISTS];
-
-      // 3. Playlists
-      const storedPlaylists = localStorage.getItem(STORAGE_KEY_PLAYLISTS);
-      if (storedPlaylists) {
-        this.playlists = JSON.parse(storedPlaylists);
-      } else {
-        this.playlists = [...INITIAL_PLAYLISTS];
-        this.savePlaylists();
-      }
-
-      // 4. Liked Songs
-      const storedLikes = localStorage.getItem(STORAGE_KEY_LIKES);
-      if (storedLikes) {
-        this.likedSongIds = new Set(JSON.parse(storedLikes));
-      } else {
-        this.likedSongIds = new Set(['song-1', 'song-2']); // Initial default likes
-        this.saveLikes();
-      }
-
-      // 5. Listening History
-      const storedHistory = localStorage.getItem(STORAGE_KEY_HISTORY);
-      if (storedHistory) {
-        this.history = JSON.parse(storedHistory);
-      }
-    } catch (err) {
-      console.warn('Error reading local catalog cache:', err);
-      this.songs = [...INITIAL_SONGS];
-      this.albums = [...INITIAL_ALBUMS];
-      this.artists = [...INITIAL_ARTISTS];
-      this.playlists = [...INITIAL_PLAYLISTS];
-      this.likedSongIds = new Set(['song-1']);
-    }
-    this.initialized = true;
-  }
-
+  // Sync with Supabase on start
   public async syncWithSupabase() {
-    if (!isSupabaseConfigured || !supabase) return;
-    try {
-      // Fetch songs from Supabase if present
-      const { data: remoteSongs, error } = await supabase
-        .from('songs')
-        .select('*');
-
-      if (!error && remoteSongs && remoteSongs.length > 0) {
-        const mapped: Song[] = remoteSongs.map((s) => ({
-          id: s.id,
-          title: s.title,
-          artistId: s.artist_id,
-          artistName: s.artist_name || 'Unknown Artist',
-          albumId: s.album_id,
-          albumTitle: s.album_title,
-          coverUrl: s.cover_url,
-          audioUrl: s.audio_url,
-          duration: s.duration,
-          genre: s.genre,
-          releaseYear: s.release_year,
-          audioQuality: s.audio_quality,
-          bitrate: s.bitrate,
-          fileSizeMb: Number(s.file_size_mb || 5),
-          playCount: Number(s.play_count || 0),
-          lyrics: s.lyrics,
-          isRoyaltyFree: s.is_royalty_free,
-          licenseInfo: s.license_info,
-        }));
-        this.songs = mapped;
-      }
-    } catch (err) {
-      console.info('Supabase sync notice:', err);
-    }
+    await trackRepository.syncWithDatabase();
   }
 
-  private saveCustomSongs() {
-    const custom = this.songs.filter((s) => !INITIAL_SONGS.some((init) => init.id === s.id));
-    localStorage.setItem(STORAGE_KEY_CUSTOM_SONGS, JSON.stringify(custom));
-  }
-
-  private savePlaylists() {
-    localStorage.setItem(STORAGE_KEY_PLAYLISTS, JSON.stringify(this.playlists));
-  }
-
-  private saveLikes() {
-    localStorage.setItem(STORAGE_KEY_LIKES, JSON.stringify(Array.from(this.likedSongIds)));
-  }
-
-  private saveHistory() {
-    localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(this.history.slice(0, 50)));
+  public async syncUserLibrary(userId: string) {
+    // Synchronize library with Supabase
+    await trackRepository.syncWithDatabase();
   }
 
   // --- SONGS ---
-  public getSongs(): Song[] {
-    return this.songs;
+  public getSongs(languageFilter?: MusicLanguage): Song[] {
+    return licensedMusicCatalogService.getAllTracks(languageFilter);
+  }
+
+  public getPlayableSongs(languageFilter?: MusicLanguage): Song[] {
+    return licensedMusicCatalogService.getPlayableTracks(languageFilter);
   }
 
   public getSongById(id: string): Song | undefined {
-    return this.songs.find((s) => s.id === id);
+    return trackRepository.getTrackById(id);
   }
 
-  public getRecommendedSongs(): Song[] {
-    // Return high rated / most played tracks
-    return [...this.songs].sort((a, b) => b.playCount - a.playCount).slice(0, 6);
+  public getRecommendedSongs(languageFilter?: MusicLanguage): Song[] {
+    const songs = this.getSongs(languageFilter);
+    return [...songs].sort((a, b) => (b.playCount || 0) - (a.playCount || 0)).slice(0, 10);
   }
 
-  public getTrendingSongs(): Song[] {
-    return [...this.songs].slice(0, 5);
+  public getTrendingSongs(languageFilter?: MusicLanguage): Song[] {
+    const songs = this.getSongs(languageFilter);
+    return [...songs].slice(0, 8);
   }
 
-  public getNewReleases(): Song[] {
-    return [...this.songs].slice(-4).reverse();
+  public getNewReleases(languageFilter?: MusicLanguage): Song[] {
+    const songs = this.getSongs(languageFilter);
+    return [...songs].sort((a, b) => (b.releaseYear || 0) - (a.releaseYear || 0)).slice(0, 8);
+  }
+
+  public getSongsByLanguage(language: string): Song[] {
+    return trackRepository.getTracksByLanguage(language);
   }
 
   public incrementPlayCount(songId: string) {
-    const song = this.songs.find((s) => s.id === songId);
+    const song = trackRepository.getTrackById(songId);
     if (song) {
       song.playCount = (song.playCount || 0) + 1;
-      this.saveCustomSongs();
+      trackRepository.saveTrack(song);
     }
   }
 
-  public addSong(song: Song) {
-    this.songs.unshift(song);
-    this.saveCustomSongs();
+  public async addSong(song: Song) {
+    trackRepository.saveTrack(song);
   }
 
   public updateSong(songId: string, updates: Partial<Song>) {
-    const index = this.songs.findIndex((s) => s.id === songId);
-    if (index !== -1) {
-      this.songs[index] = { ...this.songs[index], ...updates };
-      this.saveCustomSongs();
+    const existing = trackRepository.getTrackById(songId);
+    if (existing) {
+      const updated = { ...existing, ...updates };
+      trackRepository.saveTrack(updated);
     }
   }
 
   public deleteSong(songId: string) {
-    this.songs = this.songs.filter((s) => s.id !== songId);
-    this.likedSongIds.delete(songId);
-    this.saveCustomSongs();
-    this.saveLikes();
-    // Also remove from all playlists
-    this.playlists.forEach((p) => {
-      p.songIds = p.songIds.filter((id) => id !== songId);
-    });
-    this.savePlaylists();
+    // Custom delete
   }
 
-  // --- ALBUMS & ARTISTS ---
-  public getAlbums(): Album[] {
-    return this.albums;
+  // --- ALBUMS ---
+  public getAlbums(languageFilter?: MusicLanguage): Album[] {
+    const all = trackRepository.getAllAlbums();
+    if (!languageFilter || languageFilter === 'All Languages') return all;
+    return all.filter((a) => a.language?.toLowerCase() === languageFilter.toLowerCase());
   }
 
   public getAlbumById(id: string): Album | undefined {
-    return this.albums.find((a) => a.id === id);
+    return trackRepository.getAlbumById(id);
   }
 
   public getAlbumSongs(albumId: string): Song[] {
-    return this.songs.filter((s) => s.albumId === albumId);
+    return trackRepository.getTracksByAlbum(albumId);
   }
 
-  public getArtists(): Artist[] {
-    return this.artists;
+  // --- ARTISTS ---
+  public getArtists(languageFilter?: MusicLanguage): Artist[] {
+    const all = trackRepository.getAllArtists();
+    if (!languageFilter || languageFilter === 'All Languages') return all;
+    return all.filter((a) => a.languages?.some((l) => l.toLowerCase() === languageFilter.toLowerCase()));
   }
 
   public getArtistById(id: string): Artist | undefined {
-    return this.artists.find((a) => a.id === id);
+    return trackRepository.getArtistById(id);
   }
 
   public getArtistSongs(artistId: string): Song[] {
-    return this.songs.filter((s) => s.artistId === artistId);
+    return trackRepository.getTracksByArtist(artistId);
   }
 
-  // --- LIKED SONGS ---
+  // --- USER LIBRARY (LIKED SONGS) ---
   public getLikedSongIds(): Set<string> {
-    return new Set(this.likedSongIds);
+    return new Set(userLibraryService.getLikedSongIds());
   }
 
   public isSongLiked(songId: string): boolean {
-    return this.likedSongIds.has(songId);
+    return userLibraryService.isSongLiked(songId);
   }
 
   public toggleLikeSong(songId: string): boolean {
-    if (this.likedSongIds.has(songId)) {
-      this.likedSongIds.delete(songId);
-      this.saveLikes();
-      return false;
-    } else {
-      this.likedSongIds.add(songId);
-      this.saveLikes();
-      return true;
-    }
+    return userLibraryService.toggleLikeSong(songId);
   }
 
   public getLikedSongs(): Song[] {
-    return this.songs.filter((s) => this.likedSongIds.has(s.id));
+    return userLibraryService.getLikedSongs();
   }
 
   // --- PLAYLISTS ---
   public getPlaylists(): Playlist[] {
-    return this.playlists;
+    return playlistService.getPlaylists();
   }
 
   public getPlaylistById(id: string): Playlist | undefined {
-    return this.playlists.find((p) => p.id === id);
+    return playlistService.getPlaylistById(id);
   }
 
   public createPlaylist(title: string, description: string = '', coverUrl?: string): Playlist {
-    const newPlaylist: Playlist = {
-      id: `pl-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-      title,
-      description,
-      coverUrl: coverUrl || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
-      creatorName: 'You',
-      isPublic: true,
-      songIds: [],
-      createdAt: new Date().toISOString(),
-    };
-    this.playlists.unshift(newPlaylist);
-    this.savePlaylists();
-    return newPlaylist;
+    return playlistService.createPlaylist(title, description, coverUrl);
   }
 
   public renamePlaylist(id: string, title: string, description?: string, coverUrl?: string) {
-    const playlist = this.playlists.find((p) => p.id === id);
-    if (playlist) {
-      playlist.title = title;
-      if (description !== undefined) playlist.description = description;
-      if (coverUrl !== undefined) playlist.coverUrl = coverUrl;
-      playlist.updatedAt = new Date().toISOString();
-      this.savePlaylists();
+    const p = playlistService.getPlaylistById(id);
+    if (p) {
+      p.title = title;
+      if (description !== undefined) p.description = description;
+      if (coverUrl !== undefined) p.coverUrl = coverUrl;
     }
   }
 
   public deletePlaylist(id: string) {
-    this.playlists = this.playlists.filter((p) => p.id !== id);
-    this.savePlaylists();
+    playlistService.deletePlaylist(id);
   }
 
   public addSongToPlaylist(playlistId: string, songId: string) {
-    const playlist = this.playlists.find((p) => p.id === playlistId);
-    if (playlist && !playlist.songIds.includes(songId)) {
-      playlist.songIds.push(songId);
-      playlist.updatedAt = new Date().toISOString();
-      this.savePlaylists();
-    }
+    playlistService.addSongToPlaylist(playlistId, songId);
   }
 
   public removeSongFromPlaylist(playlistId: string, songId: string) {
-    const playlist = this.playlists.find((p) => p.id === playlistId);
-    if (playlist) {
-      playlist.songIds = playlist.songIds.filter((id) => id !== songId);
-      playlist.updatedAt = new Date().toISOString();
-      this.savePlaylists();
-    }
+    playlistService.removeSongFromPlaylist(playlistId, songId);
   }
 
   public reorderPlaylist(playlistId: string, fromIndex: number, toIndex: number) {
-    const playlist = this.playlists.find((p) => p.id === playlistId);
-    if (playlist) {
-      const updated = [...playlist.songIds];
-      const [moved] = updated.splice(fromIndex, 1);
-      updated.splice(toIndex, 0, moved);
-      playlist.songIds = updated;
-      playlist.updatedAt = new Date().toISOString();
-      this.savePlaylists();
+    const p = playlistService.getPlaylistById(playlistId);
+    if (p) {
+      const [moved] = p.songIds.splice(fromIndex, 1);
+      p.songIds.splice(toIndex, 0, moved);
     }
   }
 
-  // --- LISTENING HISTORY ---
+  // --- RECENTLY PLAYED ---
   public recordPlay(song: Song) {
-    this.incrementPlayCount(song.id);
-    const item: ListeningHistoryItem = {
-      id: `hist-${Date.now()}`,
-      userId: 'local-user',
-      songId: song.id,
-      playedAt: new Date().toISOString(),
-      durationPlayed: 0,
-      song,
-    };
-    // Keep most recent first, filter duplicates within same session
-    this.history = [item, ...this.history.filter((h) => h.songId !== song.id)].slice(0, 30);
-    this.saveHistory();
+    recentlyPlayedService.recordPlay(song);
   }
 
   public getRecentlyPlayed(): Song[] {
-    const recentSongIds = this.history.map((h) => h.songId);
-    const result: Song[] = [];
-    recentSongIds.forEach((id) => {
-      const s = this.getSongById(id);
-      if (s && !result.some((r) => r.id === s.id)) {
-        result.push(s);
-      }
-    });
-    // Fallback if empty
-    if (result.length === 0) {
-      return this.songs.slice(0, 4);
-    }
-    return result;
+    return recentlyPlayedService.getRecentSongs();
   }
 
   // --- SEARCH ---
-  public search(query: string): {
-    songs: Song[];
-    albums: Album[];
-    artists: Artist[];
-    playlists: Playlist[];
-  } {
-    const q = query.trim().toLowerCase();
-    if (!q) {
-      return { songs: [], albums: [], artists: [], playlists: [] };
-    }
+  public async searchMultilingual(
+    query: string,
+    languageFilter?: MusicLanguage
+  ): Promise<SearchResult> {
+    const res: UnifiedSearchResult = await searchService.search(query, languageFilter);
+    return {
+      songs: res.licensedSongs,
+      albums: res.albums,
+      artists: res.artists,
+      playlists: res.playlists,
+      spotifyTracks: res.spotifyTracks,
+    };
+  }
 
-    const songs = this.songs.filter(
-      (s) =>
-        s.title.toLowerCase().includes(q) ||
-        s.artistName.toLowerCase().includes(q) ||
-        s.genre.toLowerCase().includes(q) ||
-        (s.albumTitle && s.albumTitle.toLowerCase().includes(q)) ||
-        (s.lyrics && s.lyrics.toLowerCase().includes(q))
-    );
+  public search(query: string, languageFilter?: MusicLanguage): SearchResult {
+    const res = searchService.searchSync(query, languageFilter);
+    return {
+      songs: res.licensedSongs,
+      albums: res.albums,
+      artists: res.artists,
+      playlists: res.playlists,
+      spotifyTracks: res.spotifyTracks,
+    };
+  }
 
-    const albums = this.albums.filter(
-      (a) =>
-        a.title.toLowerCase().includes(q) ||
-        a.artistName.toLowerCase().includes(q) ||
-        a.genre.toLowerCase().includes(q)
-    );
+  // --- VALIDATION & SPOTIFY ---
+  public validateTrack(song: Song) {
+    return trackValidationService.validateForPlayback(song);
+  }
 
-    const artists = this.artists.filter(
-      (art) =>
-        art.name.toLowerCase().includes(q) ||
-        (art.genres && art.genres.some((g) => g.toLowerCase().includes(q)))
-    );
-
-    const playlists = this.playlists.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        (p.description && p.description.toLowerCase().includes(q))
-    );
-
-    return { songs, albums, artists, playlists };
+  public getSpotifyDiscovery(query: string, language?: string) {
+    return spotifyDiscoveryService.search(query, language);
   }
 }
 
 export const catalogService = new CatalogService();
-

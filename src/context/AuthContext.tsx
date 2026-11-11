@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AuthState, authService } from '../services/authService';
-import { UserProfile, AudioQuality } from '../types';
+import type { UserProfile, AudioQuality } from '../types/index.ts';
 
 interface AuthContextValue extends AuthState {
   signInWithEmail: (email: string, pass: string) => Promise<unknown>;

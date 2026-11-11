@@ -41,29 +41,29 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150 select-none">
-      <div className="relative w-full max-w-sm p-6 rounded-xl bg-[#181818] border border-[#2b2b2b] shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none">
+      <div className="relative w-full max-w-sm p-6 rounded-2xl bg-[#171819] border border-[#292929] shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 text-[#737373] hover:text-white rounded-md hover:bg-[#242424] transition-colors"
+          className="absolute top-4 right-4 p-1.5 text-[#666666] hover:text-[#F3F0E9] rounded-md hover:bg-[#202123] transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
 
-        <h3 className="text-base font-semibold text-[#F5F5F5] mb-1">Create Playlist</h3>
-        <p className="text-xs text-[#A1A1A1] mb-4">Curate your own mood and collection</p>
+        <h3 className="text-base font-bold text-[#F3F0E9] mb-1 font-['Manrope']">Create Playlist</h3>
+        <p className="text-xs text-[#929292] mb-4">Curate your own mood and collection</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Cover Art Preview & Presets */}
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-2">
+            <label className="text-[11px] font-medium text-[#929292] block mb-2">
               Artwork Cover
             </label>
             <div className="flex items-center gap-2.5">
               <img
                 src={coverUrl}
                 alt=""
-                className="w-14 h-14 rounded-md object-cover border border-[#303030] bg-[#242424] shrink-0"
+                className="w-14 h-14 rounded-lg object-cover border border-[#292929] bg-[#101112] shrink-0"
               />
               <div className="flex items-center gap-1.5 flex-wrap">
                 {PRESET_COVERS.map((preset, idx) => (
@@ -72,7 +72,7 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
                     type="button"
                     onClick={() => setCoverUrl(preset)}
                     className={`w-8 h-8 rounded overflow-hidden border transition-all ${
-                      coverUrl === preset ? 'border-[#B7A0FF] ring-1 ring-[#B7A0FF]' : 'border-[#2b2b2b] opacity-60 hover:opacity-100'
+                      coverUrl === preset ? 'border-[#C5A66B] ring-1 ring-[#C5A66B]' : 'border-[#292929] opacity-60 hover:opacity-100'
                     }`}
                   >
                     <img src={preset} alt="" className="w-full h-full object-cover" />
@@ -83,7 +83,7 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+            <label className="text-[11px] font-medium text-[#929292] block mb-1">
               Title
             </label>
             <input
@@ -91,13 +91,13 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Midnight Ambient"
-              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-lg text-xs text-white placeholder-[#525252] focus:outline-none focus:border-[#B7A0FF] transition-colors"
+              placeholder="e.g. Midnight Soul or Bollywood Chill"
+              className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] placeholder-[#555555] focus:outline-none focus:border-[#C5A66B] transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#A1A1A1] block mb-1">
+            <label className="text-[11px] font-medium text-[#929292] block mb-1">
               Description (Optional)
             </label>
             <textarea
@@ -105,7 +105,7 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Optional notes or mood description..."
-              className="w-full px-3 py-2 bg-[#101010] border border-[#2b2b2b] rounded-lg text-xs text-white placeholder-[#525252] focus:outline-none focus:border-[#B7A0FF] transition-colors resize-none"
+              className="w-full px-3 py-2 bg-[#101112] border border-[#292929] rounded-lg text-xs text-[#F3F0E9] placeholder-[#555555] focus:outline-none focus:border-[#C5A66B] transition-colors resize-none"
             />
           </div>
 
@@ -113,15 +113,15 @@ export const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 rounded-md text-xs font-medium text-[#737373] hover:text-white"
+              className="px-3 py-1.5 rounded-md text-xs font-medium text-[#929292] hover:text-[#F3F0E9]"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-1.5 rounded-md bg-[#F5F5F5] hover:bg-white text-black font-medium text-xs transition-colors"
+              className="px-4 py-1.5 rounded-md bg-[#C5A66B] hover:bg-[#D8BF91] text-[#08090A] font-semibold text-xs transition-colors shadow-sm"
             >
-              Create
+              Create Playlist
             </button>
           </div>
         </form>

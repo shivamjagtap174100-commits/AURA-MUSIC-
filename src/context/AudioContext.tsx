@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { PlayerState, Song } from '../types';
+import type { PlayerState, Song } from '../types/index.ts';
 import { audioService } from '../services/audioService';
 
 interface AudioContextValue extends PlayerState {
@@ -21,6 +21,7 @@ interface AudioContextValue extends PlayerState {
   clearQueue: () => void;
   setFullScreen: (isOpen: boolean) => void;
   setQueueOpen: (isOpen: boolean) => void;
+  clearPlaybackError: () => void;
 }
 
 const AudioContext = createContext<AudioContextValue | null>(null);
@@ -55,6 +56,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     clearQueue: () => audioService.clearQueue(),
     setFullScreen: (isOpen) => audioService.setFullScreen(isOpen),
     setQueueOpen: (isOpen) => audioService.setQueueOpen(isOpen),
+    clearPlaybackError: () => audioService.clearPlaybackError(),
   };
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;

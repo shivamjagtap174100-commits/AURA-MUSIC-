@@ -20,26 +20,26 @@ export const QueueDrawer: React.FC = () => {
   if (!isQueueOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-88 bg-[#181818] border-l border-[#262626] shadow-2xl flex flex-col animate-in slide-in-from-right duration-150 select-none">
+    <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-88 bg-[#171819] border-l border-[#292929] shadow-2xl flex flex-col animate-in slide-in-from-right duration-150 select-none">
       {/* Header */}
-      <div className="px-5 py-3.5 border-b border-[#262626] flex items-center justify-between">
+      <div className="px-5 py-3.5 border-b border-[#292929] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ListMusic className="w-4 h-4 text-[#B7A0FF]" />
-          <h3 className="font-semibold text-[#F5F5F5] text-sm">Playback Queue</h3>
-          <span className="text-xs font-mono text-[#737373]">({queue.length})</span>
+          <ListMusic className="w-4 h-4 text-[#C5A66B]" />
+          <h3 className="font-semibold text-[#F3F0E9] text-sm font-['Manrope']">Playback Queue</h3>
+          <span className="text-xs font-mono text-[#666666]">({queue.length})</span>
         </div>
         <div className="flex items-center gap-2">
           {queue.length > 1 && (
             <button
               onClick={clearQueue}
-              className="text-xs text-[#737373] hover:text-rose-400 px-2 py-1 rounded transition-colors"
+              className="text-xs text-[#929292] hover:text-[#C5A66B] px-2 py-1 rounded transition-colors"
             >
               Clear
             </button>
           )}
           <button
             onClick={() => setQueueOpen(false)}
-            className="p-1.5 text-[#737373] hover:text-white rounded hover:bg-[#262626] transition-colors"
+            className="p-1.5 text-[#666666] hover:text-[#F3F0E9] rounded hover:bg-[#202123] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -51,18 +51,18 @@ export const QueueDrawer: React.FC = () => {
         {/* Currently Playing Card */}
         {currentSong && (
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#737373] mb-2 block">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[#C5A66B] mb-2 block font-semibold">
               Now Playing
             </span>
-            <div className="p-3 rounded-lg bg-[#202020] border border-[#2b2b2b] flex items-center gap-3">
+            <div className="p-3 rounded-xl bg-[#202123] border border-[#292929] flex items-center gap-3">
               <img
                 src={currentSong.coverUrl}
                 alt={currentSong.title}
-                className="w-10 h-10 rounded object-cover bg-[#242424]"
+                className="w-10 h-10 rounded-lg object-cover bg-[#101112]"
               />
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-[#F5F5F5] truncate">{currentSong.title}</p>
-                <p className="text-[11px] text-[#A1A1A1] truncate">{currentSong.artistName}</p>
+                <p className="text-xs font-medium text-[#F3F0E9] truncate">{currentSong.title}</p>
+                <p className="text-[11px] text-[#929292] truncate">{currentSong.artistName}</p>
               </div>
               <EqualizerBars isPlaying={isPlaying} size="sm" />
             </div>
@@ -71,11 +71,11 @@ export const QueueDrawer: React.FC = () => {
 
         {/* Up Next List */}
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-[#737373] mb-2 block">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#666666] mb-2 block">
             Up Next
           </span>
           {queue.length <= 1 ? (
-            <div className="text-center py-12 text-[#737373] text-xs">
+            <div className="text-center py-12 text-[#666666] text-xs">
               Queue is empty. Select songs to play next.
             </div>
           ) : (
@@ -85,21 +85,21 @@ export const QueueDrawer: React.FC = () => {
                 return (
                   <div
                     key={`${song.id}-${idx}`}
-                    className="group flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#202020] transition-colors"
+                    className="group flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#202123] transition-colors"
                   >
                     <img
                       src={song.coverUrl}
                       alt={song.title}
-                      className="w-9 h-9 rounded object-cover bg-[#242424]"
+                      className="w-9 h-9 rounded object-cover bg-[#101112]"
                     />
                     <div
                       onClick={() => playSong(song, queue, idx)}
                       className="flex-1 min-w-0 cursor-pointer"
                     >
-                      <p className="text-xs font-medium text-[#D4D4D4] group-hover:text-white truncate">
+                      <p className="text-xs font-medium text-[#F3F0E9] group-hover:text-[#D8BF91] truncate">
                         {song.title}
                       </p>
-                      <p className="text-[11px] text-[#737373] truncate">{song.artistName}</p>
+                      <p className="text-[11px] text-[#666666] truncate">{song.artistName}</p>
                     </div>
 
                     {/* Actions */}
@@ -108,7 +108,7 @@ export const QueueDrawer: React.FC = () => {
                         <button
                           onClick={() => reorderQueue(idx, idx - 1)}
                           title="Move up"
-                          className="p-1 text-[#737373] hover:text-white"
+                          className="p-1 text-[#666666] hover:text-[#F3F0E9]"
                         >
                           <ArrowUp className="w-3.5 h-3.5" />
                         </button>
@@ -117,7 +117,7 @@ export const QueueDrawer: React.FC = () => {
                         <button
                           onClick={() => reorderQueue(idx, idx + 1)}
                           title="Move down"
-                          className="p-1 text-[#737373] hover:text-white"
+                          className="p-1 text-[#666666] hover:text-[#F3F0E9]"
                         >
                           <ArrowDown className="w-3.5 h-3.5" />
                         </button>
@@ -125,7 +125,7 @@ export const QueueDrawer: React.FC = () => {
                       <button
                         onClick={() => removeFromQueue(idx)}
                         title="Remove"
-                        className="p-1 text-[#737373] hover:text-rose-400"
+                        className="p-1 text-[#666666] hover:text-rose-400"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>

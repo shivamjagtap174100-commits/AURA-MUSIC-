@@ -1,5 +1,5 @@
 import { get, set, del, keys } from 'idb-keyval';
-import { Song, DownloadedSong } from '../types';
+import type { Song, DownloadedSong } from '../types/index.ts';
 
 const AUDIO_PREFIX = 'aura_offline_audio_';
 const META_PREFIX = 'aura_offline_meta_';

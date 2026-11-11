@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Pause, Heart, Download, Check, MoreHorizontal, Plus, Loader2 } from 'lucide-react';
+import { Play, Heart, Download, Check, MoreHorizontal, Plus, Loader2 } from 'lucide-react';
 import type { Song } from '../types/index.ts';
 import { useAudio } from '../context/AudioContext';
 import { useDownloads } from '../context/DownloadContext';
@@ -66,30 +66,29 @@ export const SongRow: React.FC<SongRowProps> = ({
   return (
     <div
       onClick={handleRowClick}
-      className={`group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-150 cursor-pointer select-none ${
-        isCurrent
-          ? 'bg-[#1a1726] border border-[#B7A0FF]/20 text-[#F5F5F5]'
-          : 'hover:bg-[#181818] border border-transparent'
-      }`}
+      className={`group relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-150 cursor-pointer select-none ${isCurrent
+        ? 'bg-[#171819] border border-[#C5A66B]/30 text-[#F3F0E9] shadow-sm'
+        : 'hover:bg-[#101112] border border-transparent'
+        }`}
     >
       {/* Index or Play / Equalizer indicator */}
-      <div className="w-7 flex items-center justify-center text-xs font-mono text-[#737373] shrink-0">
+      <div className="w-7 flex items-center justify-center text-xs font-mono text-[#666666] shrink-0">
         {isCurrent ? (
           isPlaying ? (
             <EqualizerBars size="sm" isPlaying={true} />
           ) : (
-            <Play className="w-3.5 h-3.5 text-[#B7A0FF] fill-[#B7A0FF]" />
+            <Play className="w-3.5 h-3.5 text-[#C5A66B] fill-[#C5A66B]" />
           )
         ) : (
           <>
             <span className="group-hover:hidden">{index + 1}</span>
-            <Play className="w-3.5 h-3.5 text-[#F5F5F5] fill-[#F5F5F5] hidden group-hover:block" />
+            <Play className="w-3.5 h-3.5 text-[#C5A66B] fill-[#C5A66B] hidden group-hover:block" />
           </>
         )}
       </div>
 
       {/* Album Artwork */}
-      <div className="relative w-10 h-10 rounded-md overflow-hidden shrink-0 bg-[#202020] border border-[#282828]">
+      <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-[#171819] border border-[#292929]">
         <img
           src={song.coverUrl}
           alt={song.title}
@@ -102,15 +101,29 @@ export const SongRow: React.FC<SongRowProps> = ({
       <div className="flex-1 min-w-0 pr-2">
         <div className="flex items-center gap-2">
           <p
-            className={`text-sm font-medium truncate ${
-              isCurrent ? 'text-[#B7A0FF]' : 'text-[#F5F5F5] group-hover:text-white'
-            }`}
+            className={`text-sm font-medium truncate ${isCurrent ? 'text-[#C5A66B]' : 'text-[#F3F0E9] group-hover:text-white'
+              }`}
           >
             {song.title}
           </p>
+          {song.titleNative && (
+            <span className="hidden sm:inline-block text-[10px] px-1.5 py-0.5 rounded bg-[#101112] text-[#C5A66B] border border-[#292929]">
+              {song.titleNative}
+            </span>
+          )}
+          {song.playbackAvailability === 'unavailable' && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1DB954]/10 text-[#1DB954] border border-[#1DB954]/20 hidden sm:inline">
+              Spotify Master
+            </span>
+          )}
           <AudioQualityBadge quality={song.audioQuality} />
+          {song.language && (
+            <span className="text-[10px] text-[#666666] font-mono hidden lg:inline">
+              {song.language}
+            </span>
+          )}
         </div>
-        <p className="text-xs text-[#A1A1A1] truncate mt-0.5">
+        <p className="text-xs text-[#929292] truncate mt-0.5">
           <span
             onClick={(e) => {
               if (onSelectArtist) {
@@ -118,12 +131,12 @@ export const SongRow: React.FC<SongRowProps> = ({
                 onSelectArtist(song.artistId);
               }
             }}
-            className="hover:text-[#F5F5F5] hover:underline cursor-pointer"
+            className="hover:text-[#D8BF91] hover:underline cursor-pointer transition-colors"
           >
-            {song.artistName}
+            {song.artistName} {song.artistNative && `(${song.artistNative})`}
           </span>
           {showAlbum && song.albumTitle && (
-            <span className="hidden md:inline text-[#737373]"> • {song.albumTitle}</span>
+            <span className="hidden md:inline text-[#666666]"> • {song.albumTitle}</span>
           )}
         </p>
       </div>
@@ -134,18 +147,17 @@ export const SongRow: React.FC<SongRowProps> = ({
         <button
           onClick={handleDownloadClick}
           title={downloaded ? 'Saved offline' : 'Download for offline playback'}
-          className={`p-1.5 rounded transition-colors ${
-            downloaded
-              ? 'text-[#B7A0FF]'
-              : isDownloading
-              ? 'text-[#B7A0FF]'
-              : 'text-[#737373] hover:text-[#F5F5F5] opacity-0 group-hover:opacity-100'
-          }`}
+          className={`p-1.5 rounded transition-colors ${downloaded
+            ? 'text-[#C5A66B]'
+            : isDownloading
+              ? 'text-[#C5A66B]'
+              : 'text-[#666666] hover:text-[#F3F0E9] opacity-0 group-hover:opacity-100'
+            }`}
         >
           {isDownloading ? (
             <div className="flex items-center gap-1">
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#B7A0FF]" />
-              <span className="text-[10px] font-mono text-[#B7A0FF]">{progressInfo.progress}%</span>
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#C5A66B]" />
+              <span className="text-[10px] font-mono text-[#C5A66B]">{progressInfo.progress}%</span>
             </div>
           ) : downloaded ? (
             <Check className="w-3.5 h-3.5" />
@@ -158,17 +170,16 @@ export const SongRow: React.FC<SongRowProps> = ({
         <button
           onClick={handleLikeToggle}
           title={isLiked ? 'Remove from Liked' : 'Save to Liked Songs'}
-          className={`p-1.5 rounded transition-colors ${
-            isLiked
-              ? 'text-[#B7A0FF]'
-              : 'text-[#737373] hover:text-[#F5F5F5] opacity-0 group-hover:opacity-100'
-          }`}
+          className={`p-1.5 rounded transition-colors ${isLiked
+            ? 'text-[#C5A66B]'
+            : 'text-[#666666] hover:text-[#F3F0E9] opacity-0 group-hover:opacity-100'
+            }`}
         >
-          <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#B7A0FF]' : ''}`} />
+          <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#C5A66B]' : ''}`} />
         </button>
 
         {/* Duration */}
-        <span className="text-xs text-[#737373] font-mono w-10 text-right hidden sm:inline-block">
+        <span className="text-xs text-[#666666] font-mono w-10 text-right hidden sm:inline-block">
           {formatDuration(song.duration)}
         </span>
 
@@ -179,7 +190,7 @@ export const SongRow: React.FC<SongRowProps> = ({
               e.stopPropagation();
               setShowMenu(!showMenu);
             }}
-            className="p-1.5 text-[#737373] hover:text-[#F5F5F5] rounded hover:bg-[#262626] transition-colors"
+            className="p-1.5 text-[#666666] hover:text-[#F3F0E9] rounded hover:bg-[#171819] transition-colors"
           >
             <MoreHorizontal className="w-4 h-4" />
           </button>
@@ -187,16 +198,16 @@ export const SongRow: React.FC<SongRowProps> = ({
           {showMenu && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-8 z-30 w-44 py-1 rounded-lg bg-[#181818] border border-[#303030] shadow-xl animate-in fade-in duration-100"
+              className="absolute right-0 top-8 z-30 w-44 py-1.5 rounded-xl bg-[#171819] border border-[#292929] shadow-2xl animate-in fade-in duration-100"
             >
               <button
                 onClick={() => {
                   setShowMenu(false);
                   if (onOpenPlaylistModal) onOpenPlaylistModal(song);
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#D4D4D4] hover:bg-[#262626] hover:text-white transition-colors"
+                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#F3F0E9] hover:bg-[#202123] hover:text-[#C5A66B] transition-colors"
               >
-                <Plus className="w-3.5 h-3.5 text-[#B7A0FF]" />
+                <Plus className="w-3.5 h-3.5 text-[#C5A66B]" />
                 Add to Playlist
               </button>
               <button
@@ -204,9 +215,9 @@ export const SongRow: React.FC<SongRowProps> = ({
                   setShowMenu(false);
                   handleDownloadClick(e);
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#D4D4D4] hover:bg-[#262626] hover:text-white transition-colors"
+                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#F3F0E9] hover:bg-[#202123] hover:text-[#C5A66B] transition-colors"
               >
-                <Download className="w-3.5 h-3.5 text-[#B7A0FF]" />
+                <Download className="w-3.5 h-3.5 text-[#C5A66B]" />
                 {downloaded ? 'Remove Download' : 'Save for Offline'}
               </button>
             </div>

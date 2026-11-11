@@ -14,6 +14,7 @@ import { AddToPlaylistModal } from './components/AddToPlaylistModal';
 
 // Screens
 import { HomeScreen } from './screens/HomeScreen';
+import { DiscoverScreen } from './screens/DiscoverScreen';
 import { SearchScreen } from './screens/SearchScreen';
 import { LibraryScreen } from './screens/LibraryScreen';
 import { LikedSongsScreen } from './screens/LikedSongsScreen';
@@ -77,6 +78,13 @@ const MainApp: React.FC = () => {
             onOpenPlaylistModal={openAddToPlaylist}
           />
         );
+      case 'discover':
+        return (
+          <DiscoverScreen
+            onNavigate={handleNavigate}
+            onOpenPlaylistModal={openAddToPlaylist}
+          />
+        );
       case 'search':
         return (
           <SearchScreen
@@ -86,6 +94,7 @@ const MainApp: React.FC = () => {
           />
         );
       case 'library':
+      case 'recently-played':
         return (
           <LibraryScreen
             onNavigate={handleNavigate}
@@ -146,7 +155,7 @@ const MainApp: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#101010] text-[#F5F5F5] overflow-hidden">
+    <div className="flex h-screen w-full bg-[#08090A] text-[#F3F0E9] overflow-hidden">
       {/* Desktop Sidebar */}
       <Sidebar
         currentTab={currentNav.tab}

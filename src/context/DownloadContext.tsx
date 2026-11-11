@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { DownloadedSong, Song } from '../types';
-import { downloadManager, DownloadProgress } from '../services/downloadManager';
+import type { DownloadedSong, Song } from '../types/index.ts';
+import type { DownloadProgress } from '../services/downloadManager';
+import { downloadManager } from '../services/downloadManager';
 
 interface DownloadContextValue {
   downloadedSongs: DownloadedSong[];

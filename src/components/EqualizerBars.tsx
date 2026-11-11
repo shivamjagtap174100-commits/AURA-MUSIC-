@@ -12,24 +12,24 @@ export const EqualizerBars: React.FC<EqualizerBarsProps> = ({ isPlaying = true, 
   return (
     <div className="flex items-end gap-0.5 h-5 px-1 select-none" aria-hidden="true">
       <span
-        className={`${barWidth} bg-[#B7A0FF] rounded-full transition-all duration-300 ${
+        className={`${barWidth} bg-[#C5A66B] rounded-full transition-all duration-300 ${
           isPlaying ? `${heights[0]} animate-pulse` : 'h-1'
         }`}
       />
       <span
-        className={`${barWidth} bg-[#B7A0FF] rounded-full transition-all duration-300 ${
+        className={`${barWidth} bg-[#D8BF91] rounded-full transition-all duration-300 ${
           isPlaying ? `${heights[1]} animate-bounce` : 'h-1.5'
         }`}
         style={{ animationDelay: '0.15s' }}
       />
       <span
-        className={`${barWidth} bg-[#B7A0FF] rounded-full transition-all duration-300 ${
+        className={`${barWidth} bg-[#C5A66B] rounded-full transition-all duration-300 ${
           isPlaying ? `${heights[2]} animate-pulse` : 'h-1'
         }`}
         style={{ animationDelay: '0.3s' }}
       />
       <span
-        className={`${barWidth} bg-[#B7A0FF] rounded-full transition-all duration-300 ${
+        className={`${barWidth} bg-[#D8BF91] rounded-full transition-all duration-300 ${
           isPlaying ? `${heights[3]} animate-bounce` : 'h-1.5'
         }`}
         style={{ animationDelay: '0.45s' }}

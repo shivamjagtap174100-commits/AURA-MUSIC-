@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Library, User, Shield } from 'lucide-react';
+import { Home, Compass, Search, Library, User, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 interface MobileBottomNavProps {
@@ -17,6 +17,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
   const tabs = [
     { id: 'home', label: 'Home', icon: Home },
+    { id: 'discover', label: 'Discover', icon: Compass },
     { id: 'search', label: 'Search', icon: Search },
     { id: 'library', label: 'Library', icon: Library },
     ...(user?.role === 'admin'
@@ -26,8 +27,8 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
   return (
     <nav
-      className={`md:hidden fixed left-0 right-0 z-30 bg-[#181818] border-t border-[#262626] px-2 py-1.5 flex items-center justify-around select-none ${
-        hasMiniPlayer ? 'bottom-[56px]' : 'bottom-0'
+      className={`md:hidden fixed left-0 right-0 z-30 bg-[#08090A]/95 backdrop-blur-md border-t border-[#292929] px-2 py-1.5 flex items-center justify-around select-none ${
+        hasMiniPlayer ? 'bottom-[64px]' : 'bottom-0'
       }`}
     >
       {tabs.map((tab) => {
@@ -37,8 +38,8 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center gap-0.5 py-1 px-4 rounded transition-colors ${
-              isActive ? 'text-[#B7A0FF]' : 'text-[#737373] hover:text-[#A1A1A1]'
+            className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded transition-colors ${
+              isActive ? 'text-[#C5A66B]' : 'text-[#666666] hover:text-[#929292]'
             }`}
           >
             <Icon className="w-5 h-5" />
