@@ -35,8 +35,6 @@ class MockAudioElement {
 class PlaybackService {
   private audio: HTMLAudioElement;
   private listeners: Set<PlaybackListener> = new Set();
-  private virtualOffset: number = 0;
-  private mediaDuration: number = 0;
   private state: PlayerState = {
     currentSong: null,
     isPlaying: false,
@@ -91,40 +89,17 @@ class PlaybackService {
     });
 
     this.audio.addEventListener('timeupdate', () => {
-      const rawCurrent = this.audio.currentTime || 0;
-      const currentPos = this.virtualOffset + rawCurrent;
-
-      // Ensure minimum 180 seconds (at least 3 minutes)
-      const targetDuration = Math.max(
-        this.state.duration || 0,
-        this.state.currentSong?.duration || 0,
-        180
-      );
-      this.state.duration = targetDuration;
-
-      if (currentPos >= targetDuration) {
-        // Full 3+ minute song finished
-        this.state.currentTime = targetDuration;
-        this.notify();
-        this.handleSongEnded();
-        return;
+      this.state.currentTime = this.audio.currentTime || 0;
+      if (this.audio.duration && !isNaN(this.audio.duration) && this.audio.duration > 0) {
+        this.state.duration = this.audio.duration;
       }
-
-      this.state.currentTime = currentPos;
       this.notify();
     });
 
     this.audio.addEventListener('loadedmetadata', () => {
-      if (this.audio.duration && !isNaN(this.audio.duration)) {
-        this.mediaDuration = this.audio.duration;
+      if (this.audio.duration && !isNaN(this.audio.duration) && this.audio.duration > 0) {
+        this.state.duration = this.audio.duration;
       }
-      // Maintain full track duration (at least 3 minutes)
-      const targetDuration = Math.max(
-        this.state.currentSong?.duration || 0,
-        this.state.duration || 0,
-        180
-      );
-      this.state.duration = targetDuration;
       this.state.isBuffering = false;
       this.notify();
     });
@@ -140,29 +115,8 @@ class PlaybackService {
     });
 
     this.audio.addEventListener('ended', () => {
-      const streamLen = (this.audio.duration && !isNaN(this.audio.duration) && this.audio.duration > 0)
-        ? this.audio.duration
-        : (this.mediaDuration > 0 ? this.mediaDuration : 30);
-      const nextVirtual = this.virtualOffset + streamLen;
-      const targetDuration = Math.max(
-        this.state.duration || 0,
-        this.state.currentSong?.duration || 0,
-        180
-      );
-
-      // Seamless streaming continuation until the song reaches its full 3+ minute duration
-      if (nextVirtual < (targetDuration - 0.5)) {
-        this.virtualOffset = nextVirtual;
-        this.audio.currentTime = 0;
-        this.state.currentTime = nextVirtual;
-        this.notify();
-        this.audio.play().catch((err) => {
-          console.warn('[PlaybackService] Stream continuation warning:', err);
-        });
-      } else {
-        this.state.currentTime = targetDuration;
-        this.handleSongEnded();
-      }
+      // Natural track completion - advance to next track without repeating
+      this.handleSongEnded();
     });
 
     this.audio.addEventListener('error', (e) => {
@@ -176,7 +130,6 @@ class PlaybackService {
 
   private handleSongEnded() {
     if (this.state.repeat === 'one') {
-      this.virtualOffset = 0;
       this.audio.currentTime = 0;
       this.state.currentTime = 0;
       this.audio.play().catch(console.warn);
@@ -305,10 +258,9 @@ class PlaybackService {
     // 1. VALIDATE TRACK BEFORE PLAYBACK
     const validation = trackValidationService.validateForPlayback(song);
 
-    this.virtualOffset = 0;
     this.state.currentSong = song;
     this.state.currentTime = 0;
-    this.state.duration = Math.max(song.duration || 180, 180);
+    this.state.duration = song.duration || 0;
 
     if (!validation.canPlay) {
       // STOP any currently running audio! DO NOT PLAY FALLBACK AUDIO!
@@ -405,22 +357,12 @@ class PlaybackService {
 
   public seek(seconds: number) {
     if (isNaN(seconds) || seconds < 0) return;
-    const maxDur = this.state.duration > 0 ? this.state.duration : Math.max(180, this.state.currentSong?.duration || 180);
-    const targetTime = Math.max(0, Math.min(maxDur, seconds));
-    const streamLen = (this.audio.duration && !isNaN(this.audio.duration) && this.audio.duration > 0)
+    const maxDur = (this.audio.duration && !isNaN(this.audio.duration) && this.audio.duration > 0)
       ? this.audio.duration
-      : (this.mediaDuration > 0 ? this.mediaDuration : 30);
-
-    if (streamLen >= maxDur) {
-      this.virtualOffset = 0;
-      this.audio.currentTime = targetTime;
-    } else {
-      const loopIndex = Math.floor(targetTime / streamLen);
-      this.virtualOffset = loopIndex * streamLen;
-      const remainder = targetTime % streamLen;
-      this.audio.currentTime = Math.min(remainder, Math.max(0, streamLen - 0.1));
-    }
-    this.state.currentTime = targetTime;
+      : (this.state.duration || 0);
+    const clamped = maxDur > 0 ? Math.max(0, Math.min(maxDur, seconds)) : seconds;
+    this.audio.currentTime = clamped;
+    this.state.currentTime = clamped;
     this.notify();
   }
 
@@ -444,7 +386,6 @@ class PlaybackService {
   }
 
   public next() {
-    this.virtualOffset = 0;
     const nextTrack = queueService.getNext();
     if (nextTrack) {
       this.playSong(nextTrack);
@@ -459,7 +400,6 @@ class PlaybackService {
       this.seek(0);
       return;
     }
-    this.virtualOffset = 0;
     const prevTrack = queueService.getPrevious();
     if (prevTrack) {
       this.playSong(prevTrack);
