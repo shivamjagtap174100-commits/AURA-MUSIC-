@@ -88,7 +88,7 @@ export interface Song {
   licenseInfo?: string;
   playbackMode?: 'full-length' | 'preview'; // Truthful playback distinction: full licensed track vs 30s preview
   previewDuration?: number; // Actual preview length in seconds (default 30)
-  playbackRights?: 'public-domain' | 'licensed-preview' | 'creative-commons' | 'user-authorized' | 'licensed-full';
+  playbackRights?: 'public-domain' | 'licensed-preview' | 'creative-commons' | 'user-authorized' | 'licensed-full' | 'authorized-master';
   availabilityStatus?: 'available' | 'offline-cached' | 'streaming';
   playbackAvailability: PlaybackAvailability; // 'available' | 'unavailable'
   verificationStatus: VerificationStatus; // 'verified' | 'unverified'

@@ -271,7 +271,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = ({
           </div>
 
           <div className="rounded-2xl bg-[#171819] border border-[#292929] p-3 space-y-1 shadow-sm">
-            {fullLengthSongs.map((song, idx) => (
+            {fullLengthSongs.slice(0, 8).map((song, idx) => (
               <SongRow
                 key={song.id}
                 song={song}
