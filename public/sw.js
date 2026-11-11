@@ -2,10 +2,10 @@
 const CACHE_NAME = 'aura-music-v1.0.0';
 
 const APP_SHELL_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.svg',
+  './',
+  './index.html',
+  './manifest.json',
+  './favicon.svg',
 ];
 
 self.addEventListener('install', (event) => {

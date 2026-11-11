@@ -6,7 +6,8 @@ import App from './App.tsx'
 // Register Service Worker for PWA & Offline Support
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then(
+    const swUrl = `${import.meta.env.BASE_URL}sw.js`;
+    navigator.serviceWorker.register(swUrl).then(
       (registration) => {
         console.log('[Aura ServiceWorker] Registered successfully with scope:', registration.scope);
       },
