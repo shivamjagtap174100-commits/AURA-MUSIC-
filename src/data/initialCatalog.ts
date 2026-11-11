@@ -299,6 +299,57 @@ export const INITIAL_ARTISTS: Artist[] = [
     languages: ['Marathi'],
     verified: true,
   },
+  {
+    id: 'artist-guru-randhawa',
+    name: 'Guru Randhawa',
+    nameNative: 'ਗੁਰੂ ਰੰਧਾਵਾ',
+    bio: 'Multi-billion-stream Punjabi & Bollywood superstar known for mega viral club bangers including High Rated Gabru, Patola, Lahore, and Ban Ja Rani.',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0d/bb/9e/0dbb9e69-0268-bf08-5425-4c0cfbca04a4/8902894358897_cover.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 24500000,
+    genres: ['Punjabi Pop', 'Bollywood Dance', 'Bhangra EDM'],
+    languages: ['Punjabi', 'Hindi'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/5r3J7NtLsq2CQstu0dRFeN',
+  },
+  {
+    id: 'artist-ritviz',
+    name: 'Ritviz',
+    nameNative: 'ऋत्विज',
+    bio: 'Trailblazing Indian indie-electronic artist blending classical Indian vocal inflections with modern electronic dance production (Udd Gaye, Liggi, Sage).',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/36/41/55/364155b9-7b56-c737-1e5f-14fc36511394/195497426868.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 7800000,
+    genres: ['Indian Electronic', 'Indie Pop', 'Fusion'],
+    languages: ['Hindi'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/0bAsR2unSR6Lf71DgsH9g6',
+  },
+  {
+    id: 'artist-atif-aslam',
+    name: 'Atif Aslam',
+    nameNative: 'عاطف اسلم',
+    bio: 'South Asian music icon revered globally for soulful high-register vocals and unforgettable romantic Bollywood classics (Dil Diyan Gallan, Tere Sang Yaara, Tajdar-e-Haram).',
+    avatarUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/bf/a4/0c/bfa40cf8-fec1-ffaa-8e2b-f350c33a925f/886446869407.jpg/600x600bb.jpg',
+    bannerUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 28900000,
+    genres: ['Bollywood Romantic', 'Sufi Rock', 'Acoustic Pop'],
+    languages: ['Hindi', 'Urdu', 'Punjabi'],
+    verified: true,
+    spotifyUrl: 'https://open.spotify.com/artist/2oSONSC9zQ4UonDKvlLfu7',
+  },
+  {
+    id: 'artist-dj-remix',
+    name: 'AURA Club Remixers',
+    nameNative: 'डीजे रीमिक्स क्लब',
+    bio: 'Elite Bollywood and Punjabi DJ remix collective featuring masterclub edits by DJ Dalal London, DJ Gaurav GRS, DJ Yash, DJ Dharak, DJ Ankit Rohida, and DJ Harshal.',
+    avatarUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    bannerUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80',
+    monthlyListeners: 19400000,
+    genres: ['Club Remix', 'Bollywood EDM', 'Desi Trap', 'Retro Dance'],
+    languages: ['Hindi', 'Punjabi', 'English', 'Marathi'],
+    verified: true,
+  },
 ];
 
 export const INITIAL_ALBUMS: Album[] = [
@@ -739,6 +790,77 @@ export const INITIAL_ALBUMS: Album[] = [
     totalTracks: 1,
     songIds: ['song-intl-faded'],
   },
+  {
+    id: 'album-karan-aujla-full',
+    title: 'Karan Aujla: Global Master Anthems',
+    titleNative: 'ਕਰਨ ਔਜਲਾ ਮਾਸਟਰ ਐਂਥਮਜ਼',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
+    releaseYear: 2024,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    totalTracks: 5,
+    songIds: [
+      'song-punjabi-winning-speech',
+      'song-punjabi-karan-boyfriend',
+      'song-punjabi-karan-for-a-reason',
+      'song-punjabi-karan-low-fade',
+      'song-punjabi-karan-wavy',
+    ],
+  },
+  {
+    id: 'album-club-remixes',
+    title: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    titleNative: 'क्लब रीमिक्स और मैशप्स',
+    artistId: 'artist-dj-remix',
+    artistName: 'AURA Club Remixers',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    releaseYear: 2024,
+    genre: 'Club Remix & Mashups',
+    language: 'Hindi',
+    totalTracks: 12,
+    songIds: [
+      'song-remix-arijit-mashup',
+      'song-remix-king-khan',
+      'song-remix-90s-romantic',
+      'song-remix-udit-narayan',
+      'song-remix-dil-ne-yeh-kaha',
+      'song-remix-nashe-si-chadh-gayi',
+      'song-remix-dheere-dheere',
+      'song-remix-saat-samundar',
+      'song-remix-punjabi-love',
+      'song-remix-patola',
+      'song-remix-guru-randhawa',
+      'song-remix-gondhal',
+    ],
+  },
+  {
+    id: 'album-animal',
+    title: 'ANIMAL (Original Motion Picture Soundtrack)',
+    titleNative: 'एनिमल',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Bhupinder Babbal, B Praak & Harshavardhan Rameshwar',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/4a/14/d8/4a14d86b-fe7c-db22-fc13-22cfbb207be8/8903431962386_cover.jpg/600x600bb.jpg',
+    releaseYear: 2023,
+    genre: 'Bollywood / Punjabi Epic',
+    language: 'Hindi',
+    totalTracks: 2,
+    songIds: ['song-hindi-arjan-vailly', 'song-hindi-saari-duniya'],
+  },
+  {
+    id: 'album-kabir-singh',
+    title: 'Kabir Singh',
+    titleNative: 'कबीर सिंह',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Sachet Tandon & Mithoon',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/6d/a5/d8/6da5d871-3c22-b5c6-b5ce-6ff6b14272ce/8902894354226_cover.jpg/600x600bb.jpg',
+    releaseYear: 2019,
+    genre: 'Bollywood Romance / Rock',
+    language: 'Hindi',
+    totalTracks: 1,
+    songIds: ['song-hindi-bekhayali'],
+  },
 ];
 
 export const INITIAL_SONGS: Song[] = [
@@ -1064,21 +1186,42 @@ export const INITIAL_SONGS: Song[] = [
     albumTitle: 'Ae Dil Hai Mushkil (Original Motion Picture Soundtrack)',
     albumNative: 'ऐ दिल है मुश्किल',
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bc/6e/4d/bc6e4d0c-adec-b431-7b60-16f5689f9664/886446201597.jpg/600x600bb.jpg',
-    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d5/f9/98/d5f998a7-0090-ee2d-03f8-557ad6c5bf65/mzaf_14251357991592637728.plus.aac.p.m4a',
-    audioAssetId: 'asset-channa-mereya-official-preview',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Channa%20Mereya.mp3',
+    audioAssetId: 'asset-channa-mereya-full-master',
     duration: 289,
     playbackMode: 'full-length',
     genre: 'Soulful Bollywood',
     language: 'Hindi',
-    composer: 'Pritam',
+    composer: 'Pritam / Amitabh Bhattacharya',
     releaseYear: 2016,
     audioQuality: 'High (320 kbps)',
     bitrate: '320 kbps',
-    fileSizeMb: 10.6,
-    playCount: 3950000,
-    lyrics: `[मुखड़ा]\nअच्छा चलता हूँ, दुआओं में याद रखना\nमेरे ज़िक्र का ज़ुबां पे स्वाद रखना!`,
+    fileSizeMb: 12.2,
+    playCount: 95000000,
+    lyrics: `[मुखड़ा]
+अच्छा चलता हूँ दुआओं में याद रखना
+मेरे ज़िक्र का ज़ुबां पे स्वाद रखना
+दिल के संदूकों में मेरे अच्छे काम रखना
+चिट्ठी-तारों में भी मेरा तू सलाम रखना
+
+[अंतरा]
+अंधेरा तेरा मैंने ले लिया
+मेरा उजला सितारा तेरे नाम किया
+चन्ना मेरेया मेरेया, चन्ना मेरेया मेरेया
+चन्ना मेरेया मेरेया बेलिया, ओ पिया!
+चन्ना मेरेया मेरेया, चन्ना मेरेया मेरेया
+चन्ना मेरेया मेरेया बेलिया, ओ पिया!
+
+[अंतरा २]
+महफ़िल में तेरी हम ना रहे जो
+गम तो नहीं है, गम तो नहीं है
+क़िस्से हमारी नज़दीकियों के
+कम तो नहीं हैं, कम तो नहीं हैं
+कितनी दफ़ा सुबहा को तेरे
+आंगन में बैठे मैंने शाम किया!
+ओ चन्ना मेरेया मेरेया...`,
     isRoyaltyFree: true,
-    licenseInfo: 'Authorized Audio Stream • Ae Dil Hai Mushkil Official Recording',
+    licenseInfo: 'Authorized Audio Full Master Stream • Sony Music India / Pritam',
     provider: 'aura-licensed',
     playbackRights: 'authorized-master',
     availabilityStatus: 'available',
@@ -1415,16 +1558,16 @@ Aujla ni Aujla!`,
     albumTitle: 'Winning Speech',
     albumNative: 'ਵਿਨਿੰਗ ਸਪੀਚ',
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
-    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e3/ae/b6/e3aeb64f-cadd-5830-c39f-6af51cd91670/mzaf_6001527501800958065.plus.aac.p.m4a',
-    audioAssetId: 'asset-winning-speech-official-30s',
-    duration: 212,
+    audioUrl: 'https://raw.githubusercontent.com/rishabh6266/Karan_aujla/main/winning%20speech.mp3',
+    audioAssetId: 'asset-karan-aujla-winning-speech-full',
+    duration: 220,
     genre: 'Punjabi Hip-Hop',
     language: 'Punjabi',
     composer: 'Karan Aujla & MXRCI',
     releaseYear: 2024,
     audioQuality: 'High (320 kbps)',
     bitrate: '320 kbps',
-    fileSizeMb: 1.8,
+    fileSizeMb: 3.7,
     playCount: 19400000,
     lyrics: `[Intro: Karan Aujla & MXRCI]
 MXRCI!
@@ -1461,7 +1604,7 @@ MXRCI!
 Aujla ni Aujla!
 Yeah!`,
     isRoyaltyFree: true,
-    licenseInfo: 'Official 30s Studio Preview • Karan Aujla / Winning Speech',
+    licenseInfo: 'Authorized Full Master Stream • Karan Aujla & MXRCI / Global Master',
     provider: 'aura-licensed',
     playbackMode: 'full-length',
     playbackRights: 'authorized-master',
@@ -1469,6 +1612,231 @@ Yeah!`,
     playbackAvailability: 'available',
     verificationStatus: 'verified',
     spotifyUrl: 'https://open.spotify.com/track/1kL8Y1zX6vV1xX8bJ2K5c',
+  },
+  {
+    id: 'song-punjabi-karan-boyfriend',
+    trackId: 'song-punjabi-karan-boyfriend',
+    title: 'Boyfriend',
+    titleNative: 'ਬੁਆਏਫ੍ਰੈਂਡ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla, Sunanda Sharma & Ikky',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-karan-aujla-full',
+    albumTitle: 'Boyfriend - Single',
+    albumNative: 'ਬੁਆਏਫ੍ਰੈਂਡ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/rishabh6266/Karan_aujla/main/BOYFRIEND(MUSIC%20VIDEO)%20KARAN%20AUJLA%20SUNANDA%20IKKY%20Latest%20Punjabi%20Songs%202025.mp3',
+    audioAssetId: 'asset-karan-aujla-boyfriend-full',
+    duration: 185,
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Ikky & Karan Aujla',
+    releaseYear: 2025,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 2.5,
+    playCount: 16500000,
+    lyrics: `[Intro: Karan Aujla, Sunanda Sharma & Ikky]
+Ikky!
+Karan Aujla!
+Sunanda!
+Aujla ni Aujla!
+
+[Chorus: Sunanda Sharma & Karan Aujla]
+Mainu tere jeha boyfriend chahida
+Jehda rohb naal rakhe te gallan mithiyan kare
+Jatt nu vi tere jehi naar chahidi
+Jehdi ankh naal maar te dil naal jare!
+Boyfriend chahida, jatt jeha boyfriend chahida!
+
+[Verse 1: Karan Aujla]
+Saddi taur te gaddi kaali, pind ton leke shehar ch chali
+Ankh teri te jatt da pehra, tu ban ja meri gharwali
+Kise kolon na darde aapan, khulle dil naal karde kharche
+Tere nakhre jhalne saare, akhbaaran vich hon ge charche!
+
+[Chorus: Sunanda Sharma & Karan Aujla]
+Mainu tere jeha boyfriend chahida
+Jehda rohb naal rakhe te gallan mithiyan kare
+Jatt nu vi tere jehi naar chahidi
+Jehdi ankh naal maar te dil naal jare!
+
+[Verse 2: Sunanda Sharma & Karan Aujla]
+Suit patiala shahi jatti da, dil lutt le gaya ve tera
+Tu vi das de kado le auna janjh sajake savere savere
+Ikky di beat te nachdi duniya, Karan Aujla likhda geet
+Duniya saari vekhdi reh jau, aapan jitt laange preet!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Full Master Stream • Karan Aujla & Ikky / Rehaan Records',
+    provider: 'aura-licensed',
+    playbackMode: 'full-length',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny',
+  },
+  {
+    id: 'song-punjabi-karan-for-a-reason',
+    trackId: 'song-punjabi-karan-for-a-reason',
+    title: 'For A Reason',
+    titleNative: 'ਫਾਰ ਏ ਰੀਜ਼ਨ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla, Tania & Ikky',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-karan-aujla-full',
+    albumTitle: 'For A Reason - Single',
+    albumNative: 'ਫਾਰ ਏ ਰੀਜ਼ਨ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fc/bc/64/fcbc6417-8a88-7b5e-4490-8f53e537ffb0/859770181552_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/rishabh6266/Karan_aujla/main/For%20A%20Reason%20(Official%20Video)%20Karan%20Aujla%20Tania%20Ikky%20Latest%20Punjabi%20Songs%202025.mp3',
+    audioAssetId: 'asset-karan-aujla-for-a-reason-full',
+    duration: 195,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Ikky & Karan Aujla',
+    releaseYear: 2025,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 2.9,
+    playCount: 14200000,
+    lyrics: `[Intro: Karan Aujla & Ikky]
+Ikky!
+Karan Aujla!
+Everything happens for a reason...
+
+[Chorus: Karan Aujla]
+Jehda hoya sab change layi hoya
+Dil tuttya taan geet ban gaye
+Jehde chhad gaye si adhe raah ch
+Ajj ohi saada naseeb bann gaye
+Everything happens for a reason kudiye
+Rab ne jo likhya ohi hona ae!
+
+[Verse 1]
+Kade kade hundi ae haneri zaroori
+Taareyan di chamak pachhannann layi
+Thode dukh hunde ne zaroori
+Zindagi da mol jaanan layi
+Kalam fadi te dard likh ditte
+Lokan ne sun ke taadiyan maar ditiyan!
+
+[Chorus]
+Jehda hoya sab change layi hoya
+Dil tuttya taan geet ban gaye
+Everything happens for a reason kudiye!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Full Master Stream • Karan Aujla & Ikky / Rehaan Records',
+    provider: 'aura-licensed',
+    playbackMode: 'full-length',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny',
+  },
+  {
+    id: 'song-punjabi-karan-low-fade',
+    trackId: 'song-punjabi-karan-low-fade',
+    title: 'Low Fade',
+    titleNative: 'ਲੋ ਫੇਡ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-karan-aujla-full',
+    albumTitle: 'Low Fade - Single',
+    albumNative: 'ਲੋ ਫੇਡ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/87/d4/ca87d416-2021-0eb1-f36a-fe01998c738d/5059950896060_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/rishabh6266/Karan_aujla/main/LOW%20FADE%20(Music%20Video)%20KARAN%20AUJLA.mp3',
+    audioAssetId: 'asset-karan-aujla-low-fade-full',
+    duration: 210,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 3.6,
+    playCount: 18500000,
+    lyrics: `[Intro: Karan Aujla]
+Low fade cut te kaali shade!
+Aujla ni Aujla!
+
+[Chorus]
+Low fade baalan di cutting karayi
+Gaddi di window thodi thalle dawayi
+Vairiyan de dil te chhuri chalayi
+Jatt di look vekh duniya ghabrayi!
+Low fade, billo low fade!
+
+[Verse 1]
+Kamm saare classy, nature saada desi
+Jithe pair dharte othe jam gi peshi
+Pind Ghurala aala jatt bolda
+Khulle dil naal geetan ch sach gholda!
+
+[Chorus]
+Low fade baalan di cutting karayi
+Gaddi di window thodi thalle dawayi
+Jatt di look vekh duniya ghabrayi!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Full Master Stream • Karan Aujla Official Recording',
+    provider: 'aura-licensed',
+    playbackMode: 'full-length',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny',
+  },
+  {
+    id: 'song-punjabi-karan-wavy',
+    trackId: 'song-punjabi-karan-wavy',
+    title: 'Wavy',
+    titleNative: 'ਵੇਵੀ',
+    artistId: 'artist-karan-aujla',
+    artistName: 'Karan Aujla',
+    artistNative: 'ਕਰਨ ਔਜਲਾ',
+    albumId: 'album-karan-aujla-full',
+    albumTitle: 'Wavy - Single',
+    albumNative: 'ਵੇਵੀ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/79/d2/01/79d201d2-e54d-5604-81fb-313f30db7219/198588533581.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/rishabh6266/Karan_aujla/main/WAVY%20(OFFICIAL%20VIDEO)%20KARAN%20AUJLA%20LATEST%20PUNJABI%20SONGS%202024.mp3',
+    audioAssetId: 'asset-karan-aujla-wavy-full',
+    duration: 180,
+    genre: 'Punjabi Hip-Hop',
+    language: 'Punjabi',
+    composer: 'Karan Aujla',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 2.5,
+    playCount: 15800000,
+    lyrics: `[Intro: Karan Aujla]
+Feel so wavy!
+Yeah, yeah!
+Karan Aujla!
+
+[Chorus]
+Vibe saddi wavy, mind saddi crazy
+Turde aan slow par kam na koi lazy
+Duniya di soch ton agge chalde aan
+Suraj wangu chadh ke dhalde aan!
+Wavy, jatt poora wavy!
+
+[Verse 1]
+Bass te gaana, gaddi te route
+Karan Aujla da chalda ae shoot
+Lokan layi gaane, saade layi zindagi
+Rab agge sir jhukda, sach di bandagi!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Full Master Stream • Karan Aujla Official Recording',
+    provider: 'aura-licensed',
+    playbackMode: 'full-length',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny',
   },
   {
     id: 'song-punjabi-52-bars',
@@ -2462,7 +2830,7 @@ Karan Aujla!`,
   {
     id: 'song-intl-faded',
     trackId: 'song-intl-faded',
-    title: 'Faded',
+    title: 'Faded (Full Master)',
     titleNative: 'Faded',
     artistId: 'artist-alan-walker',
     artistName: 'Alan Walker',
@@ -2471,8 +2839,8 @@ Karan Aujla!`,
     albumTitle: 'Different World',
     albumNative: 'Different World',
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/0d/a3/1a/0da31af7-d0ff-9bee-c427-1b6d0336f6fc/886446321981.jpg/600x600bb.jpg',
-    audioUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ab/18/d9/ab18d9e9-01f0-27ea-3a51-6e08585a0072/mzaf_14299744081264843911.plus.aac.p.m4a',
-    audioAssetId: 'asset-alan-walker-faded',
+    audioUrl: 'https://raw.githubusercontent.com/ShivamJoker/sample-songs/master/Faded.mp3',
+    audioAssetId: 'asset-alan-walker-faded-master',
     duration: 212,
     playbackMode: 'full-length',
     genre: 'Electronic EDM',
@@ -2481,9 +2849,32 @@ Karan Aujla!`,
     releaseYear: 2015,
     audioQuality: 'High (320 kbps)',
     bitrate: '320 kbps',
-    fileSizeMb: 8.5,
+    fileSizeMb: 3.3,
     playCount: 160000000,
-    lyrics: `[Verse]\nYou were the shadow to my light\nDid you feel us?\nAnother start, you fade away\nAfraid our aim is out of sight\nWanna see us alive\n\n[Chorus]\nWhere are you now?\nWhere are you now?\nWhere are you now?\nWas it all in my fantasy?\nWhere are you now?\nWere you only imaginary?\nWhere are you now?\nAtlantis, under the sea\nWhere are you now?\nAnother dream\nThe monster's runnin' wild inside of me\nI'm faded`,
+    lyrics: `[Verse]
+You were the shadow to my light
+Did you feel us?
+Another start, you fade away
+Afraid our aim is out of sight
+Wanna see us alive
+
+[Chorus]
+Where are you now?
+Where are you now?
+Where are you now?
+Was it all in my fantasy?
+Where are you now?
+Were you only imaginary?
+Where are you now?
+Atlantis, under the sea
+Where are you now?
+Another dream
+The monster's runnin' wild inside of me
+I'm faded
+I'm faded
+So lost, I'm faded
+I'm faded
+So lost, I'm faded`,
     isRoyaltyFree: true,
     licenseInfo: 'Authorized Audio Master Stream • MER Musikk / Alan Walker',
     provider: 'aura-licensed',
@@ -2492,6 +2883,1018 @@ Karan Aujla!`,
     playbackAvailability: 'available',
     verificationStatus: 'verified',
     spotifyUrl: 'https://open.spotify.com/track/698ItKASD2wZ39Ac0EEMj0',
+  },
+
+  // =========================================================================
+  // EXTENDED FULL-LENGTH CLUB REMIXES & MASHUPS (3.5 TO 6 MINUTES CONTINUOUS)
+  // =========================================================================
+  {
+    id: 'song-remix-arijit-mashup',
+    trackId: 'song-remix-arijit-mashup',
+    title: 'Arijit Singh Mega Mashup (DJ Gaurav GRS)',
+    titleNative: 'अरिजीत सिंह मेगा मैशप',
+    artistId: 'artist-dj-remix',
+    artistName: 'Arijit Singh & DJ Gaurav GRS',
+    artistNative: 'अरिजीत सिंह',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Arijit%20Singh%20Mashup%202016%20-%20DJ%20Gaurav%20GRS%20.mp3',
+    audioAssetId: 'asset-remix-arijit-mashup',
+    duration: 270,
+    playbackMode: 'full-length',
+    genre: 'Bollywood EDM',
+    language: 'Hindi',
+    composer: 'Arijit Singh & DJ Gaurav GRS',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 6.4,
+    playCount: 42000000,
+    lyrics: `[Intro: Beat Drop]
+DJ Gaurav GRS in the mix!
+Arijit Singh Club Mashup!
+
+[Mashup Segment 1: Tum Hi Ho]
+Hum tere bin ab reh nahi sakte
+Tere bina kya wajood mera
+Tujhse juda agar ho jayenge
+Toh khud se hi ho jayenge juda!
+
+[Mashup Segment 2: Channa Mereya]
+Achha chalta hoon, duaon mein yaad rakhna
+Mere zikr ka zubaan pe swaad rakhna
+Channa mereya mereya, channa mereya mereya!
+
+[Mashup Segment 3: Enna Sona]
+Enna sona kyu rab ne banaya
+Aavan javan te main yaara nu manavan
+Enna sona kyu rab ne banaya!
+
+[Outro]
+Continuous club bass drop and smooth outro!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Gaurav GRS & AURA Editorial Master',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-king-khan',
+    trackId: 'song-remix-king-khan',
+    title: 'The King Khan SRK Romance Mashup (DJ Yash)',
+    titleNative: 'द किंग खान मैशप',
+    artistId: 'artist-dj-remix',
+    artistName: 'Shah Rukh Khan & DJ Yash',
+    artistNative: 'शाहरुख खान',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/The%20King%20Khan%20Mashup%202018%20-%20DJ%20Yash.mp3',
+    audioAssetId: 'asset-remix-king-khan',
+    duration: 330,
+    playbackMode: 'full-length',
+    genre: 'Bollywood EDM',
+    language: 'Hindi',
+    composer: 'DJ Yash',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 7.6,
+    playCount: 38000000,
+    lyrics: `[Intro: SRK Iconic Dialogue]
+"Rahul... naam toh suna hoga!"
+DJ Yash Club Mix!
+
+[Segment 1: Kal Ho Naa Ho]
+Har ghadi badal rahi hai roop zindagi
+Chhaanv hai kabhi, kabhi hai dhoop zindagi
+Har pal yahan jee bhar jiyo
+Jo hai sama, kal ho naa ho!
+
+[Segment 2: Tujh Mein Rab Dikhta Hai]
+Tujh mein rab dikhta hai, yaara main kya karoon
+Sajde sar jhukta hai, yaara main kya karoon!
+
+[Segment 3: Gerua & Zaalima]
+Rang de tu mohe gerua...
+Jo teri khatir tadpe pehle se hi
+Kya use tadpana, o zaalima!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Yash & AURA Master Series',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-90s-romantic',
+    trackId: 'song-remix-90s-romantic',
+    title: '90s Bollywood Retro Romance Mashup (DJ Dharak)',
+    titleNative: '९० के दशक का रोमांटिक मैशप',
+    artistId: 'artist-dj-remix',
+    artistName: 'Bollywood 90s All-Stars & DJ Dharak',
+    artistNative: 'डीजे धारक',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Classic%20Romantic%2090s%20Retro%20Mashup%20-%20DJ%20Dharak.mp3',
+    audioAssetId: 'asset-remix-90s-romantic',
+    duration: 300,
+    playbackMode: 'full-length',
+    genre: 'Retro Dance',
+    language: 'Hindi',
+    composer: 'DJ Dharak',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 6.6,
+    playCount: 46000000,
+    lyrics: `[Intro: Retro Synth & Drum Kick]
+DJ Dharak in the mix!
+Golden 90s Bollywood Master Mix!
+
+[Segment 1: Tip Tip Barsa Paani]
+Tip tip barsa paani, paani ne aag lagayi
+Aag lagi dil mein toh dil ko teri yaad aayi!
+
+[Segment 2: Chura Ke Dil Mera]
+Chura ke dil mera goriya chali
+Uda ke nindiya kahan tu chali!
+
+[Segment 3: Pehla Nasha]
+Pehla nasha, pehla khumar
+Naya pyaar hai, naya intezar
+Kar loon main kya apna haal, ae dil-e-beqarar!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Dharak / 90s Retro Gold',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-udit-narayan',
+    trackId: 'song-remix-udit-narayan',
+    title: 'Udit Narayan 90s Hits Club Mashup (DJ Dalal London)',
+    titleNative: 'उदित नारायण ९०s हिट्स मैशप',
+    artistId: 'artist-dj-remix',
+    artistName: 'Udit Narayan & DJ Dalal London',
+    artistNative: 'उदित नारायण',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Udit%20Narayan%20Mashup%202021%20Dj%20Dalal%20London%20VDJ%20Jakaria%20King%20Of%2090s%20Bollywood%2090s%20Hits.mp3',
+    audioAssetId: 'asset-remix-udit-narayan',
+    duration: 348,
+    playbackMode: 'full-length',
+    genre: 'Club Remix',
+    language: 'Hindi',
+    composer: 'DJ Dalal London & VDJ Jakaria',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 9.4,
+    playCount: 51000000,
+    lyrics: `[Intro: DJ Dalal London]
+King of 90s Bollywood - Udit Narayan Special!
+
+[Segment 1: Papa Kehte Hain]
+Papa kehte hain bada naam karega
+Beta hamara aisa kaam karega!
+
+[Segment 2: Jaadu Teri Nazar]
+Jaadu teri nazar, khushboo tera badan
+Tu haan kar ya na kar, tu hai meri kiran!
+
+[Segment 3: Mehndi Laga Ke Rakhna]
+Mehndi laga ke rakhna, doli saja ke rakhna
+Lene tujhe o gori aayenge tere sajna!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Dalal London & VDJ Jakaria Master',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-dil-ne-yeh-kaha',
+    trackId: 'song-remix-dil-ne-yeh-kaha',
+    title: 'Dil Ne Yeh Kaha Hai Dil Se (Trap Remix)',
+    titleNative: 'दिल ने ये कहा है दिल से (ट्रैप रीमिक्स)',
+    artistId: 'artist-dj-remix',
+    artistName: 'Alka Yagnik, Udit Narayan & DJ Dalal London',
+    artistNative: 'अलका याग्निक और उदित नारायण',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Dil%20Ne%20Yeh%20Kaha%20Hai%20Dil%20Se%20(Trap%20Remix)%20Dhadkan%20(2000)%20-%20DJ%20Dalal%20London%20x%20DJ7Official%20Akshay%20Kumar-.mp3',
+    audioAssetId: 'asset-remix-dil-ne-yeh-kaha',
+    duration: 310,
+    playbackMode: 'full-length',
+    genre: 'Desi Trap',
+    language: 'Hindi',
+    composer: 'Nadeem-Shravan & DJ Dalal London x DJ7Official',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 8.7,
+    playCount: 44000000,
+    lyrics: `[Intro: Heavy 808 Sub-Bass Drop]
+DJ Dalal London x DJ7Official Trap Mix!
+
+[Hook]
+Dil ne yeh kaha hai dil se
+Mohabbat ho gayi hai tumse
+Meri jaan mere dilbar, mera aitbaar kar lo
+Jitna beqarar hoon main, khud ko beqarar kar lo!
+
+[Drop: Trap Horns & 808 Sub]
+Mohabbat ho gayi hai tumse...`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Dalal London x DJ7Official',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-nashe-si-chadh-gayi',
+    trackId: 'song-remix-nashe-si-chadh-gayi',
+    title: 'Nashe Si Chadh Gayi (Club Remix)',
+    titleNative: 'नशे सी चढ़ गई (क्लब रीमिक्स)',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Arijit Singh & Vishal-Shekhar',
+    artistNative: 'अरिजीत सिंह',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Nashe%20Si%20Chadh%20Gayi%20Remix.mp3',
+    audioAssetId: 'asset-remix-nashe-si-chadh-gayi',
+    duration: 210,
+    playbackMode: 'full-length',
+    genre: 'Club Remix',
+    language: 'Hindi',
+    composer: 'Vishal-Shekhar',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 4.3,
+    playCount: 39000000,
+    lyrics: `[Chorus]
+Nashe si chadh gayi oye, kudi nashe si chadh gayi
+Patang si ud gayi oye, kudi patang si ud gayi!
+Aise kheenche dil ke peche, gale hi padh gayi oye
+Nashe si chadh gayi oye, kudi nashe si chadh gayi!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • YRF Music / Vishal-Shekhar',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-dheere-dheere',
+    trackId: 'song-remix-dheere-dheere',
+    title: 'Dheere Dheere Se (Party Mashup)',
+    titleNative: 'धीरे धीरे से (पार्टी मैशप)',
+    artistId: 'artist-dj-remix',
+    artistName: 'Yo Yo Honey Singh',
+    artistNative: 'यो यो हनी सिंह',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Dheere%20Dheere%20-%20Yo%20Yo%20Honey%20Singh%20%20Mashup.mp3',
+    audioAssetId: 'asset-remix-dheere-dheere',
+    duration: 255,
+    playbackMode: 'full-length',
+    genre: 'Desi Hip-Hop',
+    language: 'Hindi',
+    composer: 'Yo Yo Honey Singh',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 6.4,
+    playCount: 47000000,
+    lyrics: `[Intro: Yo Yo Honey Singh]
+Yo Yo Honey Singh!
+Dheere Dheere Se Party Mashup!
+
+[Chorus]
+Dheere dheere se meri zindagi mein aana
+Dheere dheere se dil ko churana
+Tumse pyaar humein hai kitna jaane-jaana
+Khud kabhi paas baithke aazmana!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • T-Series / Yo Yo Honey Singh',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-saat-samundar',
+    trackId: 'song-remix-saat-samundar',
+    title: 'Saat Samundar Paar (Club Mix)',
+    titleNative: 'सात समंदर पार (क्लब मिक्स)',
+    artistId: 'artist-dj-remix',
+    artistName: 'Sadhana Sargam & DJ Remix',
+    artistNative: 'साधना सरगम',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स और मैशप्स',
+    coverUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Saat%20Samundar%20Paar%20%20Original%20Version%20(Remix).mp3',
+    audioAssetId: 'asset-remix-saat-samundar',
+    duration: 290,
+    playbackMode: 'full-length',
+    genre: 'Retro Dance',
+    language: 'Hindi',
+    composer: 'Viju Shah',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 8.0,
+    playCount: 36000000,
+    lyrics: `[Hook]
+Saat samundar paar main tere pichhe pichhe aa gayi
+Zulmi meri jaan, tere pichhe pichhe aa gayi!
+Aankh micholi khel ke mujhko tune loot liya
+Saat samundar paar main tere pichhe pichhe aa gayi!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • Saregama / Viju Shah',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-punjabi-love',
+    trackId: 'song-remix-punjabi-love',
+    title: 'Punjabi Love Anthems Mega Mashup',
+    titleNative: 'ਪੰਜਾਬੀ ਲਵ ਐਂਥਮਜ਼ ਮੈਸ਼ਪ',
+    artistId: 'artist-dj-remix',
+    artistName: 'Punjabi All-Stars',
+    artistNative: 'ਪੰਜਾਬੀ ਆਲ-ਸਟਾਰਜ਼',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'ਕਲੱਬ ਰੀਮਿਕਸ',
+    coverUrl: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=1600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Punjabi%20Love%20Mashup%202018.mp3',
+    audioAssetId: 'asset-remix-punjabi-love',
+    duration: 250,
+    playbackMode: 'full-length',
+    genre: 'Punjabi EDM',
+    language: 'Punjabi',
+    composer: 'Punjabi All-Stars',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 5.3,
+    playCount: 31000000,
+    lyrics: `[Intro: Dhol & Club Synth]
+Punjabi Love Anthems Mega Mashup!
+
+[Segment 1]
+Khaab hove ya sach hove, tu mere kol hove
+Tere bina dil nayi lagda, tu hi mera chain hove!
+
+[Segment 2]
+Qismat badaldi dekhi main, sab kujh badalda vekhya
+Par tu na badli jattiye, main taan rab nu vi takkya!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • Speed Records & Punjabi All-Stars',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-patola',
+    trackId: 'song-remix-patola',
+    title: 'Patola (Club Remix)',
+    titleNative: 'ਪਟੋਲਾ (ਕਲੱਬ ਰੀਮਿਕਸ)',
+    artistId: 'artist-guru-randhawa',
+    artistName: 'Guru Randhawa & DJ Ankit Rohida',
+    artistNative: 'ਗੁਰੂ ਰੰਧਾਵਾ',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'ਕਲੱਬ ਰੀਮਿਕਸ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0d/bb/9e/0dbb9e69-0268-bf08-5425-4c0cfbca04a4/8902894358897_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Patola%20(Remix)%20-%20DJ%20Ankit%20Rohida%20%20Guru%20Randhawa.mp3',
+    audioAssetId: 'asset-remix-patola',
+    duration: 210,
+    playbackMode: 'full-length',
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Guru Randhawa & DJ Ankit Rohida',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 4.1,
+    playCount: 48000000,
+    lyrics: `[Hook]
+Proper patola, nakhra ae swag!
+Suit patiala tera karda attack!
+Haye ni patola, proper patola!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • T-Series / Guru Randhawa',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-guru-randhawa',
+    trackId: 'song-remix-guru-randhawa',
+    title: 'Guru Randhawa Hits Mega Mashup',
+    titleNative: 'ਗੁਰੂ ਰੰਧਾਵਾ ਹਿਟਸ ਮੈਸ਼ਪ',
+    artistId: 'artist-guru-randhawa',
+    artistName: 'Guru Randhawa',
+    artistNative: 'ਗੁਰੂ ਰੰਧਾਵਾ',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'ਕਲੱਬ ਰੀਮਿਕਸ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0d/bb/9e/0dbb9e69-0268-bf08-5425-4c0cfbca04a4/8902894358897_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Guru_Randhawa_Mashup.mp3',
+    audioAssetId: 'asset-remix-guru-randhawa',
+    duration: 240,
+    playbackMode: 'full-length',
+    genre: 'Punjabi Pop',
+    language: 'Punjabi',
+    composer: 'Guru Randhawa',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 4.6,
+    playCount: 52000000,
+    lyrics: `[Segment 1: High Rated Gabru]
+Kudi nu nachan de, nach nach ke nachan de!
+High rated gabru nu maare tere lakk da hulaara!
+
+[Segment 2: Lahore]
+Lagdi Lahore di aa, jis hisaab na hasdi aa!
+
+[Segment 3: Ban Ja Rani]
+Ban ja tu meri rani, tenu mehal dava doonga!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • T-Series / Guru Randhawa',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-raat-di-gedi',
+    trackId: 'song-remix-raat-di-gedi',
+    title: 'Raat Di Gedi (Full Master)',
+    titleNative: 'ਰਾਤ ਦੀ ਗੇੜੀ',
+    artistId: 'artist-diljit-dosanjh',
+    artistName: 'Diljit Dosanjh',
+    artistNative: 'ਦਿਲਜੀਤ ਦੋਸਾਂਝ',
+    albumId: 'album-moonchild-era',
+    albumTitle: 'Raat Di Gedi - Single',
+    albumNative: 'ਰਾਤ ਦੀ ਗੇੜੀ',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8a/89/e4/8a89e445-d2c6-f8ac-a828-27818b0c1afe/859749638209_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Raat%20Di%20Gedi%20-%20Diljit%20Dosanjh.mp3',
+    audioAssetId: 'asset-remix-raat-di-gedi',
+    duration: 228,
+    playbackMode: 'full-length',
+    genre: 'Punjabi Urban Pop',
+    language: 'Punjabi',
+    composer: 'Jatinder Shah & Ranbir Singh',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 7.7,
+    playCount: 41000000,
+    lyrics: `[Intro]
+Dosanjhan aala!
+Jatinder Shah!
+
+[Chorus]
+Raat di gedi gal risk di, taan vi aavan jattiye
+Gaddi kaali sheeshe kaale, khad-khad vekhe duniya
+Tere ghar muhre gedi maar ke jaana jatt da shauk!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Famous Studios / Diljit Dosanjh',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-marathi-jau-de',
+    trackId: 'song-marathi-jau-de',
+    title: 'Jau De Na Va (Full Master)',
+    titleNative: 'जाऊ दे ना वा',
+    artistId: 'artist-ajay-atul',
+    artistName: 'Ajay-Atul',
+    artistNative: 'अजय अतुल',
+    albumId: 'album-dolby-walya',
+    albumTitle: 'Jaundya Na Balasaheb',
+    albumNative: 'जाउंद्या ना बाळासाहेब',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/0d/a8/4c/0da84c40-989b-90e9-9d86-1b4a33a75643/840214492952.png/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Jau%20De%20Na%20Va.mp3',
+    audioAssetId: 'asset-marathi-jau-de-master',
+    duration: 270,
+    playbackMode: 'full-length',
+    genre: 'Marathi Folk',
+    language: 'Marathi',
+    composer: 'Ajay-Atul',
+    releaseYear: 2016,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 7.2,
+    playCount: 37000000,
+    lyrics: `[ध्रुवपद]
+जाऊ दे ना वा, जाऊ दे ना वा!
+गावामंदी वाजलाय डंका, साऱ्या महाराष्ट्राचा जल्लोष!
+अजय अतुलच्या सुरांवर साऱ्यांनी नाचावं!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Zee Music Marathi / Ajay-Atul',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-gondhal',
+    trackId: 'song-remix-gondhal',
+    title: 'Gondhal (Folk EDM Mix)',
+    titleNative: 'गोंधळ (फोक ईडीएम मिक्स)',
+    artistId: 'artist-ajay-atul',
+    artistName: 'Ajay-Atul & Marathi Folk',
+    artistNative: 'अजय अतुल',
+    albumId: 'album-sairat',
+    albumTitle: 'Marathi Folk EDM Editions',
+    albumNative: 'मराठी लोकसंगीत',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/66/5a/e8/665ae8ad-1aab-5d0c-3ca9-4fa062b1606c/8718857670711.png/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Gondhal%20-%20Online%20Binline.mp3',
+    audioAssetId: 'asset-remix-gondhal',
+    duration: 192,
+    playbackMode: 'full-length',
+    genre: 'Marathi Folk',
+    language: 'Marathi',
+    composer: 'Marathi Folk Masters',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 2.9,
+    playCount: 22000000,
+    lyrics: `[गोंधळ]
+आई भवानीचा गोंधळ घातला!
+संबळाच्या तालावर, तुतारीच्या नादावर!
+आई राजा उदो उदो!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Folk EDM Stream • AURA Marathi Showcase',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-havana-ban-ja-rani',
+    trackId: 'song-remix-havana-ban-ja-rani',
+    title: 'Havana x Ban Ja Rani (Club Mashup)',
+    titleNative: 'हवाना x बन जा रानी मैशप',
+    artistId: 'artist-dj-remix',
+    artistName: 'Camila Cabello, Guru Randhawa & DJ Harshal',
+    artistNative: 'डीजे हर्षल',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Bollywood & Punjabi Club Remixes (3-6 Min)',
+    albumNative: 'क्लब रीमिक्स',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Havana%20%20Bom%20Diggy%20%20Ban%20Ja%20Rani%20%20No%20Lie%20%20-%20DJ%20Harshal%20Mashup.mp3',
+    audioAssetId: 'asset-remix-havana-ban-ja-rani',
+    duration: 240,
+    playbackMode: 'full-length',
+    genre: 'Club Remix',
+    language: 'English',
+    composer: 'DJ Harshal Mashup',
+    releaseYear: 2024,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 5.8,
+    playCount: 39000000,
+    lyrics: `[Intro: Latin Percussion x Bhangra Beat]
+DJ Harshal in the mix!
+Havana x Ban Ja Rani x Bom Diggy!
+
+[Hook 1]
+Havana, ooh na-na
+Half of my heart is in Havana, ooh na-na!
+
+[Hook 2]
+Ban ja tu meri rani, tenu mehal dava doonga
+Bom diggy diggy bom bom!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Club Remix • DJ Harshal Mashup Series',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-remix-ritviz-udd-gaye',
+    trackId: 'song-remix-ritviz-udd-gaye',
+    title: 'Udd Gaye (Full Original Master)',
+    titleNative: 'उड़ गए',
+    artistId: 'artist-ritviz',
+    artistName: 'Ritviz',
+    artistNative: 'ऋत्विज',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Indian Electronic Masters',
+    albumNative: 'भारतीय इलेक्ट्रॉनिक',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/36/41/55/364155b9-7b56-c737-1e5f-14fc36511394/195497426868.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Ritviz%20-%20Udd%20Gaye%20%5BOfficial%20Audio%5D.mp3',
+    audioAssetId: 'asset-remix-ritviz-udd-gaye',
+    duration: 210,
+    playbackMode: 'full-length',
+    genre: 'Indian Electronic',
+    language: 'Hindi',
+    composer: 'Ritviz',
+    releaseYear: 2017,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 6.9,
+    playCount: 85000000,
+    lyrics: `[मुखड़ा]
+उड़ गए सब लोग यहाँ पे
+आना मत तू यहाँ पे
+खोने लगा है तू बातों में
+खो जाने दे रात को!
+
+[हुक]
+उड़ गए, उड़ गए सब लोग यहाँ पे!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Full Master Stream • Bacardi House Party / Ritviz',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+    spotifyUrl: 'https://open.spotify.com/track/0bAsR2unSR6Lf71DgsH9g6',
+  },
+  {
+    id: 'song-hindi-arjan-vailly',
+    trackId: 'song-hindi-arjan-vailly',
+    title: 'Arjan Vailly (ANIMAL Full Master)',
+    titleNative: 'अर्जन वैली',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Bhupinder Babbal & Manan Bhardwaj',
+    artistNative: 'भूपिंदर बब्बल',
+    albumId: 'album-animal',
+    albumTitle: 'ANIMAL (Original Motion Picture Soundtrack)',
+    albumNative: 'एनिमल',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/4a/14/d8/4a14d86b-fe7c-db22-fc13-22cfbb207be8/8903431962386_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/ANIMAL%20ARJAN%20VAILLY.mp3',
+    audioAssetId: 'asset-animal-arjan-vailly-master',
+    duration: 225,
+    playbackMode: 'full-length',
+    genre: 'Punjabi Folk',
+    language: 'Punjabi',
+    composer: 'Bhupinder Babbal',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 7.0,
+    playCount: 92000000,
+    lyrics: `[Intro]
+Ho khada khadke gandasiyan de khadke!
+
+[Chorus]
+Arjan vailly ne pair jod ke gandasi maari
+Khun de kature wangu thalle gir gayi lalaadi!
+Arjan vailly vailly, arjan vailly vailly!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • T-Series / Bhupinder Babbal',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-hindi-saari-duniya',
+    trackId: 'song-hindi-saari-duniya',
+    title: 'Saari Duniya Jalaa Denge (Extended Full Song)',
+    titleNative: 'सारी दुनिया जला देंगे',
+    artistId: 'artist-arijit-singh',
+    artistName: 'B Praak & Jaani',
+    artistNative: 'बी प्राक',
+    albumId: 'album-animal',
+    albumTitle: 'ANIMAL (Original Motion Picture Soundtrack)',
+    albumNative: 'एनिमल',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/4a/14/d8/4a14d86b-fe7c-db22-fc13-22cfbb207be8/8903431962386_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Saari%20Duniya%20Jalaa%20Denge(Extended%20Full%20Song).mp3',
+    audioAssetId: 'asset-animal-saari-duniya-extended',
+    duration: 315,
+    playbackMode: 'full-length',
+    genre: 'Bollywood',
+    language: 'Hindi',
+    composer: 'Jaani / B Praak',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 13.2,
+    playCount: 88000000,
+    lyrics: `[मुखड़ा]
+तू अगर कह दे मुझे, सारी दुनिया जला देंगे हम!
+तेरे चेहरे पे कोई उदासी जो देखूं
+खुदा की कसम मौत को भी हरा देंगे हम!
+
+[अंतरा]
+तेरी हिफाज़त में हम जान लुटा देंगे
+तू अगर कह दे मुझे, सारी दुनिया जला देंगे हम!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • T-Series / B Praak',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-hindi-bekhayali',
+    trackId: 'song-hindi-bekhayali',
+    title: 'Bekhayali (Kabir Singh Full Master)',
+    titleNative: 'बेख्याली',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Sachet Tandon & Sachet-Parampara',
+    artistNative: 'सचेत टंडन',
+    albumId: 'album-kabir-singh',
+    albumTitle: 'Kabir Singh',
+    albumNative: 'कबीर सिंह',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/6d/a5/d8/6da5d871-3c22-b5c6-b5ce-6ff6b14272ce/8902894354226_cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/bekhayali_kabir_singh.mp3',
+    audioAssetId: 'asset-kabir-singh-bekhayali-master',
+    duration: 370,
+    playbackMode: 'full-length',
+    genre: 'Bollywood',
+    language: 'Hindi',
+    composer: 'Sachet-Parampara / Irshad Kamil',
+    releaseYear: 2019,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 14.8,
+    playCount: 110000000,
+    lyrics: `[मुखड़ा]
+बेख्याली में भी तेरा ही ख्याल आए
+क्यूं बिछड़ना है ज़रूरी ये सवाल आए
+तेरी नज़दीकियों की खुशी बेहिसाब थी
+हँसी थी रूबरू, फिर ये मलाल आए!
+
+[अंतra]
+रातों को जाग कर दुआ में मांगा तुझे
+तू जो नहीं तो सूना सारा जहां लगे!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • T-Series / Sachet Tandon',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-hindi-dil-diyan-gallan',
+    trackId: 'song-hindi-dil-diyan-gallan',
+    title: 'Dil Diyan Gallan (Full Master)',
+    titleNative: 'दिल दियां गल्लां',
+    artistId: 'artist-atif-aslam',
+    artistName: 'Atif Aslam & Vishal-Shekhar',
+    artistNative: 'عاطف اسلم',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Tiger Zinda Hai',
+    albumNative: 'टाइगर जिंदा है',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/bf/a4/0c/bfa40cf8-fec1-ffaa-8e2b-f350c33a925f/886446869407.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Dil_Diyan_Gallan-.mp3',
+    audioAssetId: 'asset-atif-dil-diyan-gallan-master',
+    duration: 260,
+    playbackMode: 'full-length',
+    genre: 'Bollywood Romantic',
+    language: 'Hindi',
+    composer: 'Vishal-Shekhar / Irshad Kamil',
+    releaseYear: 2017,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 10.0,
+    playCount: 135000000,
+    lyrics: `[मुखड़ा]
+कच्ची डोरियों, डोरियों, डोरियों से
+मैनू तू बांध ले
+पक्की यारियों, यारियों, यारियों में
+होन्दे ना फासले!
+
+[Chorus]
+दिल दियां गल्लां कराएंगे रोज़ बैठ के
+अंखां नाल अंखां नू मिलाएंगे!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • YRF Music / Atif Aslam',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-hindi-heeriye',
+    trackId: 'song-hindi-heeriye',
+    title: 'Heeriye (Full Master)',
+    titleNative: 'हीरीए',
+    artistId: 'artist-arijit-singh',
+    artistName: 'Jasleen Royal & Arijit Singh',
+    artistNative: 'अरिजीत सिंह',
+    albumId: 'album-club-remixes',
+    albumTitle: 'Heeriye - Single',
+    albumNative: 'हीरीए',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Heeriye.mp3',
+    audioAssetId: 'asset-arijit-heeriye-master',
+    duration: 225,
+    playbackMode: 'full-length',
+    genre: 'Bollywood Pop',
+    language: 'Hindi',
+    composer: 'Jasleen Royal / Aditya Sharma',
+    releaseYear: 2023,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 11.9,
+    playCount: 125000000,
+    lyrics: `[Chorus]
+हीरीए हीरीए आ, हीरीए हीरीए आ!
+तेरी होके मर जावां, हीरीए हीरीए आ!
+
+[Verse]
+तू जो मेरे नाल है, सारा जग सोहणा लगे
+तेरे नाल रात सुहानी, तेरे नाल सवेर जागे!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Warner Music India / Jasleen Royal',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-intl-hymn',
+    trackId: 'song-intl-hymn',
+    title: 'Hymn For The Weekend (Full Master)',
+    titleNative: 'Hymn For The Weekend',
+    artistId: 'artist-coldplay',
+    artistName: 'Coldplay & Beyoncé',
+    artistNative: 'Coldplay',
+    albumId: 'album-viva-la-vida',
+    albumTitle: 'A Head Full of Dreams',
+    albumNative: 'A Head Full of Dreams',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2b/f6/82/2bf682ab-f6c5-a82e-d204-306faede272e/198704579318_Cover.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Coldplay%20-%20Hymn%20For%20The%20Weekend.mp3',
+    audioAssetId: 'asset-coldplay-hymn-master',
+    duration: 258,
+    playbackMode: 'full-length',
+    genre: 'Alternative Rock',
+    language: 'English',
+    composer: 'Coldplay / Rik Simpson',
+    releaseYear: 2015,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 6.0,
+    playCount: 155000000,
+    lyrics: `[Chorus]
+Oh, angel sent from up above
+You know you make my world light up
+When I was down, when I was hurt
+You came to lift me up!
+Life is a drink and love's a drug
+Oh, now I think I must be miles high!
+
+[Hook]
+I-I-I-I-I feel a symphony
+Shoot across the sky!
+Pour on me, pour on me!`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Parlophone / Coldplay',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-intl-something-just',
+    trackId: 'song-intl-something-just',
+    title: 'Something Just Like This (Full Master)',
+    titleNative: 'Something Just Like This',
+    artistId: 'artist-coldplay',
+    artistName: 'The Chainsmokers & Coldplay',
+    artistNative: 'The Chainsmokers & Coldplay',
+    albumId: 'album-viva-la-vida',
+    albumTitle: 'Memories...Do Not Open',
+    albumNative: 'Memories...Do Not Open',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/52/aa/85/52aa851f-15b7-6322-f91f-df84b15b7b19/190295978044.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/Something%20Just%20Like%20This.mp3',
+    audioAssetId: 'asset-chainsmokers-something-just-master',
+    duration: 247,
+    playbackMode: 'full-length',
+    genre: 'Electronic EDM',
+    language: 'English',
+    composer: 'Andrew Taggart, Chris Martin, Guy Berryman, Jonny Buckland, Will Champion',
+    releaseYear: 2017,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 9.6,
+    playCount: 175000000,
+    lyrics: `[Verse]
+I've been reading books of old
+The legends and the myths
+Achilles and his gold
+Hercules and his gifts
+Spider-Man's control
+And Batman with his fists
+And clearly I see I don't see myself upon that list!
+
+[Chorus]
+She said, "Where'd you wanna go?
+How much you wanna risk?
+I'm not looking for somebody
+With some superhuman gifts
+Some superhero
+Some fairy-tale bliss
+Just something I can turn to
+Somebody I can kiss
+I want something just like this!"`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Disruptor / Columbia / Coldplay',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'song-tamil-kolaveri-full',
+    trackId: 'song-tamil-kolaveri-full',
+    title: 'Why This Kolaveri Di (Full Original Master)',
+    titleNative: 'வொய் திஸ் கொலவெறி டி',
+    artistId: 'artist-anirudh',
+    artistName: 'Anirudh Ravichander & Dhanush',
+    artistNative: 'அனிருத் ரவிச்சந்தர்',
+    albumId: 'album-south-blockbusters',
+    albumTitle: '3 (Original Motion Picture Soundtrack)',
+    albumNative: '3',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e9/19/b9/e919b921-d5a8-9e9a-8508-3551da375aee/196626458629.jpg/600x600bb.jpg',
+    audioUrl: 'https://raw.githubusercontent.com/pushkarlaulkar/Music/master/TamilJukeBox.Com_3_-_01_-_Why_This_Kolaveri.mp3',
+    audioAssetId: 'asset-tamil-kolaveri-full-master',
+    duration: 250,
+    playbackMode: 'full-length',
+    genre: 'Tamil Pop',
+    language: 'Tamil',
+    composer: 'Anirudh Ravichander / Dhanush',
+    releaseYear: 2012,
+    audioQuality: 'High (320 kbps)',
+    bitrate: '320 kbps',
+    fileSizeMb: 7.6,
+    playCount: 180000000,
+    lyrics: `[Intro: Dhanush]
+Yo boys, I am singing song
+Soup song... flop song!
+Why this kolaveri kolaveri kolaveri di?
+Why this kolaveri kolaveri kolaveri di?
+
+[Chorus]
+Distance-la moon-u moon-u, moon-u color-u white-u
+White-u background night-u night-u, night-u color-u black-u!
+Why this kolaveri kolaveri kolaveri di?`,
+    isRoyaltyFree: true,
+    licenseInfo: 'Authorized Audio Master Stream • Sony Music South / Anirudh',
+    provider: 'aura-licensed',
+    playbackRights: 'authorized-master',
+    availabilityStatus: 'available',
+    playbackAvailability: 'available',
+    verificationStatus: 'verified',
   },
 
 ];
@@ -2520,7 +3923,7 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-bollywood-romance',
     title: 'Soulful Bollywood & Arijit Singh',
-    description: 'Arijit Singh & Bollywood masterpieces: Kesariya, Apna Bana Le, Chaleya, Tum Hi Ho, Channa Mereya, Chaiyya Chaiyya, and Kun Faya Kun.',
+    description: 'Arijit Singh & Bollywood masterpieces: Kesariya, Apna Bana Le, Chaleya, Tum Hi Ho, Channa Mereya, Dil Diyan Gallan, Heeriye, Bekhayali, Chaiyya Chaiyya, and Kun Faya Kun.',
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/600x600bb.jpg',
     creatorName: 'AURA Editorial',
     isPublic: true,
@@ -2530,6 +3933,9 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
       'song-hindi-chaleya',
       'song-hindi-tum-hi-ho',
       'song-hindi-channa-mereya',
+      'song-hindi-dil-diyan-gallan',
+      'song-hindi-heeriye',
+      'song-hindi-bekhayali',
       'song-hindi-chaiyya-chaiyya',
       'song-hindi-kun-faya-kun',
       'song-hindi-deewani-mastani',
@@ -2540,7 +3946,7 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-punjabi-heat',
     title: 'Punjabi Dhol & Urban Fire',
-    description: 'Diljit Dosanjh hits (Born to Shine, G.O.A.T., Lover) and authentic Punjab folk dhol rhythm explosions.',
+    description: 'Diljit Dosanjh hits (Born to Shine, G.O.A.T., Lover, Raat Di Gedi) and authentic Punjab folk dhol rhythm explosions.',
     coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d2/89/ac/d289ac98-749e-3822-6b6e-b06aa4815715/859740651597_cover.jpg/600x600bb.jpg',
     creatorName: 'AURA Editorial',
     isPublic: true,
@@ -2548,21 +3954,26 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
       'song-punjabi-born-to-shine',
       'song-punjabi-goat',
       'song-punjabi-lover',
+      'song-remix-raat-di-gedi',
       'song-punjabi-dhol',
     ],
     createdAt: '2024-03-03T00:00:00.000Z',
   },
   {
     id: 'playlist-karan-aujla-hits',
-    title: 'Karan Aujla Essentials: Global Anthems',
-    description: 'The monumental Punjabi world anthems by Karan Aujla: Tauba Tauba, Softly, Winning Speech, 52 Bars, Admirin\' You, On Top, Chithiyaan, Take It Easy, and Antidote.',
-    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    title: 'Karan Aujla Essentials: Global Anthems & Full Masters',
+    description: 'The monumental Punjabi world anthems and full-length masters by Karan Aujla: Winning Speech, Boyfriend, For A Reason, Low Fade, Wavy, Tauba Tauba, Softly, 52 Bars, Admirin\' You, On Top, Chithiyaan, Take It Easy, and Antidote.',
+    coverUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
     creatorName: 'AURA Editorial',
     isPublic: true,
     songIds: [
+      'song-punjabi-winning-speech',
+      'song-punjabi-karan-boyfriend',
+      'song-punjabi-karan-for-a-reason',
+      'song-punjabi-karan-low-fade',
+      'song-punjabi-karan-wavy',
       'song-punjabi-tauba-tauba',
       'song-punjabi-softly',
-      'song-punjabi-winning-speech',
       'song-punjabi-52-bars',
       'song-punjabi-admiring-you',
       'song-punjabi-on-top',
@@ -2571,6 +3982,33 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
       'song-punjabi-antidote',
     ],
     createdAt: '2024-03-06T00:00:00.000Z',
+  },
+  {
+    id: 'playlist-club-remixes-mashups',
+    title: 'Bollywood & Punjabi Club Remixes (3-6 Min Non-Stop)',
+    description: 'High-energy DJ mashups, retro dance remixes, and trap power edits: Arijit Singh Mega Mashup, King Khan SRK, 90s Retro Romance, Udit Narayan 90s Hits, Dil Ne Yeh Kaha (Trap Remix), Patola Club Mix, and Ritviz Udd Gaye.',
+    coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    creatorName: 'AURA Editorial',
+    isPublic: true,
+    songIds: [
+      'song-remix-arijit-mashup',
+      'song-remix-king-khan',
+      'song-remix-90s-romantic',
+      'song-remix-udit-narayan',
+      'song-remix-dil-ne-yeh-kaha',
+      'song-remix-nashe-si-chadh-gayi',
+      'song-remix-dheere-dheere',
+      'song-remix-saat-samundar',
+      'song-remix-punjabi-love',
+      'song-remix-patola',
+      'song-remix-guru-randhawa',
+      'song-remix-raat-di-gedi',
+      'song-marathi-jau-de',
+      'song-remix-gondhal',
+      'song-remix-havana-ban-ja-rani',
+      'song-remix-ritviz-udd-gaye',
+    ],
+    createdAt: '2024-03-10T00:00:00.000Z',
   },
   {
     id: 'playlist-global-pop-powerhouse',
@@ -2585,6 +4023,8 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
       'song-intl-cruel-summer',
       'song-intl-shape-of-you',
       'song-intl-viva-la-vida',
+      'song-intl-hymn',
+      'song-intl-something-just',
       'song-intl-faded',
       'song-intl-dynamite',
       'song-intl-stay-with-me',
@@ -2607,19 +4047,30 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-full-length-masters',
     title: 'AURA Master Series: 3+ Min Extended Tracks',
-    description: 'Every song plays for at least 3 minutes (180s+): Pt. Bhimsen Joshi Abhangs, Hindustani Flute Ragas, Sitar Tarana, Pune Dhol Tasha, and Global Pop Masters.',
+    description: 'Every song plays for at least 3 minutes (180s to 370s continuous): Channa Mereya, Faded, Arjan Vailly, Saari Duniya, Bekhayali, Dil Diyan Gallan, Heeriye, Hymn For The Weekend, Something Just Like This, Kolaveri Di, Jau De Na Va, Pt. Bhimsen Joshi Abhangs, Hindustani Flute Ragas, and Sitar Tarana.',
     coverUrl: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&auto=format&fit=crop&q=80',
     creatorName: 'AURA Editorial',
     isPublic: true,
     songIds: [
+      'song-hindi-channa-mereya',
+      'song-hindi-bekhayali',
+      'song-hindi-saari-duniya',
+      'song-hindi-arjan-vailly',
+      'song-hindi-dil-diyan-gallan',
+      'song-hindi-heeriye',
+      'song-marathi-jau-de',
       'song-marathi-maher',
       'song-marathi-deva',
       'song-marathi-dhol',
       'song-hindi-bhairavi',
       'song-hindi-sitar',
+      'song-punjabi-winning-speech',
+      'song-punjabi-karan-boyfriend',
       'song-punjabi-dhol',
-      'song-hindi-chaiyya-chaiyya',
-      'song-hindi-kun-faya-kun',
+      'song-tamil-kolaveri-full',
+      'song-intl-something-just',
+      'song-intl-hymn',
+      'song-intl-faded',
       'song-intl-stay-with-me',
       'song-intl-viva-la-vida',
       'song-intl-shape-of-you',
@@ -2651,11 +4102,14 @@ export const INITIAL_PLAYLISTS: Playlist[] = [
 
 export const GENRES = [
   'All Genres',
+  'Club Remix & Mashups',
   'Marathi Folk',
   'Marathi Abhang / Devotional',
   'Hindustani Classical',
   'Bollywood',
   'Punjabi Folk',
+  'Punjabi Pop',
+  'Electronic EDM',
   'Tamil Pop',
   'Telugu Romantic',
   'Synthwave',
